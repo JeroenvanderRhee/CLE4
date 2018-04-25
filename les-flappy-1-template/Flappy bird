@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            text-align: center;
+        }
+
+        img {
+            display: none;
+        }
+
+        #game {
+            margin: 0 auto;
+            border: 1px solid;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <h1>Game Development Basics</h1>
+
+    <canvas id="game" width="800" height="600"></canvas>
+
+    <img id="flappy" src="images/flappy.png" />
+    <img id="background" src="images/background.png" />
+    
+
+
+    <audio id="flySound" src="sounds/fly.wav"></audio>
+
+    <script src="js/jquery.js"></script>
+    <script src="js/script.js"></script>
+</body>
+</html>

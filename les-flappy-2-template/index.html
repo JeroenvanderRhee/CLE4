@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        @font-face {
+            font-family: 'FlappyFont';
+            src: url('fonts/FlappyFont.ttf');
+        }
+
+        body {
+            text-align: center;
+        }
+
+        img {
+            display: none;
+        }
+
+        #game {
+            margin: 0 auto;
+            border: 1px solid;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <h1>Game Development Basics 2</h1>
+
+    <canvas id="game" width="800" height="600"></canvas>
+
+    <img id="flappy" src="images/flappy.png" />
+    <img id="flappy-dead" src="images/flappy-dead.png" />
+    <img id="background" src="images/background.png" />
+    <img id="pipe" src="images/pipe.png" />
+
+    <audio id="fly-sound" src="sounds/fly.wav"></audio>
+    <audio id="die-sound" src="sounds/die.wav"></audio>]
+    <audio id="score-sound" src="sounds/score.wav"></audio>
+
+    <script src="js/jquery.js"></script>
+    <script src="js/script.js"></script>
+</body>
+</html>
