@@ -1,5 +1,6 @@
 *{
 	margin:0px;
+	padding:0px;
 }
 
 blok{
@@ -7,6 +8,7 @@ blok{
 	width:200px;
 	height:200px;
 	background-color:green;
+<<<<<<< HEAD
 	min-width:100px;
 	min-height:100px;
 	transform: translate(30px,100px);
@@ -14,4 +16,6 @@ blok{
 level{
 	height: 100vh;
 	width: 100vw;
+=======
+>>>>>>> 54140651db214a0e0b5e1d3a6599f67aa7350da0
 }
