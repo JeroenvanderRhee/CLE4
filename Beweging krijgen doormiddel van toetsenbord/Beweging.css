@@ -1,5 +1,6 @@
 *{
 	margin:0px;
+	padding:0px;
 }
 
 blok{
@@ -7,7 +8,4 @@ blok{
 	width:200px;
 	height:200px;
 	background-color:green;
-	min-width:100px;
-	min-height:100px;
-	transform: translate(30px,100px);
 }
