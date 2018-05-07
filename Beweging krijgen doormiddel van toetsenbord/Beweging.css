@@ -11,3 +11,7 @@ blok{
 	min-height:100px;
 	transform: translate(30px,100px);
 }
+level{
+	height: 100vh;
+	width: 100vw;
+}
