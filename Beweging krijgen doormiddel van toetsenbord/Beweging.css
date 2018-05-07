@@ -1,0 +1,13 @@
+*{
+	margin:0px;
+}
+
+blok{
+	position: absolute;
+	width:200px;
+	height:200px;
+	background-color:green;
+	min-width:100px;
+	min-height:100px;
+	transform: translate(30px,100px);
+}
