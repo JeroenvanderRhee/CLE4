@@ -1,6 +1,6 @@
 // game.js
 
-// Create an instance of the engine.
+//Maak het veld aan. Vul opties in, in de parameter width and height om een vaststaande breedte te gebruiken. Laat hem leeg om full screen te spelen
 var game = new ex.Engine({
     // width: 800,
     // height: 600
