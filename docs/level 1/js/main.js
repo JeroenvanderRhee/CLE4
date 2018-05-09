@@ -2,8 +2,8 @@
 
 // Create an instance of the engine.
 var game = new ex.Engine({
-    width: 800,
-    height: 600
+    // width: 800,
+    // height: 600
 });
 
 // Create an actor with x position of 150px,
