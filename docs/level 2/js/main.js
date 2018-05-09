@@ -70,7 +70,7 @@
 var Blok = /** @class */ (function () {
     function Blok() {
         this.speed = 10;
-        this.width = 200;
+        this.width = 1000;
         this.height = 200;
         this.BeginPositionX = 0;
         this.BeginPositionY = 0;
@@ -80,3 +80,4 @@ var Blok = /** @class */ (function () {
     }
     return Blok;
 }());
+

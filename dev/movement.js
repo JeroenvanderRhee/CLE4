@@ -2,7 +2,7 @@
 var Blok = /** @class */ (function () {
     function Blok() {
         this.speed = 10;
-        this.width = 200;
+        this.width = 300;
         this.height = 200;
         this.BeginPositionX = 0;
         this.BeginPositionY = 0;
