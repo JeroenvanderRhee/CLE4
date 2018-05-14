@@ -13320,15 +13320,15 @@ define("Engine", ["require", "exports", "Index", "Promises", "Algebra", "UIActor
             else {
                 _this._compatible = true;
             }
-            // Use native console API for color fun
-            if (console.log && !options.suppressConsoleBootMessage) {
-                console.log("%cPowered by Excalibur.js (v" + Index_7.EX_VERSION + ")", 'background: #176BAA; color: white; border-radius: 5px; padding: 15px; font-size: 1.5em; line-height: 80px;');
-                console.log('\n\
-      /| ________________\n\
-O|===|* >________________>\n\
-      \\|');
-                console.log('Visit', 'http://excaliburjs.com', 'for more information');
-            }
+            //Use native console API for color fun
+//             if (console.log && !options.suppressConsoleBootMessage) {
+//                 console.log("%cPowered by Excalibur.js (v" + Index_7.EX_VERSION + ")", 'background: #176BAA; color: white; border-radius: 5px; padding: 15px; font-size: 1.5em; line-height: 80px;');
+//                 console.log('\n\
+//       /| ________________\n\
+// O|===|* >________________>\n\
+//       \\|');
+//                 console.log('Visit', 'http://excaliburjs.com', 'for more information');
+//             }
             _this._logger = Log_15.Logger.getInstance();
             // If debug is enabled, let's log browser features to the console.
             if (_this._logger.defaultLevel === Log_15.LogLevel.Debug) {

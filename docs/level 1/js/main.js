@@ -6,13 +6,10 @@ var game = new ex.Engine({
     // height: 600
 });
 
-// Create an actor with x position of 150px,
-// y position of 40px from the bottom of the screen,
-// width of 200px, height and a height of 20px
+//Dit zet een character op het scherm, die je kan besturen. De x positie is X en de y positie = 40 pixxels min de schermhoogte. De breedte is 200px en de hoogte 20px
 var paddle = new ex.Actor(150, game.drawHeight - 40, 200, 20);
 
-// Let's give it some color with one of the predefined
-// color constants
+//we moeten de kleuren definieren inn de excalibur. Dan kunnen we ze oproepen via de volgende manier. ex.Color + kleurnaam
 paddle.color = ex.Color.Chartreuse;
 
 // Make sure the paddle can partipate in collisions, by default excalibur actors do not collide
@@ -23,9 +20,33 @@ paddle.collisionType = ex.CollisionType.Fixed;
 game.add(paddle);
 
 // Add a mouse move listener
-game.input.pointers.primary.on('move', function (evt) {
-    paddle.pos.x = evt.x;
-});
+// game.input.pointers.primary.on('move', function (evt) {
+//     paddle.pos.x = evt.x;
+// });
+
+// Keyboard.prototype.on("press", function(evt){
+// 	paddle.pos.x = evt.x;
+// })
+function aansturenKeyboard(event){
+	console.log(event.key)
+	if(event.key == 39){
+		paddle.pos.x +=10;
+	}
+
+	if(event.key == 37){
+		paddle.pos.x -= 10;
+	}
+
+	if(event.key == 38){
+		paddle.pos.y -=10;
+	}
+
+	if(event.key == 40){
+		paddle.pos.y += 10;
+	}
+}
+
+game.input.keyboard.on("hold", aansturenKeyboard);
 
 // Create a ball
 var ball = new ex.Actor(100, 300, 20, 20);
