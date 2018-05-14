@@ -1,4 +1,5 @@
 "use strict";
+console.log("hoi");
 var Blok = (function () {
     function Blok() {
         this.speed = 10;
