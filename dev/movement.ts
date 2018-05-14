@@ -16,5 +16,6 @@ class Blok {
         this.currentLocationY = 0
         console.log("gelukt")
     }
-       
+
 }
+

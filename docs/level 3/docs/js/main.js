@@ -1,5 +1,5 @@
 "use strict";
-var Blok = /** @class */ (function () {
+var Blok = (function () {
     function Blok() {
         this.speed = 10;
         this.width = 300;
@@ -12,5 +12,4 @@ var Blok = /** @class */ (function () {
     }
     return Blok;
 }());
-
-console.log(Blok.width);
+//# sourceMappingURL=main.js.map

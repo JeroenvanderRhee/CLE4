@@ -4,7 +4,7 @@
   "removeComments": true,
   "strict": true,
   "target":"es5",
-  "out": "docs/level 3/js/main.js"
+  "out": "docs/js/main.js"
   },
   "exclude": [
   "node_modules",
