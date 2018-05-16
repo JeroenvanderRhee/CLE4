@@ -1,4 +1,5 @@
 "use strict";
+game.currentScene.camera.strategy.lockToActorAxis(headCharacter, ex.Axis.X);
 var headCharacter = (function () {
     function headCharacter() {
         this.name = "Aap";
@@ -7,16 +8,23 @@ var headCharacter = (function () {
         this.velocity = 2;
         this.positionX = 0;
         this.positionY = window.innerHeight;
-        this.image = "red";
+        this.image = "img/Poppetje.png";
+        this.elementpath = document.createElement("headcharacter");
         console.log("character created");
     }
     headCharacter.prototype.create = function () {
-        var element = document.createElement("headcharacter");
-        element.appendChild("body");
+        var childElement = document.getElementsByTagName("body");
+        var element = this.elementpath;
+        childElement[0].appendChild(element);
+        element.innerHTML = "HOOOOIIII";
+        element.style.backgroundColor = "red";
+        element.style.width = this.width + "px";
+        element.style.height = this.height + "px";
     };
     return headCharacter;
 }());
-var head = new headCharacter();
+var element = new headCharacter();
+element.create();
 var Game = (function () {
     function Game() {
         console.log("new game created");

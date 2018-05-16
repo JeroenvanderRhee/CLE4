@@ -1,10 +1,3 @@
-// camera following character position on X-axis
-// Class Camera{
-// private headcharacter:headCharacter[]
-// constructor(){
+/// <reference path="/Users/joriam/Downloads/package/dist/excalibur.d.ts" />
 
-// }
-
-
-// game.currentScene.camera.strategy.lockToActorAxis(headCharacter, ex.Axis.X);
-// }
+game.currentScene.camera.strategy.lockToActorAxis(headCharacter, ex.Axis.X);

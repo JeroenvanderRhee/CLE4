@@ -5,7 +5,6 @@ function loadTypeScriptJS (url){
     script.type = 'text/javascript';
     script.src = "js/main.js";
     // Fire the loading
-    head.appendChild(script);
 }
 
 
