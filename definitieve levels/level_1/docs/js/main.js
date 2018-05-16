@@ -21,4 +21,5 @@ var headCharacter = (function () {
     };
     return headCharacter;
 }());
+console.log("test");
 //# sourceMappingURL=main.js.map
