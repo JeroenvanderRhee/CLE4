@@ -9,12 +9,16 @@ var headCharacter = (function () {
         this.positionY = window.innerHeight;
         this.image = "red";
         console.log("character created");
+        this.elementpath = document.createElement("headcharacter");
     }
     headCharacter.prototype.create = function () {
-        var element = document.createElement("headcharacter");
-        element.appendChild("body");
+        var childElement = document.getElementsByTagName("canvas");
+        var element = this.elementpath;
+        childElement[0].appendChild(element);
+    };
+    headCharacter.prototype.opmaak = function () {
+        this.elementpath.style.backgroundImage;
     };
     return headCharacter;
 }());
-var head = new headCharacter();
 //# sourceMappingURL=main.js.map

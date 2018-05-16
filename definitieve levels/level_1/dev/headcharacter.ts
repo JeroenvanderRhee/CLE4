@@ -6,6 +6,7 @@ class headCharacter {
     private positionX:number
     private positionY:number
     private image:string
+    private elementpath:HTMLElement
     
     constructor(){
         this.name = "Aap"
@@ -16,12 +17,17 @@ class headCharacter {
         this.positionY = window.innerHeight
         this.image = "red"
         console.log("character created")
+        this.elementpath = document.createElement("headcharacter")
     }
 
     public create(){
-        let element = document.createElement("headcharacter")
-        element.appendChild("body")
+        let childElement = document.getElementsByTagName("canvas")
+        let element = this.elementpath
+        childElement[0].appendChild(element)
+    }
+
+    public opmaak(){
+        this.elementpath.style.backgroundImage
     }
 }
 
-var head = new headCharacter()
