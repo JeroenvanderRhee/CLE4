@@ -8,8 +8,8 @@ var headCharacter = (function () {
         this.positionX = 0;
         this.positionY = window.innerHeight;
         this.image = "img/Poppetje.png";
-        console.log("character created");
         this.elementpath = document.createElement("headcharacter");
+        console.log("character created");
     }
     headCharacter.prototype.create = function () {
         var childElement = document.getElementsByTagName("body");
@@ -24,5 +24,26 @@ var headCharacter = (function () {
 }());
 var element = new headCharacter();
 element.create();
-console.log("test");
+var Game = (function () {
+    function Game() {
+        console.log("new game created");
+        this.character = [];
+        for (var i = 0; i < 1; i++) {
+            var c = new headCharacter();
+            this.character.push(c);
+            c.create();
+        }
+        this.gameLoop();
+    }
+    Game.prototype.gameLoop = function () {
+        var _this = this;
+        for (var _i = 0, _a = this.character; _i < _a.length; _i++) {
+            var c = _a[_i];
+            c.create();
+        }
+        requestAnimationFrame(function () { return _this.gameLoop(); });
+    };
+    return Game;
+}());
+window.addEventListener("load", function () { return new Game(); });
 //# sourceMappingURL=main.js.map

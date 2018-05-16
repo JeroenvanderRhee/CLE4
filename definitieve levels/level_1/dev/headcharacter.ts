@@ -16,8 +16,8 @@ class headCharacter {
         this.positionX = 0
         this.positionY = window.innerHeight
         this.image = "img/Poppetje.png"
-        console.log("character created")
         this.elementpath = document.createElement("headcharacter")
+        console.log("character created")
     }
 
     public create(){
