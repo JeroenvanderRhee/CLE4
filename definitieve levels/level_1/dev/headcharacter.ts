@@ -15,19 +15,23 @@ class headCharacter {
         this.velocity = 2
         this.positionX = 0
         this.positionY = window.innerHeight
-        this.image = "red"
+        this.image = "img/Poppetje.png"
         console.log("character created")
         this.elementpath = document.createElement("headcharacter")
     }
 
     public create(){
-        let childElement = document.getElementsByTagName("canvas")
+        let childElement = document.getElementsByTagName("body")
         let element = this.elementpath
         childElement[0].appendChild(element)
+        element.innerHTML = "HOOOOIIII"
+        element.style.backgroundColor = "red"
+        element.style.width = this.width + "px"
+        element.style.height = this.height + "px"
     }
 
-    public opmaak(){
-        this.elementpath.style.backgroundImage
-    }
 }
+
+let element = new headCharacter()
+element.create()
 

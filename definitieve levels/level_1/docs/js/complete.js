@@ -7,10 +7,13 @@ function loadTypeScriptJS (url){
     // Fire the loading
     head.appendChild(script);
 }
+// var game = new ex.Engine({ });
+    
+// // call game.start, which is a Promise
+// game.start().then(function () {
+    loadTypeScriptJS ("js/main.js")  
+// });
 
 
-var game = new ex.Engine()
-//call game.start, which is a Promise
-game.start().then(function () {
-    loadTypeScriptJS ("js/main.js")
-});
+
+

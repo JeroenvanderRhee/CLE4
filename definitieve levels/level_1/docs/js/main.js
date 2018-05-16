@@ -7,19 +7,22 @@ var headCharacter = (function () {
         this.velocity = 2;
         this.positionX = 0;
         this.positionY = window.innerHeight;
-        this.image = "red";
+        this.image = "img/Poppetje.png";
         console.log("character created");
         this.elementpath = document.createElement("headcharacter");
     }
     headCharacter.prototype.create = function () {
-        var childElement = document.getElementsByTagName("canvas");
+        var childElement = document.getElementsByTagName("body");
         var element = this.elementpath;
         childElement[0].appendChild(element);
-    };
-    headCharacter.prototype.opmaak = function () {
-        this.elementpath.style.backgroundImage;
+        element.innerHTML = "HOOOOIIII";
+        element.style.backgroundColor = "red";
+        element.style.width = this.width + "px";
+        element.style.height = this.height + "px";
     };
     return headCharacter;
 }());
+var element = new headCharacter();
+element.create();
 console.log("test");
 //# sourceMappingURL=main.js.map
