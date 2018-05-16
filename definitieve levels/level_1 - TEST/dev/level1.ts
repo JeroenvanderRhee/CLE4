@@ -7,14 +7,14 @@ this.character = []
         for(let i = 0;i<1; i++){
             let c = new headCharacter()
             this.character.push(c)
-            c.create()
+            //c.create()
     
         }
         this.gameLoop()
     }
     gameLoop(){
         for(let c of this.character){
-            c.create()
+           // c.create()
         }
         requestAnimationFrame(() =>this.gameLoop())
     }
