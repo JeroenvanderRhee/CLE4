@@ -16,6 +16,7 @@ var headCharacter = (function () {
     };
     return headCharacter;
 }());
+d;
 var head = new headCharacter();
 var Game = (function () {
     function Game() {
