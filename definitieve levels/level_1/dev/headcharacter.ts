@@ -23,5 +23,5 @@ class headCharacter {
         element.appendChild("body")
     }
 }
-d
+
 var head = new headCharacter()
