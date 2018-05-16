@@ -1,7 +1,4 @@
 "use strict";
-<<<<<<< HEAD
-console.log("test");
-=======
 var headCharacter = (function () {
     function headCharacter() {
         this.name = "Aap";
@@ -20,5 +17,26 @@ var headCharacter = (function () {
     return headCharacter;
 }());
 var head = new headCharacter();
->>>>>>> ad3511aa55ad46933ab7ee804b3ff74f76bbfbf9
+var Game = (function () {
+    function Game() {
+        console.log("new game created");
+        this.character = [];
+        for (var i = 0; i < 1; i++) {
+            var c = new headCharacter();
+            this.character.push(c);
+            c.create();
+        }
+        this.gameLoop();
+    }
+    Game.prototype.gameLoop = function () {
+        var _this = this;
+        for (var _i = 0, _a = this.character; _i < _a.length; _i++) {
+            var c = _a[_i];
+            c.create();
+        }
+        requestAnimationFrame(function () { return _this.gameLoop(); });
+    };
+    return Game;
+}());
+window.addEventListener("load", function () { return new Game(); });
 //# sourceMappingURL=main.js.map

@@ -1,6 +1,24 @@
-<<<<<<< HEAD
-console.log("test")
-=======
+class Game {
+    private character:headCharacter[]
+    constructor(){
+        console.log("new game created")
+this.character = []
 
+        for(let i = 0;i<1; i++){
+            let c = new headCharacter()
+            this.character.push(c)
+            c.create()
+    
+        }
+        this.gameLoop()
+    }
+    gameLoop(){
+        for(let c of this.character){
+            c.create()
+        }
+        requestAnimationFrame(() =>this.gameLoop())
+    }
+}
 
->>>>>>> ad3511aa55ad46933ab7ee804b3ff74f76bbfbf9
+window.addEventListener("load", () => new Game())
+
