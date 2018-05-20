@@ -5,11 +5,10 @@ function loadTypeScriptJS (url){
     script.type = 'text/javascript';
     script.src = "js/main.js";
     // Fire the loading
+    head.appendChild(script);
 }
+    
+loadTypeScriptJS ("js/main.js")  
 
 
-var game = new ex.Engine()
-//call game.start, which is a Promise
-game.start().then(function () {
-    loadTypeScriptJS ("js/main.js")
-});
+
