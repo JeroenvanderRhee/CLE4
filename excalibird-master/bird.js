@@ -35,27 +35,27 @@ var Bird = ex.Actor.extend({
 		this.dead = false;
 
 		// setup passive collision, meaning it will get collsion events but not be moveds
-		this.collisionType = ex.CollisionType.Passive;
+		this.collisionType = ex.CollisionType.Active;
 		this.on('collision', function(){
 			if(!this.dead){
 				console.log("Collision!")
-				dispatcher.stop();
-				this.actionQueue.clearActions();
+				// dispatcher.stop();
+				// this.actionQueue.clearActions();
 				this.dead = true;
 				this.rx = 10;
-				engine.input.pointers.primary.off("down");
-				gameOver();
+				// engine.input.pointers.primary.off("down");
+				// gameOver();
 			}
 			//this.moveTo(-1000, 1000, 300).kill();
 		});
 
-		this.on('exitviewport', function(){
+		this.on('.exitviewport', function(){
 			this.dead = true;
 			this.rx = 10;
 			dispatcher.stop();
 			this.actionQueue.clearActions();
 			engine.input.pointers.primary.off("down");
-			gameOver();
+			// gameOver();
 		});
 
 		
@@ -70,14 +70,14 @@ var Bird = ex.Actor.extend({
 			// if bird is falling play down animation
 			if(this.dy > 0){
 				//this.downAnimation.reset();
-				this.setDrawing("down");
+				// this.setDrawing("down");
 			}
 
 			// only calculate if not animating to make the snap less jarring
 			if(!this.animatingUpwards){
 				// calculate bird's angle
-				var velocityAngle = new ex.Vector(-Config.LevelSpeed, this.dy).normalize().toAngle();
-				this.rotation = velocityAngle;
+				// var velocityAngle = new ex.Vector(-Config.LevelSpeed, this.dy).normalize().toAngle();
+				// this.rotation = velocityAngle;
 
 			}
 
@@ -98,10 +98,10 @@ var Bird = ex.Actor.extend({
 
 		// Apply a smoothing effect to make the snap less jarring
 		var velocityAngle = new ex.Vector(-Config.LevelSpeed, this.dy).normalize().toAngle();
-		this.animatingUpwards = true;
+		this.animatingUpwards = false;
 		var that = this;
 		// animate a rotation over 150 ms then switch the animating flag
-		this.rotateBy(velocityAngle, 130).callMethod(function(){
+		this.rotateBy(velocityAngle, 0).callMethod(function(){
 			that.animatingUpwards = false;
 		});
 
