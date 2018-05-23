@@ -17,8 +17,8 @@ var Bird = ex.Actor.extend({
 		// setup animations
 		var spriteSheet = new ex.SpriteSheet(Resource.BirdSpriteSheet, 4, 1, 32, 32);
 		this.upAnimation = spriteSheet.getAnimationByIndices(engine, [2, 1, 0], 150);
-		this.upAnimation.setScaleX(gameScale.x);
-		this.upAnimation.setScaleY(gameScale.y);
+		// this.upAnimation.setScaleX(gameScale.x);
+		// this.upAnimation.setScaleY(gameScale.y);
 		this.upAnimation.freezeFrame = 2;
 
 		this.downAnimation = spriteSheet.getAnimationByIndices(engine, [0, 3, 2], 150);
@@ -30,32 +30,32 @@ var Bird = ex.Actor.extend({
 		this.addDrawing("down", this.downAnimation);
 
 		this.setCenterDrawing(true);
-		this.scale.setTo(gameScale.x*Config.BirdScale, gameScale.y*Config.BirdScale);
+		this.scale.setTo(gameScale.x, gameScale.y);
 		
 		this.dead = false;
 
 		// setup passive collision, meaning it will get collsion events but not be moveds
-		this.collisionType = ex.CollisionType.Passive;
+		this.collisionType = ex.CollisionType.Active;
 		this.on('collision', function(){
 			if(!this.dead){
 				console.log("Collision!")
-				dispatcher.stop();
-				this.actionQueue.clearActions();
+				// dispatcher.stop();
+				// this.actionQueue.clearActions();
 				this.dead = true;
 				this.rx = 10;
-				engine.input.pointers.primary.off("down");
-				gameOver();
+				// engine.input.pointers.primary.off("down");
+				// gameOver();
 			}
 			//this.moveTo(-1000, 1000, 300).kill();
 		});
 
-		this.on('exitviewport', function(){
+		this.on('.exitviewport', function(){
 			this.dead = true;
 			this.rx = 10;
 			dispatcher.stop();
 			this.actionQueue.clearActions();
 			engine.input.pointers.primary.off("down");
-			gameOver();
+			// gameOver();
 		});
 
 		
@@ -70,14 +70,14 @@ var Bird = ex.Actor.extend({
 			// if bird is falling play down animation
 			if(this.dy > 0){
 				//this.downAnimation.reset();
-				this.setDrawing("down");
+				// this.setDrawing("down");
 			}
 
 			// only calculate if not animating to make the snap less jarring
 			if(!this.animatingUpwards){
 				// calculate bird's angle
-				var velocityAngle = new ex.Vector(-Config.LevelSpeed, this.dy).normalize().toAngle();
-				this.rotation = velocityAngle;
+				// var velocityAngle = new ex.Vector(-Config.LevelSpeed, this.dy).normalize().toAngle();
+				// this.rotation = velocityAngle;
 
 			}
 
@@ -98,10 +98,10 @@ var Bird = ex.Actor.extend({
 
 		// Apply a smoothing effect to make the snap less jarring
 		var velocityAngle = new ex.Vector(-Config.LevelSpeed, this.dy).normalize().toAngle();
-		this.animatingUpwards = true;
+		this.animatingUpwards = false;
 		var that = this;
 		// animate a rotation over 150 ms then switch the animating flag
-		this.rotateBy(velocityAngle, 130).callMethod(function(){
+		this.rotateBy(velocityAngle, 0).callMethod(function(){
 			that.animatingUpwards = false;
 		});
 
