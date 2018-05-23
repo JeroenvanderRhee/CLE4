@@ -17,8 +17,8 @@ var Bird = ex.Actor.extend({
 		// setup animations
 		var spriteSheet = new ex.SpriteSheet(Resource.BirdSpriteSheet, 4, 1, 32, 32);
 		this.upAnimation = spriteSheet.getAnimationByIndices(engine, [2, 1, 0], 150);
-		this.upAnimation.setScaleX(gameScale.x);
-		this.upAnimation.setScaleY(gameScale.y);
+		// this.upAnimation.setScaleX(gameScale.x);
+		// this.upAnimation.setScaleY(gameScale.y);
 		this.upAnimation.freezeFrame = 2;
 
 		this.downAnimation = spriteSheet.getAnimationByIndices(engine, [0, 3, 2], 150);
@@ -30,7 +30,7 @@ var Bird = ex.Actor.extend({
 		this.addDrawing("down", this.downAnimation);
 
 		this.setCenterDrawing(true);
-		this.scale.setTo(gameScale.x*Config.BirdScale, gameScale.y*Config.BirdScale);
+		this.scale.setTo(gameScale.x, gameScale.y);
 		
 		this.dead = false;
 

@@ -3,12 +3,12 @@
 
 var Config = {
 
-	BirdWidth: 35,
-	BirdHeight: 35,
+	BirdWidth: 20,
+	BirdHeight: 50,
 	BirdImpulse: -200,
-	BirdAccel: 570,
-	BirdMaxVel: 450,
-	BirdScale: 1.7,
+	BirdAccel: 1000,
+	BirdMaxVel: 1000,
+	BirdScale: 1,
 
 	LevelSpeed: -250,
 	LevelAccel: 0,
