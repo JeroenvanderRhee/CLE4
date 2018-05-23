@@ -32,3 +32,5 @@ class headCharacter {
     element.style.transform = "translate(" + this.positionX + "px," + this.positionY + "px)"
 }
 }
+
+var headperson

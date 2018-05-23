@@ -1,6 +1,4 @@
 "use strict";
-var game = new ex.Engine({});
-game.start();
 var headCharacter = (function () {
     function headCharacter() {
         this.elementpath = document.createElement("headcharacter");
@@ -27,4 +25,10 @@ var headCharacter = (function () {
     };
     return headCharacter;
 }());
+var game = new ex.Engine();
+var paddle = new ex.Actor(150, game.drawHeight - 40, 200, 20);
+paddle.vel.x = 5;
+paddle.color = ex.Color.Chartreuse;
+game.add(paddle);
+game.start();
 //# sourceMappingURL=main.js.map
