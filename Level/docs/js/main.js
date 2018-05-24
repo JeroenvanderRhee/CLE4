@@ -1,33 +1,67 @@
 "use strict";
 var Game = (function () {
     function Game() {
-        this.downkeycode = 40;
-        this.upkeycode = 38;
-        this.Hoofdpersoon = new headCharacter(this.upkeycode, this.downkeycode);
+        this.Hoofdpersoon = new headCharacter();
         this.Hoofdpersoon.Create();
         this.Hoofdpersoon.Opmaak();
         console.log("aangemaakt");
+        this.gameloop();
     }
     Game.prototype.gameloop = function () {
         var _this = this;
+        this.Hoofdpersoon.Update();
         requestAnimationFrame(function () { return _this.gameloop(); });
     };
     return Game;
 }());
 window.addEventListener("load", function () { return new Game; });
 var headCharacter = (function () {
-    function headCharacter(upkey, downkey) {
+    function headCharacter() {
+        var _this = this;
         this.elementpath = document.createElement("headcharacter");
-        this.leftkeycode = downkey;
-        this.rightkeycode = upkey;
+        this.leftPress = 0;
+        this.rightPress = 0;
+        this.spacePress = 0;
         this.name = "Skelet";
         this.width = 40;
         this.height = 200;
         this.velocity = 2;
         this.positionX = 20;
         this.positionY = window.innerHeight - this.height - 56;
-        window.addEventListener("keyleft", keyEvents(event, KeyboardEvent));
+        this.leftkeycode = 37;
+        this.rightkeycode = 39;
+        this.spacekeycode = 32;
+        window.addEventListener("keyup", function (e) { return _this.onKeyUp(e); });
+        window.addEventListener("keydown", function (e) { return _this.onKeyDown(e); });
     }
+    headCharacter.prototype.onKeyDown = function (e) {
+        console.log(e.keyCode);
+        switch (e.keyCode) {
+            case this.leftkeycode:
+                this.leftPress = 1;
+                break;
+            case this.rightkeycode:
+                this.rightPress = 1;
+                break;
+            case this.spacekeycode:
+                this.spacePress = 1;
+                break;
+        }
+    };
+    headCharacter.prototype.onKeyUp = function (e) {
+        console.log(e.keyCode);
+        switch (e.keyCode) {
+            case this.leftkeycode:
+                this.leftPress = 0;
+                break;
+            case this.rightkeycode:
+                this.rightPress = 0;
+                break;
+            case this.spacekeycode:
+                this.spacePress = 0;
+                break;
+        }
+    };
     headCharacter.prototype.Create = function () {
         var childElement = document.body;
         var element = this.elementpath;
@@ -42,45 +76,20 @@ var headCharacter = (function () {
         element.innerHTML = "";
         element.style.transform = "translate(" + this.positionX + "px," + this.positionY + "px)";
     };
+    headCharacter.prototype.Update = function () {
+        var element = this.elementpath;
+        if (this.rightPress == 1) {
+            this.positionX += 5;
+        }
+        if (this.leftPress == 1) {
+            this.positionX -= 5;
+        }
+        if (this.spacePress == 1) {
+            this.positionY -= 5;
+            this.spacePress = 0;
+        }
+        element.style.transform = "translate(" + this.positionX + "px," + this.positionY + "px)";
+    };
     return headCharacter;
-}());
-function keyEvents(event) {
-    if (event.keyCode == 37) {
-        console.log("left");
-    }
-    if (event.keyCode == 39) {
-        console.log("right");
-    }
-}
-var Paddle = (function () {
-    function Paddle() {
-        this.downSpeed = 0;
-        this.upSpeed = 0;
-        this.div = document.createElement("paddle");
-        document.body.appendChild(this.div);
-        this.upkey = 38;
-        this.downkey = 40;
-        this.x = 0;
-        this.y = 200;
-        window.addEventListener("keyleft", this.keyEvents);
-    }
-    Paddle.prototype.getRectangle = function () {
-        return this.div.getBoundingClientRect();
-    };
-    Paddle.prototype.keyEvents = function (event) {
-        if (event.keyCode == 37) {
-            console.log("left");
-        }
-        if (event.keyCode == 39) {
-            console.log("right");
-        }
-    };
-    Paddle.prototype.Update = function () {
-        var newY = this.y - this.upSpeed + this.downSpeed;
-        if (newY > 0 && newY + 100 < window.innerHeight)
-            this.y = newY;
-        this.div.style.transform = "translate(" + this.x + "px, " + this.y + "px)";
-    };
-    return Paddle;
 }());
 //# sourceMappingURL=main.js.map

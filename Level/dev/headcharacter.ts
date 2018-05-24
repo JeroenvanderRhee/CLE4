@@ -9,11 +9,12 @@ class headCharacter {
     private elementpath:HTMLElement = document.createElement("headcharacter")
     private leftkeycode:number
     private rightkeycode:number
+    private spacekeycode:number
+    private leftPress: number = 0
+    private rightPress: number = 0
+    private spacePress:number = 0
     
-    constructor(upkey:number, downkey:number){
-        this.leftkeycode = downkey
-        this.rightkeycode = upkey
-        
+    constructor(){
         this.name = "Skelet"
         this.width = 40
         this.height = 200
@@ -21,35 +22,79 @@ class headCharacter {
         this.positionX = 20
         this.positionY = window.innerHeight - this.height - 56
 
-        window.addEventListener("keyleft", keyEvents(event:KeyboardEvent))
-        //(event: KeyboardEvent) => 
+        //toetsenbord besturing
+        this.leftkeycode = 37
+        this.rightkeycode = 39
+        this.spacekeycode = 32        
+        window.addEventListener("keyup", (e: KeyboardEvent) => this.onKeyUp(e))
+        window.addEventListener("keydown", (e: KeyboardEvent) => this.onKeyDown(e))
     }
 
-  public Create(){
+    private onKeyDown(e: KeyboardEvent): void {
+        console.log(e.keyCode)
+        switch (e.keyCode) {
+            case this.leftkeycode:
+                this.leftPress = 1
+                break
+            case this.rightkeycode:
+                this.rightPress = 1
+                break
+            case this.spacekeycode:
+                this.spacePress = 1
+                break
+        }
+    }
+
+    private onKeyUp(e: KeyboardEvent): void {
+        console.log(e.keyCode)
+        switch (e.keyCode) {
+            case this.leftkeycode:
+                this.leftPress = 0
+                break
+            case this.rightkeycode:
+                this.rightPress = 0
+                break
+            case this.spacekeycode:
+                this.spacePress = 0
+                break
+        }
+    }
+    
+    public Create(){
         let childElement:HTMLElement = document.body
         //let element = document.createElement("headcharacter")
         let element = this.elementpath
         childElement.appendChild(element)
         element.innerHTML = " "
-  }
-
-  public Opmaak(){
-      let element = this.elementpath
-      element.style.position = "absolute"
-      element.style.width = this.width + "px"
-      element.style.height = this.height + "px"
-      element.innerHTML = ""
-      element.style.transform = "translate(" + this.positionX + "px," + this.positionY + "px)"
-  }
-}
-
-function keyEvents(event:KeyboardEvent){
-    if(event.keyCode == 37){
-        console.log("left")
     }
 
-    if(event.keyCode == 39){
-        console.log("right")
+    public Opmaak(){
+        let element = this.elementpath
+        element.style.position = "absolute"
+        element.style.width = this.width + "px"
+        element.style.height = this.height + "px"
+        element.innerHTML = ""
+        element.style.transform = "translate(" + this.positionX + "px," + this.positionY + "px)"
+    }
+
+    public Update(){
+        let element = this.elementpath
+        if(this.rightPress == 1){
+            this.positionX += 5;
+        }
+
+        if(this.leftPress == 1){
+            this.positionX -= 5;
+        }
+
+        if(this.spacePress == 1){
+            this.positionY -= 5;
+            this.spacePress = 0
+        }
+
+        element.style.transform = "translate(" + this.positionX + "px," + this.positionY + "px)"
     }
 }
+
+
 
