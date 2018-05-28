@@ -48,6 +48,8 @@ var headCharacter = (function () {
                 break;
         }
     };
+
+    //Hoofdpersoon bewegen doormiddel van toetsen.
     headCharacter.prototype.onKeyUp = function (e) {
         console.log(e.keyCode);
         switch (e.keyCode) {
@@ -62,12 +64,16 @@ var headCharacter = (function () {
                 break;
         }
     };
+
+    //Creatie Hoofdpersoon
     headCharacter.prototype.Create = function () {
         var childElement = document.body;
         var element = this.elementpath;
         childElement.appendChild(element);
         element.innerHTML = " ";
     };
+
+    //Grootte van Hoofdpersoon
     headCharacter.prototype.Opmaak = function () {
         var element = this.elementpath;
         element.style.position = "absolute";
@@ -76,6 +82,8 @@ var headCharacter = (function () {
         element.innerHTML = "";
         element.style.transform = "translate(" + this.positionX + "px," + this.positionY + "px)";
     };
+
+    //Update beweging van Hoofdpersoon
     headCharacter.prototype.Update = function () {
         var element = this.elementpath;
         if (this.rightPress == 1) {
