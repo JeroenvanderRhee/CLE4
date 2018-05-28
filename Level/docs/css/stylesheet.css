@@ -12,3 +12,7 @@ body{
 headcharacter{
     background: url("../img/Poppetje.png") no-repeat center top;
 }
+
+bar{
+    background-color:gray;
+}

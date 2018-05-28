@@ -9,9 +9,11 @@ class headCharacter {
     private elementpath:HTMLElement = document.createElement("headcharacter")
     private leftkeycode:number
     private rightkeycode:number
+    private upkeycode:number
     private spacekeycode:number
     private leftPress: number = 0
     private rightPress: number = 0
+    private upPress: number = 0
     private spacePress:number = 0
     
     constructor(){
@@ -25,6 +27,7 @@ class headCharacter {
         //toetsenbord besturing
         this.leftkeycode = 37
         this.rightkeycode = 39
+        this.upkeycode = 38
         this.spacekeycode = 32        
         window.addEventListener("keyup", (e: KeyboardEvent) => this.onKeyUp(e))
         window.addEventListener("keydown", (e: KeyboardEvent) => this.onKeyDown(e))
@@ -40,7 +43,10 @@ class headCharacter {
                 this.rightPress = 1
                 break
             case this.spacekeycode:
-                this.spacePress = 1
+                this.upPress = 0
+                break
+            case this.spacekeycode:
+                this.spacePress = 0
                 break
         }
     }
@@ -54,8 +60,11 @@ class headCharacter {
             case this.rightkeycode:
                 this.rightPress = 0
                 break
+            case this.upkeycode:
+                this.upPress = 1
+                break
             case this.spacekeycode:
-                this.spacePress = 0
+                this.spacePress = 1
                 break
         }
     }
@@ -87,11 +96,40 @@ class headCharacter {
             this.positionX -= 5;
         }
 
-        if(this.spacePress == 1){
-            this.positionY -= 5;
-            this.spacePress = 0
+        if(this.upPress == 1){
+            this.positionY -= 50;
+            this.positionX += 20;
+            this.upPress = 0
         }
 
+        element.style.transform = "translate(" + this.positionX + "px," + this.positionY + "px)"
+    }
+
+    public getRectangle() {
+        return this.elementpath.getBoundingClientRect()
+    }
+
+    public getvalues(){
+        let xbegin : number
+        let xeind : number
+        let y :number
+        let height:number
+        let width:number
+        let bar : HTMLElement
+        return {
+            element : this.elementpath,
+            xbegin : this.positionX,
+            xeind : this.positionX + this.width,
+            y : this.positionY,
+            height : this.height,
+            width : this.width
+        }
+    }
+
+    public gravity (strengthx:number, strengthy:number){
+        let element = this.elementpath
+        this.positionY += strengthy
+        this.positionX += strengthx
         element.style.transform = "translate(" + this.positionX + "px," + this.positionY + "px)"
     }
 }
