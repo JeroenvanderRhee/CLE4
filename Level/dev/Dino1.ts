@@ -82,7 +82,6 @@ class dino1 {
     }
 
     //Update gezette stappen doormiddel van key's klikken;
-    //
     public Update(){
         let element = this.elementpath
         if(this.rightPress == 1){
