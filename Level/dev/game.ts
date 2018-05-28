@@ -20,6 +20,7 @@ class Game{
 
     private gameloop(){
         this.Hoofdpersoon.Update()
+        this.Dino1.Update()
         requestAnimationFrame(() =>this.gameloop())
     }
 }

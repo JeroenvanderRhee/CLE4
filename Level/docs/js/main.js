@@ -92,6 +92,7 @@ var Game = (function () {
     Game.prototype.gameloop = function () {
         var _this = this;
         this.Hoofdpersoon.Update();
+        this.Dino1.Update();
         requestAnimationFrame(function () { return _this.gameloop(); });
     };
     return Game;
