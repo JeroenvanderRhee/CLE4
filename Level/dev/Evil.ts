@@ -1,4 +1,3 @@
-
 class evil {
     private name:string
     private width:number
