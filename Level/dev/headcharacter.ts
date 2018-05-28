@@ -30,6 +30,7 @@ class headCharacter {
         window.addEventListener("keydown", (e: KeyboardEvent) => this.onKeyDown(e))
     }
 
+    //Acties wanneer key DOWN
     private onKeyDown(e: KeyboardEvent): void {
         console.log(e.keyCode)
         switch (e.keyCode) {
@@ -45,6 +46,7 @@ class headCharacter {
         }
     }
 
+    //Acties wanneer key UP
     private onKeyUp(e: KeyboardEvent): void {
         console.log(e.keyCode)
         switch (e.keyCode) {
@@ -60,6 +62,7 @@ class headCharacter {
         }
     }
     
+    
     public Create(){
         let childElement:HTMLElement = document.body
         //let element = document.createElement("headcharacter")
@@ -68,6 +71,7 @@ class headCharacter {
         element.innerHTML = " "
     }
 
+    //Opmaak scherm
     public Opmaak(){
         let element = this.elementpath
         element.style.position = "absolute"
@@ -77,6 +81,7 @@ class headCharacter {
         element.style.transform = "translate(" + this.positionX + "px," + this.positionY + "px)"
     }
 
+    //Update gezette stappen doormiddel van key's klikken;
     public Update(){
         let element = this.elementpath
         if(this.rightPress == 1){
