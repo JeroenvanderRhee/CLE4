@@ -1,13 +1,13 @@
 "use strict";
-var evil = (function () {
-    function evil() {
+var dino1 = (function () {
+    function dino1() {
         var _this = this;
-        this.elementpath = document.createElement("evil");
+        this.elementpath = document.createElement("dino1");
         this.leftPress = 0;
         this.rightPress = 0;
         this.spacePress = 0;
         this.name = "Skelet";
-        this.width = 40;
+        this.width = 110;
         this.height = 200;
         this.velocity = 2;
         this.positionX = 20;
@@ -18,7 +18,7 @@ var evil = (function () {
         window.addEventListener("keyup", function (e) { return _this.onKeyUp(e); });
         window.addEventListener("keydown", function (e) { return _this.onKeyDown(e); });
     }
-    evil.prototype.onKeyDown = function (e) {
+    dino1.prototype.onKeyDown = function (e) {
         console.log(e.keyCode);
         switch (e.keyCode) {
             case this.leftkeycode:
@@ -32,7 +32,7 @@ var evil = (function () {
                 break;
         }
     };
-    evil.prototype.onKeyUp = function (e) {
+    dino1.prototype.onKeyUp = function (e) {
         console.log(e.keyCode);
         switch (e.keyCode) {
             case this.leftkeycode:
@@ -46,13 +46,13 @@ var evil = (function () {
                 break;
         }
     };
-    evil.prototype.Create = function () {
+    dino1.prototype.Create = function () {
         var childElement = document.body;
         var element = this.elementpath;
         childElement.appendChild(element);
         element.innerHTML = " ";
     };
-    evil.prototype.Opmaak = function () {
+    dino1.prototype.Opmaak = function () {
         var element = this.elementpath;
         element.style.position = "absolute";
         element.style.width = this.width + "px";
@@ -60,7 +60,7 @@ var evil = (function () {
         element.innerHTML = "";
         element.style.transform = "translate(" + this.positionX + "px," + this.positionY + "px)";
     };
-    evil.prototype.Update = function () {
+    dino1.prototype.Update = function () {
         var element = this.elementpath;
         if (this.rightPress == 1) {
             this.positionX += 5;
@@ -74,7 +74,7 @@ var evil = (function () {
         }
         element.style.transform = "translate(" + this.positionX + "px," + this.positionY + "px)";
     };
-    return evil;
+    return dino1;
 }());
 var Game = (function () {
     function Game() {
@@ -82,7 +82,7 @@ var Game = (function () {
         this.Hoofdpersoon.Create();
         this.Hoofdpersoon.Opmaak();
         console.log("aangemaakt");
-        this.Dino1 = new evil();
+        this.Dino1 = new dino1();
         this.Dino1.Create();
         this.Dino1.Opmaak();
         console.log("Evil is made, not born.");

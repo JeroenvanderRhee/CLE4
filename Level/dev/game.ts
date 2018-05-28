@@ -1,6 +1,6 @@
 class Game{
     Hoofdpersoon:headCharacter
-    Dino1: evil
+    Dino1: dino1
 
     constructor(){
         //Hoofdpersoon
@@ -10,7 +10,7 @@ class Game{
         console.log("aangemaakt")
 
         //De Eerste dino.
-        this.Dino1 = new evil()
+        this.Dino1 = new dino1()
         this.Dino1.Create()
         this.Dino1.Opmaak()
         console.log("Evil is made, not born.")
