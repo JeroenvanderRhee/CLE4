@@ -7,14 +7,14 @@ var dino1 = (function () {
         this.rightPress = 0;
         this.spacePress = 0;
         this.name = "Skelet";
-        this.width = 110;
+        this.width = 200;
         this.height = 200;
         this.velocity = 2;
         this.positionX = 20;
         this.positionY = window.innerHeight - this.height - 56;
-        this.leftkeycode = 37;
-        this.rightkeycode = 39;
-        this.spacekeycode = 32;
+        this.leftkeycode = 65;
+        this.rightkeycode = 68;
+        this.spacekeycode = 73;
         window.addEventListener("keyup", function (e) { return _this.onKeyUp(e); });
         window.addEventListener("keydown", function (e) { return _this.onKeyDown(e); });
     }
@@ -53,6 +53,7 @@ var dino1 = (function () {
         element.innerHTML = " ";
     };
     dino1.prototype.Opmaak = function () {
+        console.log("Opmaak werkt");
         var element = this.elementpath;
         element.style.position = "absolute";
         element.style.width = this.width + "px";

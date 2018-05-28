@@ -14,6 +14,7 @@ class Game{
         this.Dino1.Create()
         this.Dino1.Opmaak()
         console.log("Evil is made, not born.")
+
         this.gameloop()
     }
 

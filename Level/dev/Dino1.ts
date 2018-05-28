@@ -15,21 +15,22 @@ class dino1 {
     
     constructor(){
         this.name = "Skelet"
-        this.width = 110
-        this.height = 200
+        this.width = 200                                        //Zichtbare breedte Dino
+        this.height = 200                                       //Hoogte positie Dino
         this.velocity = 2
-        this.positionX = 20
-        this.positionY = window.innerHeight - this.height - 56
+        this.positionX = 20                                     //Begin positie X dino
+        this.positionY = window.innerHeight - this.height - 56  //Veranderende Y positie Dino
 
         //toetsenbord besturing
-        this.leftkeycode = 37
-        this.rightkeycode = 39
-        this.spacekeycode = 32        
+        this.leftkeycode = 65                                   //A = 65 = naar links
+        this.rightkeycode = 68                                  //D = 68 = naar rechts 
+        this.spacekeycode = 73                                  //I =   = Schieten       
+
         window.addEventListener("keyup", (e: KeyboardEvent) => this.onKeyUp(e))
         window.addEventListener("keydown", (e: KeyboardEvent) => this.onKeyDown(e))
     }
 
-    //Acties wanneer key DOWN
+    //Acties wanneer keys DOWN
     private onKeyDown(e: KeyboardEvent): void {
         console.log(e.keyCode)
         switch (e.keyCode) {
@@ -71,6 +72,7 @@ class dino1 {
 
     //Opmaak scherm
     public Opmaak(){
+        console.log("Opmaak werkt")
         let element = this.elementpath
         element.style.position = "absolute"
         element.style.width = this.width + "px"
@@ -80,6 +82,7 @@ class dino1 {
     }
 
     //Update gezette stappen doormiddel van key's klikken;
+    //
     public Update(){
         let element = this.elementpath
         if(this.rightPress == 1){
