@@ -1,12 +1,12 @@
 
-class headCharacter {
+class evil {
     private name:string
     private width:number
     private height:number
     private velocity:number
     private positionX:number
     private positionY:number
-    private elementpath:HTMLElement = document.createElement("headcharacter")
+    private elementpath:HTMLElement = document.createElement("evil")
     private leftkeycode:number
     private rightkeycode:number
     private spacekeycode:number
@@ -15,7 +15,6 @@ class headCharacter {
     private spacePress:number = 0
     
     constructor(){
-
         this.name = "Skelet"
         this.width = 40
         this.height = 200
@@ -65,7 +64,7 @@ class headCharacter {
     
     public Create(){
         let childElement:HTMLElement = document.body
-        //let element = document.createElement("headcharacter")
+        //let element = document.createElement("evil")
         let element = this.elementpath
         childElement.appendChild(element)
         element.innerHTML = " "

@@ -1,4 +1,81 @@
 "use strict";
+var evil = (function () {
+    function evil() {
+        var _this = this;
+        this.elementpath = document.createElement("evil");
+        this.leftPress = 0;
+        this.rightPress = 0;
+        this.spacePress = 0;
+        this.name = "Skelet";
+        this.width = 40;
+        this.height = 200;
+        this.velocity = 2;
+        this.positionX = 20;
+        this.positionY = window.innerHeight - this.height - 56;
+        this.leftkeycode = 37;
+        this.rightkeycode = 39;
+        this.spacekeycode = 32;
+        window.addEventListener("keyup", function (e) { return _this.onKeyUp(e); });
+        window.addEventListener("keydown", function (e) { return _this.onKeyDown(e); });
+    }
+    evil.prototype.onKeyDown = function (e) {
+        console.log(e.keyCode);
+        switch (e.keyCode) {
+            case this.leftkeycode:
+                this.leftPress = 1;
+                break;
+            case this.rightkeycode:
+                this.rightPress = 1;
+                break;
+            case this.spacekeycode:
+                this.spacePress = 1;
+                break;
+        }
+    };
+    evil.prototype.onKeyUp = function (e) {
+        console.log(e.keyCode);
+        switch (e.keyCode) {
+            case this.leftkeycode:
+                this.leftPress = 0;
+                break;
+            case this.rightkeycode:
+                this.rightPress = 0;
+                break;
+            case this.spacekeycode:
+                this.spacePress = 0;
+                break;
+        }
+    };
+    evil.prototype.Create = function () {
+        var childElement = document.body;
+        var element = this.elementpath;
+        childElement.appendChild(element);
+        element.innerHTML = " ";
+    };
+    evil.prototype.Opmaak = function () {
+        var element = this.elementpath;
+        element.style.position = "absolute";
+        element.style.width = this.width + "px";
+        element.style.height = this.height + "px";
+        element.innerHTML = "";
+        element.style.transform = "translate(" + this.positionX + "px," + this.positionY + "px)";
+    };
+    evil.prototype.Update = function () {
+        var element = this.elementpath;
+        if (this.rightPress == 1) {
+            this.positionX += 5;
+        }
+        if (this.leftPress == 1) {
+            this.positionX -= 5;
+        }
+        if (this.spacePress == 1) {
+            this.positionY -= 5;
+            this.spacePress = 0;
+        }
+        element.style.transform = "translate(" + this.positionX + "px," + this.positionY + "px)";
+    };
+    return evil;
+}());
 var Game = (function () {
     function Game() {
         this.Hoofdpersoon = new headCharacter();
