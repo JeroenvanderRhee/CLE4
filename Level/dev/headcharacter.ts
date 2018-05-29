@@ -23,6 +23,7 @@ class headCharacter {
         this.velocity = 2
         this.positionX = 20
         this.positionY = window.innerHeight - this.height - 56
+        console.log(this.positionY)
 
         //toetsenbord besturing
         this.leftkeycode = 37
@@ -88,17 +89,18 @@ class headCharacter {
 
     public Update(){
         let element = this.elementpath
+        let snelheid:number = 0;
         if(this.rightPress == 1){
-            this.positionX += 5;
+            this.positionX += snelheid;
         }
 
         if(this.leftPress == 1){
-            this.positionX -= 5;
+            this.positionX -= snelheid;
         }
 
         if(this.upPress == 1){
-            this.positionY -= 50;
-            this.positionX += 20;
+            this.positionY -= 100;
+            this.positionX += snelheid;
             this.upPress = 0
         }
 

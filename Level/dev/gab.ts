@@ -1,9 +1,9 @@
-class Ground{
+class Gap{
     private width:number
     private height:number
     private positionx:number
     private positiony:number
-    private elementpath:HTMLElement = document.createElement("bar")
+    private elementpath:HTMLElement = document.createElement("gap")
 
     constructor(width:number, positiony:number, positionx:number){
         this.width = width
@@ -14,9 +14,8 @@ class Ground{
 
     public Create(){
         let childElement = document.getElementById("camera")
-        //let childElement = document.body.camera
+        //let childElement:HTMLElement = document.body
         let element = this.elementpath
-        //childElement.appendChild(element)
         childElement.appendChild(element)
         element.innerHTML = " "
     }
@@ -32,10 +31,6 @@ class Ground{
 
     public getRectangle() {
         return this.elementpath.getBoundingClientRect()
-    }
-
-    public update(hoeveelheid:number) {
-        this.positionx -= hoeveelheid
     }
 
     public getvalues(){
