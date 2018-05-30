@@ -25,11 +25,18 @@ class headCharacter {
         this.positionY = window.innerHeight - this.height - 56
         console.log(this.positionY)
 
-        //toetsenbord besturing
-        this.leftkeycode = 37
-        this.rightkeycode = 39
-        this.upkeycode = 38
-        this.spacekeycode = 32        
+        //toetsenbord besturing arrows
+        // this.leftkeycode = 37
+        // this.rightkeycode = 39
+        // this.upkeycode = 38
+        // this.spacekeycode = 32  
+        
+        //toetsenbord besturing WSAD
+        this.leftkeycode = 65
+        this.rightkeycode = 68
+        this.upkeycode = 87
+        this.spacekeycode = 32 
+
         window.addEventListener("keyup", (e: KeyboardEvent) => this.onKeyUp(e))
         window.addEventListener("keydown", (e: KeyboardEvent) => this.onKeyDown(e))
     }

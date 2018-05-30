@@ -1,4 +1,110 @@
 "use strict";
+var dino1 = (function () {
+    function dino1() {
+        var _this = this;
+        this.dino = document.createElement("dino1");
+        this.leftPress = 0;
+        this.rightPress = 0;
+        this.upPress = 0;
+        this.downPress = 0;
+        this.spacePress = 0;
+        this.width = 200;
+        this.height = 200;
+        this.velocity = 2;
+        this.positionX = 3000;
+        this.positionY = window.innerHeight - this.height - 56;
+        this.leftkeycode = 65;
+        this.rightkeycode = 68;
+        this.upkeycode = 87;
+        this.downkeycode = 83;
+        this.spacekeycode = 73;
+        window.addEventListener("keyup", function (e) { return _this.onKeyUp(e); });
+        window.addEventListener("keydown", function (e) { return _this.onKeyDown(e); });
+    }
+    dino1.prototype.onKeyDown = function (e) {
+        console.log(e.keyCode);
+        switch (e.keyCode) {
+            case this.leftkeycode:
+                this.leftPress = 1;
+                break;
+            case this.rightkeycode:
+                this.rightPress = 1;
+                break;
+            case this.upkeycode:
+                this.upPress = 1;
+                break;
+            case this.downkeycode:
+                this.downPress = 1;
+                break;
+            case this.spacekeycode:
+                this.spacePress = 1;
+                break;
+        }
+    };
+    dino1.prototype.onKeyUp = function (e) {
+        console.log(e.keyCode);
+        switch (e.keyCode) {
+            case this.leftkeycode:
+                this.leftPress = 0;
+                break;
+            case this.rightkeycode:
+                this.rightPress = 0;
+                break;
+            case this.upkeycode:
+                this.upPress = 0;
+                break;
+            case this.downkeycode:
+                this.downPress = 0;
+                break;
+            case this.spacekeycode:
+                this.spacePress = 0;
+                break;
+        }
+    };
+    dino1.prototype.Create = function () {
+        var childElement = document.body;
+        var element = this.dino;
+        childElement.appendChild(element);
+        element.innerHTML = " ";
+    };
+    dino1.prototype.Opmaak = function () {
+        var element = this.dino;
+        element.style.position = "absolute";
+        element.style.width = this.width + "px";
+        element.style.height = this.height + "px";
+        element.innerHTML = "";
+        element.style.transform = "translate(" + this.positionX + "px," + this.positionY + "px)";
+    };
+    dino1.prototype.Update = function () {
+        var element = this.dino;
+        this.positionX += this.velocity;
+        if (this.positionX <= 3000) {
+            this.velocity *= -1;
+        }
+        if (this.positionX >= 3500) {
+            this.velocity *= -1;
+        }
+        element.style.transform = "translate(" + this.positionX + "px," + this.positionY + "px)";
+    };
+    dino1.prototype.getvalues = function () {
+        var xbegin;
+        var xeind;
+        var y;
+        var height;
+        var width;
+        return {
+            xbegin: this.positionX,
+            xeind: this.positionX + this.width,
+            y: this.positionY,
+            height: this.height,
+            width: this.width
+        };
+    };
+    dino1.prototype.getRectangle = function () {
+        return this.dino.getBoundingClientRect();
+    };
+    return dino1;
+}());
 var Gap = (function () {
     function Gap(width, positiony, positionx) {
         this.elementpath = document.createElement("gap");
@@ -47,6 +153,9 @@ var Game = (function () {
         this.Bar = [];
         this.Gap = [];
         this.Hoofdpersoon = new headCharacter();
+        this.Dino = new dino1();
+        this.Dino.Create();
+        this.Dino.Opmaak();
         this.Hoofdpersoon.Create();
         this.Hoofdpersoon.Opmaak();
         console.log("aangemaakt");
@@ -63,7 +172,11 @@ var Game = (function () {
     Game.prototype.createbars = function () {
         this.Bar.push(new Ground(800, window.innerHeight, 0));
         this.Bar.push(new Ground(400, window.innerHeight, 900));
-        this.Bar.push(new Ground(350, window.innerHeight, 1380));
+        this.Bar.push(new Ground(320, window.innerHeight, 1380));
+        this.Bar.push(new Ground(400, window.innerHeight, 1800));
+        this.Bar.push(new Ground(920, window.innerHeight, 1980));
+        this.Bar.push(new Ground(700, window.innerHeight, 3000));
+        this.Bar.push(new Ground(530, window.innerHeight, 3770));
         this.Bar.forEach(function (ReadOut) {
             ReadOut.Create();
             ReadOut.Opmaak();
@@ -72,6 +185,10 @@ var Game = (function () {
     Game.prototype.creategaps = function () {
         this.Gap.push(new Gap(100, window.innerHeight, 800));
         this.Gap.push(new Gap(80, window.innerHeight, 1300));
+        this.Gap.push(new Gap(100, window.innerHeight, 1700));
+        this.Gap.push(new Gap(80, window.innerHeight, 1900));
+        this.Gap.push(new Gap(100, window.innerHeight, 2900));
+        this.Gap.push(new Gap(70, window.innerHeight, 3700));
         this.Gap.forEach(function (ReadOut) {
             ReadOut.Create();
             ReadOut.Opmaak();
@@ -117,6 +234,17 @@ var Game = (function () {
             }
         });
     };
+    Game.prototype.checkColisionDino = function () {
+        var barhit;
+        var positiondino = this.Dino.getvalues();
+        var positioncharacter = this.Hoofdpersoon.getvalues();
+        if ((positioncharacter.xeind >= positiondino.xbegin) && (positioncharacter.xbegin <= positiondino.xeind)) {
+            barhit = this.checkCollision(this.Dino.getRectangle(), this.Hoofdpersoon.getRectangle());
+            if (barhit != true) {
+                alert("Je bent dood door een Dino");
+            }
+        }
+    };
     Game.prototype.checkCollisionScreen = function () {
         var positioncharacter = this.Hoofdpersoon.getvalues();
         positioncharacter.xbegin += 100;
@@ -126,9 +254,11 @@ var Game = (function () {
     };
     Game.prototype.gameloop = function () {
         var _this = this;
+        this.Dino.Update();
         this.Hoofdpersoon.Update();
         this.checkCollisionBar();
         this.checkCollisionGap();
+        this.checkColisionDino();
         this.checkCollisionScreen();
         requestAnimationFrame(function () { return _this.gameloop(); });
     };
@@ -193,9 +323,9 @@ var headCharacter = (function () {
         this.positionX = 20;
         this.positionY = window.innerHeight - this.height - 56;
         console.log(this.positionY);
-        this.leftkeycode = 37;
-        this.rightkeycode = 39;
-        this.upkeycode = 38;
+        this.leftkeycode = 65;
+        this.rightkeycode = 68;
+        this.upkeycode = 87;
         this.spacekeycode = 32;
         window.addEventListener("keyup", function (e) { return _this.onKeyUp(e); });
         window.addEventListener("keydown", function (e) { return _this.onKeyDown(e); });
