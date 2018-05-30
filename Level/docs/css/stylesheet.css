@@ -17,3 +17,9 @@ headcharacter{
 bar{
     background-color:gray;
 }
+dino1 {
+    background: url("../img/Dino1.png") no-repeat center top;
+}
+kleding {
+    background: url("../img/Prehistory_0002s_0001_Tshirt.png") no-repeat center top;
+}
