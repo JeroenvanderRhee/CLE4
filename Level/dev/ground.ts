@@ -17,7 +17,7 @@ class Ground{
         //let childElement = document.body.camera
         let element = this.elementpath
         //childElement.appendChild(element)
-        childElement.appendChild(element)
+        //childElement.appendChild(element)
         element.innerHTML = " "
     }
 
