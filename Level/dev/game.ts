@@ -32,7 +32,7 @@ class Game{
     }
 
     private creategaps(){
-        this.Gap.push(new Gap(300, window.innerHeight, 800))
+        this.Gap.push(new Gap(100, window.innerHeight, 800))
         this.Gap.push(new Gap(80, window.innerHeight, 1300))
 
         this.Gap.forEach(ReadOut => {
@@ -50,7 +50,7 @@ class Game{
             positioncharacter = this.Hoofdpersoon.getvalues()
             positionbar = ReadOut.getvalues()
             
-            if((positioncharacter.xbegin >= positionbar.xbegin) && (positioncharacter.xeind <= positionbar.xeind)){
+            if((positioncharacter.xeind >= positionbar.xbegin) && (positioncharacter.xeind <= positionbar.xeind)){
                 barhit = this.checkCollision(ReadOut.getRectangle(), this.Hoofdpersoon.getRectangle())
                 if (barhit != true){
                     console.log("hit")
@@ -70,7 +70,7 @@ class Game{
             positioncharacter = this.Hoofdpersoon.getvalues()
             positionbar = ReadOut.getvalues()
             
-            if((positioncharacter.xbegin >= positionbar.xbegin) && (positioncharacter.xeind <= positionbar.xeind)){
+            if((positioncharacter.xeind >= positionbar.xbegin) && (positioncharacter.xbegin <= positionbar.xeind)){
                 barhit = this.checkCollision(ReadOut.getRectangle(), this.Hoofdpersoon.getRectangle())
                 if (barhit != true){
                     console.log("hit")
@@ -79,7 +79,7 @@ class Game{
                 if(barhit == true){
                   this.Hoofdpersoon.gravity(1,10)
                   if (positioncharacter.y >= window.innerHeight - 10){
-                      alert("je bent af")
+                      alert("Je bent af")
                   }
                 }
             }

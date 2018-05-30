@@ -70,7 +70,7 @@ var Game = (function () {
         });
     };
     Game.prototype.creategaps = function () {
-        this.Gap.push(new Gap(300, window.innerHeight, 800));
+        this.Gap.push(new Gap(100, window.innerHeight, 800));
         this.Gap.push(new Gap(80, window.innerHeight, 1300));
         this.Gap.forEach(function (ReadOut) {
             ReadOut.Create();
@@ -85,7 +85,7 @@ var Game = (function () {
         this.Bar.forEach(function (ReadOut) {
             positioncharacter = _this.Hoofdpersoon.getvalues();
             positionbar = ReadOut.getvalues();
-            if ((positioncharacter.xbegin >= positionbar.xbegin) && (positioncharacter.xeind <= positionbar.xeind)) {
+            if ((positioncharacter.xeind >= positionbar.xbegin) && (positioncharacter.xeind <= positionbar.xeind)) {
                 barhit = _this.checkCollision(ReadOut.getRectangle(), _this.Hoofdpersoon.getRectangle());
                 if (barhit != true) {
                     console.log("hit");
@@ -102,7 +102,7 @@ var Game = (function () {
         this.Gap.forEach(function (ReadOut) {
             positioncharacter = _this.Hoofdpersoon.getvalues();
             positionbar = ReadOut.getvalues();
-            if ((positioncharacter.xbegin >= positionbar.xbegin) && (positioncharacter.xeind <= positionbar.xeind)) {
+            if ((positioncharacter.xeind >= positionbar.xbegin) && (positioncharacter.xbegin <= positionbar.xeind)) {
                 barhit = _this.checkCollision(ReadOut.getRectangle(), _this.Hoofdpersoon.getRectangle());
                 if (barhit != true) {
                     console.log("hit");
@@ -111,7 +111,7 @@ var Game = (function () {
                 if (barhit == true) {
                     _this.Hoofdpersoon.gravity(1, 10);
                     if (positioncharacter.y >= window.innerHeight - 10) {
-                        alert("je bent af");
+                        alert("Je bent af");
                     }
                 }
             }
