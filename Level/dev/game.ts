@@ -3,9 +3,11 @@ class Game{
     Bar:Ground[] = []
     Gap:Gap[] = []
     Dino:dino1
+    Fireball:Fire
 
     constructor(){
         this.Hoofdpersoon = new headCharacter()
+        this.Fireball = new Fire(1380,1700)
         this.Dino = new dino1()
         this.Dino.Create()
         this.Dino.Opmaak()
@@ -67,7 +69,7 @@ class Game{
                 barhit = this.checkCollision(ReadOut.getRectangle(), this.Hoofdpersoon.getRectangle())
                 if (barhit != true){
                     console.log("hit")
-                    this.Hoofdpersoon.gravity(2,5)
+                    this.Hoofdpersoon.gravity(0,5)
                 }
             }
         })
@@ -115,7 +117,8 @@ class Game{
     }
     
     private gameloop(){
-        this.Dino.Update()
+        this.Dino.Update(3000,3700)
+        this.Fireball.update()
         this.Hoofdpersoon.Update()
         this.checkCollisionBar()
         this.checkCollisionGap()

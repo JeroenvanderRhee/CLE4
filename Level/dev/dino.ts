@@ -106,14 +106,14 @@ class dino1 {
     }
 
     //Update gezette stappen doormiddel van key's klikken;
-    public Update(){
+    public Update(positionxbegin:number, positionxeinde:number){
         let element = this.dino
         this.positionX += this.velocity
-        if(this.positionX <= 3000){
+        if(this.positionX <= positionxbegin){
             this.velocity *=-1;
         }
 
-        if (this.positionX >= 3500) {
+        if (this.positionX >= positionxeinde - this.width) {
             this.velocity *= -1;
         }
 

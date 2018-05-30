@@ -26,6 +26,10 @@ bar{
 dino1 {
     background: url("../img/Dino1.png") no-repeat center top;
 }
+
+fireball{
+    background: url(../img/Fire.png) no-repeat center top;
+}
 kleding {
     background: url("../img/Prehistory_0002s_0001_Tshirt.png") no-repeat center top;
 }

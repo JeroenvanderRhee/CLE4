@@ -104,13 +104,13 @@ var dino1 = (function () {
         element.innerHTML = "";
         element.style.transform = "translate(" + this.positionX + "px," + this.positionY + "px)";
     };
-    dino1.prototype.Update = function () {
+    dino1.prototype.Update = function (positionxbegin, positionxeinde) {
         var element = this.dino;
         this.positionX += this.velocity;
-        if (this.positionX <= 3000) {
+        if (this.positionX <= positionxbegin) {
             this.velocity *= -1;
         }
-        if (this.positionX >= 3500) {
+        if (this.positionX >= positionxeinde - this.width) {
             this.velocity *= -1;
         }
         element.style.transform = "translate(" + this.positionX + "px," + this.positionY + "px)";
@@ -133,6 +133,70 @@ var dino1 = (function () {
         return this.dino.getBoundingClientRect();
     };
     return dino1;
+}());
+var Fire = (function () {
+    function Fire(Xbegin, Xeind) {
+        var _this = this;
+        this.spacePress = 0;
+        this.elementpath = document.createElement("fireball");
+        this.name = "Fire ball";
+        this.img = "../img/Fire.png";
+        this.width = 60;
+        this.height = 80;
+        this.velocity = 1.8;
+        this.positionX = Xbegin;
+        this.positionXbegin = Xbegin;
+        this.positionXeind = Xeind;
+        this.positionY = window.innerHeight - this.height - 60;
+        this.spacekeycode = 32;
+        window.addEventListener("keyup", function (e) { return _this.onKeyUp(e); });
+        window.addEventListener("keydown", function (e) { return _this.onKeyDown(e); });
+        this.create();
+        this.Opmaak();
+    }
+    Fire.prototype.create = function () {
+        var childElement = document.body;
+        var element = this.elementpath;
+        childElement.appendChild(element);
+        element.innerHTML = " ";
+    };
+    Fire.prototype.Opmaak = function () {
+        var element = this.elementpath;
+        element.style.position = "absolute";
+        element.style.width = this.width + "px";
+        element.style.height = this.height + "px";
+        element.innerHTML = "";
+        element.style.transform = "translate(" + this.positionX + "px," + this.positionY + "px)";
+    };
+    Fire.prototype.onKeyDown = function (e) {
+        console.log(e.keyCode);
+        switch (e.keyCode) {
+            case this.spacekeycode:
+                this.spacePress = 0;
+                break;
+        }
+    };
+    Fire.prototype.onKeyUp = function (e) {
+        console.log(e.keyCode);
+        switch (e.keyCode) {
+            case this.spacekeycode:
+                this.spacePress = 1;
+                break;
+        }
+    };
+    Fire.prototype.update = function () {
+        var element = this.elementpath;
+        var speed = this.velocity;
+        this.positionX += speed;
+        if (this.positionX <= this.positionXbegin) {
+            this.velocity *= -1;
+        }
+        if (this.positionX >= this.positionXeind - this.width) {
+            this.velocity *= -1;
+        }
+        element.style.transform = "translate(" + (this.positionX) + "px," + this.positionY + "px)";
+    };
+    return Fire;
 }());
 var Gap = (function () {
     function Gap(width, positiony, positionx) {
@@ -182,6 +246,7 @@ var Game = (function () {
         this.Bar = [];
         this.Gap = [];
         this.Hoofdpersoon = new headCharacter();
+        this.Fireball = new Fire(1380, 1700);
         this.Dino = new dino1();
         this.Dino.Create();
         this.Dino.Opmaak();
@@ -235,7 +300,7 @@ var Game = (function () {
                 barhit = _this.checkCollision(ReadOut.getRectangle(), _this.Hoofdpersoon.getRectangle());
                 if (barhit != true) {
                     console.log("hit");
-                    _this.Hoofdpersoon.gravity(2, 5);
+                    _this.Hoofdpersoon.gravity(0, 5);
                 }
             }
         });
@@ -277,7 +342,8 @@ var Game = (function () {
     };
     Game.prototype.gameloop = function () {
         var _this = this;
-        this.Dino.Update();
+        this.Dino.Update(3000, 3700);
+        this.Fireball.update();
         this.Hoofdpersoon.Update();
         this.checkCollisionBar();
         this.checkCollisionGap();
