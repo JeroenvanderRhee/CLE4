@@ -6,6 +6,7 @@ class Camera{
     //private positionY :number
     private leftkeycode :number
     private rightkeycode:number
+    private translation:number = 0
 
     constructor(event:number){
         this.speed = event
@@ -49,17 +50,16 @@ class Camera{
         let element:HTMLElement = document.getElementById("camera")
         if(this.rightPress == 1){
             this.positionX -= this.speed;
+            this.translation -= this.speed
         }
 
         if(this.leftPress == 1){
             this.positionX += this.speed;
+            this.translation += this.speed
         }
 
 
         element.style.transform = "translateX(" + this.positionX +"px)"
     }
 
-    public x(){
-        return this.positionX
-    }
 }

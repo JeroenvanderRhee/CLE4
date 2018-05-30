@@ -34,9 +34,6 @@ class Ground{
         return this.elementpath.getBoundingClientRect()
     }
 
-    public update(hoeveelheid:number) {
-        this.positionx -= hoeveelheid
-    }
 
     public getvalues(){
         let xbegin : number

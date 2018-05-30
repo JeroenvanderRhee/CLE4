@@ -89,7 +89,7 @@ class headCharacter {
 
     public Update(){
         let element = this.elementpath
-        let snelheid:number = 0;
+        let snelheid:number = 5;
         if(this.rightPress == 1){
             this.positionX += snelheid;
         }
@@ -99,8 +99,8 @@ class headCharacter {
         }
 
         if(this.upPress == 1){
-            this.positionY -= 100;
-            this.positionX += snelheid;
+            this.positionY -= 210;
+            this.positionX += snelheid + 5;
             this.upPress = 0
         }
 

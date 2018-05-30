@@ -5,6 +5,7 @@ class Gap{
     private positiony:number
     private elementpath:HTMLElement = document.createElement("gap")
 
+
     constructor(width:number, positiony:number, positionx:number){
         this.width = width
         this.height = 56
@@ -49,4 +50,5 @@ class Gap{
             width : this.width
         }
     }
+
 }

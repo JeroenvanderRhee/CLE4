@@ -1,11 +1,9 @@
 class Game{
-    Camera:Camera
     Hoofdpersoon:headCharacter
     Bar:Ground[] = []
     Gap:Gap[] = []
 
     constructor(){
-        this.Camera = new Camera(5)
         this.Hoofdpersoon = new headCharacter()
         this.Hoofdpersoon.Create()
         this.Hoofdpersoon.Opmaak()
@@ -24,7 +22,8 @@ class Game{
 
     private createbars(){
         this.Bar.push(new Ground(800, window.innerHeight, 0))
-        this.Bar.push(new Ground(400, window.innerHeight, 1000))
+        this.Bar.push(new Ground(400, window.innerHeight, 900))
+        this.Bar.push(new Ground(350, window.innerHeight, 1380))
 
         this.Bar.forEach(ReadOut => {
             ReadOut.Create()
@@ -33,7 +32,8 @@ class Game{
     }
 
     private creategaps(){
-        this.Gap.push(new Gap(200, window.innerHeight, 800))
+        this.Gap.push(new Gap(300, window.innerHeight, 800))
+        this.Gap.push(new Gap(80, window.innerHeight, 1300))
 
         this.Gap.forEach(ReadOut => {
             ReadOut.Create()
@@ -72,20 +72,35 @@ class Game{
             
             if((positioncharacter.xbegin >= positionbar.xbegin) && (positioncharacter.xeind <= positionbar.xeind)){
                 barhit = this.checkCollision(ReadOut.getRectangle(), this.Hoofdpersoon.getRectangle())
-                    this.Hoofdpersoon.gravity(1,10)
+                if (barhit != true){
+                    console.log("hit")
+                    this.Hoofdpersoon.gravity(2,5)
+                }
+                if(barhit == true){
+                  this.Hoofdpersoon.gravity(1,10)
+                  if (positioncharacter.y >= window.innerHeight - 10){
+                      alert("je bent af")
+                  }
+                }
             }
         })
         
     }
 
+    private checkCollisionScreen(){
+        let positioncharacter = this.Hoofdpersoon.getvalues()
+        positioncharacter.xbegin += 100
+        if(window.innerWidth <= positioncharacter.xbegin){
+            console.log("hit the muur")
+        }
+    }
+
     
     private gameloop(){
         this.Hoofdpersoon.Update()
-        this.Camera.Update()
-        let hoeveelheid:number = this.Camera.x()
-        //this.Bar.update(hoeveelheid)
         this.checkCollisionBar()
         this.checkCollisionGap()
+        this.checkCollisionScreen()
         requestAnimationFrame(() =>this.gameloop())
     }
 }

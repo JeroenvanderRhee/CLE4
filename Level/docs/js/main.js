@@ -46,7 +46,6 @@ var Game = (function () {
     function Game() {
         this.Bar = [];
         this.Gap = [];
-        this.Camera = new Camera(5);
         this.Hoofdpersoon = new headCharacter();
         this.Hoofdpersoon.Create();
         this.Hoofdpersoon.Opmaak();
@@ -63,14 +62,16 @@ var Game = (function () {
     };
     Game.prototype.createbars = function () {
         this.Bar.push(new Ground(800, window.innerHeight, 0));
-        this.Bar.push(new Ground(400, window.innerHeight, 1000));
+        this.Bar.push(new Ground(400, window.innerHeight, 900));
+        this.Bar.push(new Ground(350, window.innerHeight, 1380));
         this.Bar.forEach(function (ReadOut) {
             ReadOut.Create();
             ReadOut.Opmaak();
         });
     };
     Game.prototype.creategaps = function () {
-        this.Gap.push(new Gap(200, window.innerHeight, 800));
+        this.Gap.push(new Gap(300, window.innerHeight, 800));
+        this.Gap.push(new Gap(80, window.innerHeight, 1300));
         this.Gap.forEach(function (ReadOut) {
             ReadOut.Create();
             ReadOut.Opmaak();
@@ -103,17 +104,32 @@ var Game = (function () {
             positionbar = ReadOut.getvalues();
             if ((positioncharacter.xbegin >= positionbar.xbegin) && (positioncharacter.xeind <= positionbar.xeind)) {
                 barhit = _this.checkCollision(ReadOut.getRectangle(), _this.Hoofdpersoon.getRectangle());
-                _this.Hoofdpersoon.gravity(1, 10);
+                if (barhit != true) {
+                    console.log("hit");
+                    _this.Hoofdpersoon.gravity(2, 5);
+                }
+                if (barhit == true) {
+                    _this.Hoofdpersoon.gravity(1, 10);
+                    if (positioncharacter.y >= window.innerHeight - 10) {
+                        alert("je bent af");
+                    }
+                }
             }
         });
+    };
+    Game.prototype.checkCollisionScreen = function () {
+        var positioncharacter = this.Hoofdpersoon.getvalues();
+        positioncharacter.xbegin += 100;
+        if (window.innerWidth <= positioncharacter.xbegin) {
+            console.log("hit the muur");
+        }
     };
     Game.prototype.gameloop = function () {
         var _this = this;
         this.Hoofdpersoon.Update();
-        this.Camera.Update();
-        var hoeveelheid = this.Camera.x();
         this.checkCollisionBar();
         this.checkCollisionGap();
+        this.checkCollisionScreen();
         requestAnimationFrame(function () { return _this.gameloop(); });
     };
     return Game;
@@ -143,9 +159,6 @@ var Ground = (function () {
     };
     Ground.prototype.getRectangle = function () {
         return this.elementpath.getBoundingClientRect();
-    };
-    Ground.prototype.update = function (hoeveelheid) {
-        this.positionx -= hoeveelheid;
     };
     Ground.prototype.getvalues = function () {
         var xbegin;
@@ -237,7 +250,7 @@ var headCharacter = (function () {
     };
     headCharacter.prototype.Update = function () {
         var element = this.elementpath;
-        var snelheid = 0;
+        var snelheid = 5;
         if (this.rightPress == 1) {
             this.positionX += snelheid;
         }
@@ -245,8 +258,8 @@ var headCharacter = (function () {
             this.positionX -= snelheid;
         }
         if (this.upPress == 1) {
-            this.positionY -= 100;
-            this.positionX += snelheid;
+            this.positionY -= 210;
+            this.positionX += snelheid + 5;
             this.upPress = 0;
         }
         element.style.transform = "translate(" + this.positionX + "px," + this.positionY + "px)";
@@ -281,6 +294,7 @@ var headCharacter = (function () {
 var Camera = (function () {
     function Camera(event) {
         var _this = this;
+        this.translation = 0;
         this.speed = event;
         this.rightPress = 0;
         this.leftPress = 0;
@@ -316,14 +330,13 @@ var Camera = (function () {
         var element = document.getElementById("camera");
         if (this.rightPress == 1) {
             this.positionX -= this.speed;
+            this.translation -= this.speed;
         }
         if (this.leftPress == 1) {
             this.positionX += this.speed;
+            this.translation += this.speed;
         }
         element.style.transform = "translateX(" + this.positionX + "px)";
-    };
-    Camera.prototype.x = function () {
-        return this.positionX;
     };
     return Camera;
 }());
