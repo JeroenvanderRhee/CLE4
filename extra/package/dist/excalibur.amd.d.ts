@@ -4792,7 +4792,7 @@ declare module "Events" {
     export class PreUpdateEvent extends GameEvent<Actor | Scene | Engine | TileMap | BaseCamera> {
         engine: Engine;
         delta: number;
-        target: Actor | Scene | Engine | TileMap | BaseCamera;
+        target: Actor | Scene | Engine | TileMap | ;
         constructor(engine: Engine, delta: number, target: Actor | Scene | Engine | TileMap | BaseCamera);
     }
     /**

@@ -25,7 +25,7 @@ for(var resource in Resource){
 var title = null;
 var instructions = null;
 var buildTitle = function(){
-	 title = new ex.Actor(engine.getWidth()/2, engine.getHeight()/2, 500, 500);
+	 title = new ex.Actor(engine.getWidth()/2, engine.getHeight()/2, 100, 100);
 	var titleSprite = Resource.Excalibird.asSprite();
 	titleSprite.setScaleX(2.5);
 	titleSprite.setScaleY(2.5);
