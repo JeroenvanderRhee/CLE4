@@ -1,4 +1,33 @@
 "use strict";
+var kleding1 = (function () {
+    function kleding1() {
+        this.elementpath = document.createElement("dino1");
+        this.name = "shirt";
+        this.width = 200;
+        this.height = 200;
+        this.velocity = 2;
+        this.positionX = 20;
+        this.positionY = 20;
+    }
+    kleding1.prototype.Create = function () {
+        var childElement = document.body;
+        var element = this.elementpath;
+        childElement.appendChild(element);
+        element.innerHTML = " ";
+    };
+    kleding1.prototype.Opmaak = function () {
+        console.log("Opmaak werkt");
+        var element = this.elementpath;
+        element.style.position = "absolute";
+        element.style.width = this.width + "px";
+        element.style.height = this.height + "px";
+        element.innerHTML = "";
+    };
+    kleding1.prototype.Update = function () {
+        var element = this.elementpath;
+    };
+    return kleding1;
+}());
 var dino1 = (function () {
     function dino1() {
         var _this = this;
@@ -238,18 +267,12 @@ var Game = (function () {
         var barhit;
         var positiondino = this.Dino.getvalues();
         var positioncharacter = this.Hoofdpersoon.getvalues();
-        if ((positioncharacter.xeind >= positiondino.xbegin) && (positioncharacter.xbegin <= positiondino.xeind)) {
+        if ((positioncharacter.xeind >= positiondino.xbegin) && (positioncharacter.xeind <= positiondino.xeind)) {
             barhit = this.checkCollision(this.Dino.getRectangle(), this.Hoofdpersoon.getRectangle());
             if (barhit != true) {
                 alert("Je bent dood door een Dino");
+                console.log("hit by the dino");
             }
-        }
-    };
-    Game.prototype.checkCollisionScreen = function () {
-        var positioncharacter = this.Hoofdpersoon.getvalues();
-        positioncharacter.xbegin += 100;
-        if (window.innerWidth <= positioncharacter.xbegin) {
-            console.log("hit the muur");
         }
     };
     Game.prototype.gameloop = function () {
@@ -259,7 +282,6 @@ var Game = (function () {
         this.checkCollisionBar();
         this.checkCollisionGap();
         this.checkColisionDino();
-        this.checkCollisionScreen();
         requestAnimationFrame(function () { return _this.gameloop(); });
     };
     return Game;

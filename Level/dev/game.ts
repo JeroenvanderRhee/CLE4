@@ -100,27 +100,19 @@ class Game{
         
     }
 
-
     private checkColisionDino(){
         let barhit
         let positiondino = this.Dino.getvalues()
         let positioncharacter = this.Hoofdpersoon.getvalues()
-        if((positioncharacter.xeind >= positiondino.xbegin) && (positioncharacter.xbegin <= positiondino.xeind)){
+        if((positioncharacter.xeind >= positiondino.xbegin) && (positioncharacter.xeind <= positiondino.xeind)){
             barhit = this.checkCollision(this.Dino.getRectangle(), this.Hoofdpersoon.getRectangle())
             if (barhit != true){
                 alert("Je bent dood door een Dino")
+                console.log("hit by the dino")
+                
             }
         }
     }
-
-    private checkCollisionScreen(){
-        let positioncharacter = this.Hoofdpersoon.getvalues()
-        positioncharacter.xbegin += 100
-        if(window.innerWidth <= positioncharacter.xbegin){
-            console.log("hit the muur")
-        }
-    }
-
     
     private gameloop(){
         this.Dino.Update()
@@ -128,7 +120,6 @@ class Game{
         this.checkCollisionBar()
         this.checkCollisionGap()
         this.checkColisionDino()
-        this.checkCollisionScreen()
         requestAnimationFrame(() =>this.gameloop())
     }
 }
