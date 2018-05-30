@@ -1,11 +1,17 @@
 body{
     margin:0px;
-    /* overflow:hidden; */
+     overflow-y:hidden;
+     /* overflow-x:hidden; */
+     
+}
+
+dino1 {
+    background: url("../img/Dino1.png") no-repeat center top;
 }
 
 #game{
     position: absolute;
-    width: 120%;
+    width: 280%;
     height: 100%;
     background: url(../img/Achtergrond.jpg) no-repeat center top;
 }
