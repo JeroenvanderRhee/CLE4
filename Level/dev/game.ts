@@ -67,7 +67,7 @@ class Game{
                 barhit = this.checkCollision(ReadOut.getRectangle(), this.Hoofdpersoon.getRectangle())
                 if (barhit != true){
                     console.log("hit")
-                    this.Hoofdpersoon.gravity(2,5)
+                    this.Hoofdpersoon.gravity(0,5)
                 }
             }
         })
@@ -106,7 +106,7 @@ class Game{
         let positioncharacter = this.Hoofdpersoon.getvalues()
         if((positioncharacter.xeind >= positiondino.xbegin) && (positioncharacter.xeind <= positiondino.xeind)){
             barhit = this.checkCollision(this.Dino.getRectangle(), this.Hoofdpersoon.getRectangle())
-            if (barhit != true){
+            if (barhit == true){
                 alert("Je bent dood door een Dino")
                 console.log("hit by the dino")
                 

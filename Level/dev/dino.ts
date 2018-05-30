@@ -124,13 +124,15 @@ class dino1 {
      public getvalues(){
         let xbegin : number
         let xeind : number
-        let y :number
-        let height:number
-        let width:number
+        let ymax : number
+        let ymin :number
+        let height: number
+        let width: number
         return {
             xbegin : this.positionX,
             xeind : this.positionX + this.width,
-            y : this.positionY,
+            ymax : this.positionY + this.height,
+            ymin : this.positionY,
             height : this.height,
             width : this.width
         }
