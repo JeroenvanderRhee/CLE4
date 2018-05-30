@@ -8,6 +8,8 @@ class kleding1 {
 
     
     constructor(){
+        this.elementpath = document.createElement("car")
+        document.body.appendChild(this.elementpath)
         this.name = "shirt"
         this.width = 200                                        //Zichtbare breedte kleding
         this.height = 200                                       //Hoogte positie kleding
@@ -15,7 +17,9 @@ class kleding1 {
         this.positionY = 400                                  //Begin positie X kleding
 
     }
-
+    public getRectangle() {
+        return this.elementpath.getBoundingClientRect()
+    }
     
     
     public Create(){
@@ -24,6 +28,8 @@ class kleding1 {
         childElement.appendChild(element)
         element.innerHTML = " "
     }
+
+    
 
     //Opmaak scherm
     public Opmaak(){

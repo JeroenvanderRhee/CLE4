@@ -6,7 +6,7 @@ class headCharacter {
     private velocity:number
     private positionX:number
     private positionY:number
-    private elementpath:HTMLElement = document.createElement("headcharacter")
+    private elementpath1:HTMLElement = document.createElement("headcharacter")
     private leftkeycode:number
     private rightkeycode:number
     private spacekeycode:number
@@ -15,7 +15,8 @@ class headCharacter {
     private spacePress:number = 0
     
     constructor(){
-
+        this.elementpath1 = document.createElement("headcharacter")
+        document.body.appendChild(this.elementpath1)
         this.name = "Skelet"
         this.width = 40
         this.height = 200
@@ -29,6 +30,9 @@ class headCharacter {
         this.spacekeycode = 32        
         window.addEventListener("keyup", (e: KeyboardEvent) => this.onKeyUp(e))
         window.addEventListener("keydown", (e: KeyboardEvent) => this.onKeyDown(e))
+    }
+    public getRectangle() {
+        return this.elementpath1.getBoundingClientRect()
     }
 
     //Acties wanneer key DOWN
@@ -66,14 +70,14 @@ class headCharacter {
     public Create(){
         let childElement:HTMLElement = document.body
         //let element = document.createElement("headcharacter")
-        let element = this.elementpath
+        let element = this.elementpath1
         childElement.appendChild(element)
         element.innerHTML = " "
     }
 
     //Opmaak scherm
     public Opmaak(){
-        let element = this.elementpath
+        let element = this.elementpath1
         element.style.position = "absolute"
         element.style.width = this.width + "px"
         element.style.height = this.height + "px"
@@ -83,7 +87,7 @@ class headCharacter {
 
     //Update gezette stappen doormiddel van key's klikken;
     public Update(){
-        let element = this.elementpath
+        let element = this.elementpath1
         if(this.rightPress == 1){
             this.positionX += 5;
         }
