@@ -5,7 +5,7 @@
 var engine = new ex.Engine(0, 0, "game", ex.DisplayMode.FullScreen);
 //engine.isDebug = true;
 engine.setAntialiasing(false);
-engine.backgroundColor = ex.Color.Azure.clone();
+engine.backgroundColor = ex.Color.Chartreuse.clone();
 
 // detect and auto scale to viewport height
 var detected = 1.0;// .6 - (Config.BirdHeight / engine.getHeight());
@@ -35,7 +35,7 @@ var buildTitle = function(){
 	title.moveTo(title.x, title.y + 30, 50).moveTo(title.x, title.y, 50).repeatForever();
 	engine.add(title);
 
-	instructions = new ex.Label("Click or Tap to Start!!!", engine.getWidth()/2, engine.getHeight()-30, "20px 'Press Start 2P', cursive");
+	instructions = new ex.Label("Klik om te beginnen", engine.getWidth()/2, engine.getHeight()-30, "20px 'Press Start 2P', cursive");
 	instructions.color = ex.Color.Black;
 	instructions.textAlign = ex.TextAlign.Center;
 	instructions.scale.setTo(gameScale.x , gameScale.y);

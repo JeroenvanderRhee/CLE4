@@ -1,7 +1,3 @@
-body{
-    margin:0px;
-}
-
 #game{
     position: absolute;
     width: 100%;
@@ -11,8 +7,4 @@ body{
 
 headcharacter{
     background: url("../img/Poppetje.png") no-repeat center top;
-}
-
-dino1 {
-    background: url("../img/Dino1.png") no-repeat center top;
 }
