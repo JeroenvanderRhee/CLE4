@@ -2,23 +2,20 @@ class kleding1 {
     private name:string
     private width:number
     private height:number
-    private velocity:number
     private positionX:number
     private positionY:number
-    private elementpath:HTMLElement = document.createElement("dino1")
+    private elementpath:HTMLElement = document.createElement("kleding1")
 
     
     constructor(){
         this.name = "shirt"
-        this.width = 200                                        //Zichtbare breedte Dino
-        this.height = 200                                       //Hoogte positie Dino
-        this.velocity = 2
-        this.positionX = 20    
-        this.positionY = 20                                  //Begin positie X dino
+        this.width = 200                                        //Zichtbare breedte kleding
+        this.height = 200                                       //Hoogte positie kleding
+        this.positionX = 240        
+        this.positionY = 400                                  //Begin positie X kleding
 
     }
 
-    //Acties wanneer keys DOWN
     
     
     public Create(){
@@ -38,10 +35,11 @@ class kleding1 {
         element.innerHTML = ""
     }
 
-    //Update gezette stappen doormiddel van key's klikken;
+    //Update kleding stuk positie
     public Update(){
+        
         let element = this.elementpath
-       
+        element.style.transform = "translate(" + this.positionX + "px," + this.positionY + "px)"
 }
 
 

@@ -79,13 +79,12 @@ var dino1 = (function () {
 }());
 var kleding1 = (function () {
     function kleding1() {
-        this.elementpath = document.createElement("dino1");
+        this.elementpath = document.createElement("kleding1");
         this.name = "shirt";
         this.width = 200;
         this.height = 200;
-        this.velocity = 2;
-        this.positionX = 20;
-        this.positionY = 20;
+        this.positionX = 240;
+        this.positionY = 400;
     }
     kleding1.prototype.Create = function () {
         var childElement = document.body;
@@ -103,6 +102,7 @@ var kleding1 = (function () {
     };
     kleding1.prototype.Update = function () {
         var element = this.elementpath;
+        element.style.transform = "translate(" + this.positionX + "px," + this.positionY + "px)";
     };
     return kleding1;
 }());
@@ -116,12 +116,17 @@ var Game = (function () {
         this.Dino1.Create();
         this.Dino1.Opmaak();
         console.log("Evil is made, not born.");
+        this.Kleding = new kleding1();
+        this.Kleding.Create();
+        this.Kleding.Opmaak();
+        console.log("kleding.");
         this.gameloop();
     }
     Game.prototype.gameloop = function () {
         var _this = this;
         this.Hoofdpersoon.Update();
         this.Dino1.Update();
+        this.Kleding.Update();
         requestAnimationFrame(function () { return _this.gameloop(); });
     };
     return Game;
