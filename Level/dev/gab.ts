@@ -17,7 +17,7 @@ class Gap{
         let childElement = document.getElementById("camera")
         //let childElement:HTMLElement = document.body
         let element = this.elementpath
-        childElement.appendChild(element)
+        //childElement.appendChild(element)
         element.innerHTML = " "
     }
 
