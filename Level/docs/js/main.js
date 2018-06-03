@@ -560,6 +560,12 @@ var headCharacter = (function () {
             this.positionX += snelheid + 5;
             this.upPress = 0;
         }
+        if (this.positionX < 15) {
+            console.log("ik val");
+            snelheid == 0;
+            this.leftPress == 0;
+            this.positionX == 0;
+        }
         element.style.transform = "translate(" + this.positionX + "px," + this.positionY + "px)";
     };
     headCharacter.prototype.getRectangle = function () {
