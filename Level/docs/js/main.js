@@ -145,7 +145,6 @@ var Gap = (function () {
     Gap.prototype.Create = function () {
         var childElement = document.getElementById("camera");
         var element = this.elementpath;
-        childElement.appendChild(element);
         element.innerHTML = " ";
     };
     Gap.prototype.Opmaak = function () {
@@ -298,7 +297,6 @@ var Ground = (function () {
     Ground.prototype.Create = function () {
         var childElement = document.getElementById("camera");
         var element = this.elementpath;
-        childElement.appendChild(element);
         element.innerHTML = " ";
     };
     Ground.prototype.Opmaak = function () {
@@ -442,6 +440,36 @@ var headCharacter = (function () {
         element.style.transform = "translate(" + this.positionX + "px," + this.positionY + "px)";
     };
     return headCharacter;
+}());
+var Ball = (function () {
+    function Ball() {
+        this.xspeed = 2;
+        this.yspeed = 2;
+        this.div = document.createElement("ball");
+        document.body.appendChild(this.div);
+        this.x = Math.random() * (window.innerWidth - 40);
+        this.y = Math.random() * (window.innerHeight - 40);
+    }
+    Ball.prototype.update = function () {
+        this.x = this.x + this.xspeed;
+        this.y = this.y + this.yspeed;
+        if (this.y > window.innerHeight - 40 || this.y < 0) {
+            this.yspeed *= -1;
+        }
+        this.div.style.transform = "translate(" + this.x + "px, " + this.y + "px)";
+    };
+    Ball.prototype.ChangeR = function () {
+        this.xspeed = (this.xspeed * -2) - 1;
+        console.log("Dit is de speed: " + this.xspeed);
+    };
+    Ball.prototype.ChangeL = function () {
+        this.xspeed = (this.xspeed * -2) + 1;
+        console.log("Dit is de speed: " + this.xspeed);
+    };
+    Ball.prototype.getRectangle = function () {
+        return this.div.getBoundingClientRect();
+    };
+    return Ball;
 }());
 var Camera = (function () {
     function Camera(event) {

@@ -110,7 +110,11 @@ class headCharacter {
             this.positionX += snelheid + 5;
             this.upPress = 0
         }
-
+        
+        // if (this.positionX > window.innerWidth - 40){
+        //     console.log("Ik ben uit scherm")
+        //     this.positionX == 20
+        // }
         element.style.transform = "translate(" + this.positionX + "px," + this.positionY + "px)"
     }
 
