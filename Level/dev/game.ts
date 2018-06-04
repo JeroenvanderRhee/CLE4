@@ -2,13 +2,14 @@ class Game{
     Hoofdpersoon:headCharacter
     Bar:Ground[] = []
     Gap:Gap[] = []
-    Dino:dino1
+    Dino:Dino
     Fireball:Fire
 
+    //Hierworden de functies gedeclareerd.
     constructor(){
         this.Hoofdpersoon = new headCharacter()
         this.Fireball = new Fire(1380,1700)
-        this.Dino = new dino1()
+        this.Dino = new Dino(3000)
         this.Dino.Create()
         this.Dino.Opmaak()
         this.Hoofdpersoon.Create()
@@ -16,9 +17,10 @@ class Game{
         console.log("aangemaakt")
         this.createbars()
         this.creategaps()
-        this.gameloop()
+        //this.gameloop()
     }
 
+    //Algemene functie collision
     private checkCollision(a: ClientRect, b: ClientRect) {
         return (a.left <= b.right &&
             b.left <= a.right &&
@@ -26,7 +28,9 @@ class Game{
             b.top <= a.bottom)
      }
 
+     //Array waarin de nieuwe loopplanken worden gedeclareerd
     private createbars(){
+        //Array waarin de nieuwe loopplanken worden gedeclareerd
         this.Bar.push(new Ground(800, window.innerHeight, 0))
         this.Bar.push(new Ground(400, window.innerHeight, 900))
        
@@ -42,7 +46,9 @@ class Game{
         });
     }
 
+    //Array waarin de nieuwe gaten worden gedeclareerd
     private creategaps(){
+        //volgorde : Lengte, Yas, Xas
         this.Gap.push(new Gap(100, window.innerHeight, 800))
         this.Gap.push(new Gap(80, window.innerHeight, 1300))
         this.Gap.push(new Gap(100, window.innerHeight, 1700))
@@ -56,6 +62,7 @@ class Game{
         });
     }
 
+    //Check de collision van een loopbalk
     private checkCollisionBar(){
         let barhit
         let positionbar
@@ -76,6 +83,7 @@ class Game{
         
     }
 
+    //Check de collision van een Gat
     private checkCollisionGap(){
         let barhit
         let positionbar
@@ -102,6 +110,7 @@ class Game{
         
     }
 
+    //Check de collision van de Dino
     private checkColisionDino(){
         let barhit
         let positiondino = this.Dino.getvalues()
@@ -116,15 +125,14 @@ class Game{
         }
     }
     
-    private gameloop(){
+    //Dit is de gameloop. Hierin worden alle assets geupdate en word de collision bij gehouden. Deze gameloop word aangeroepen in de echte gameloop
+    public gameloop(){
         this.Dino.Update(3000,3700)
         this.Fireball.update()
         this.Hoofdpersoon.Update()
         this.checkCollisionBar()
         this.checkCollisionGap()
         this.checkColisionDino()
-        requestAnimationFrame(() =>this.gameloop())
+        //requestAnimationFrame(() =>this.gameloop())
     }
 }
-
-window.addEventListener("load", () => new Game)

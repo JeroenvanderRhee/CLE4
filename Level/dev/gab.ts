@@ -5,14 +5,15 @@ class Gap{
     private positiony:number
     private elementpath:HTMLElement = document.createElement("gap")
 
-
+    //Hiet worden alle variabelen ingevuld
     constructor(width:number, positiony:number, positionx:number){
         this.width = width
         this.height = 56
         this.positionx = positionx
         this.positiony = positiony - this.height
     }
-
+    
+    //Create functie
     public Create(){
         let childElement = document.getElementById("camera")
         //let childElement:HTMLElement = document.body
@@ -21,6 +22,7 @@ class Gap{
         element.innerHTML = " "
     }
 
+    //Opmaak functie
     public Opmaak(){
         let element = this.elementpath
         element.style.position = "absolute"
@@ -30,10 +32,12 @@ class Gap{
         element.style.transform = "translate(" + this.positionx + "px," + this.positiony + "px)"
     }
 
+    //Return data voor collision
     public getRectangle() {
         return this.elementpath.getBoundingClientRect()
     }
 
+    //Geeft waardes terug voor collision
     public getvalues(){
         let xbegin : number
         let xeind : number

@@ -1,82 +1,4 @@
 "use strict";
-var dino1 = (function () {
-    function dino1() {
-        var _this = this;
-        this.elementpath = document.createElement("dino1");
-        this.leftPress = 0;
-        this.rightPress = 0;
-        this.spacePress = 0;
-        this.name = "Skelet";
-        this.width = 200;
-        this.height = 200;
-        this.velocity = 2;
-        this.positionX = 20;
-        this.positionY = window.innerHeight - this.height - 56;
-        this.leftkeycode = 65;
-        this.rightkeycode = 68;
-        this.spacekeycode = 73;
-        window.addEventListener("keyup", function (e) { return _this.onKeyUp(e); });
-        window.addEventListener("keydown", function (e) { return _this.onKeyDown(e); });
-    }
-    dino1.prototype.onKeyDown = function (e) {
-        console.log(e.keyCode);
-        switch (e.keyCode) {
-            case this.leftkeycode:
-                this.leftPress = 1;
-                break;
-            case this.rightkeycode:
-                this.rightPress = 1;
-                break;
-            case this.spacekeycode:
-                this.spacePress = 1;
-                break;
-        }
-    };
-    dino1.prototype.onKeyUp = function (e) {
-        console.log(e.keyCode);
-        switch (e.keyCode) {
-            case this.leftkeycode:
-                this.leftPress = 0;
-                break;
-            case this.rightkeycode:
-                this.rightPress = 0;
-                break;
-            case this.spacekeycode:
-                this.spacePress = 0;
-                break;
-        }
-    };
-    dino1.prototype.Create = function () {
-        var childElement = document.body;
-        var element = this.elementpath;
-        childElement.appendChild(element);
-        element.innerHTML = " ";
-    };
-    dino1.prototype.Opmaak = function () {
-        console.log("Opmaak werkt");
-        var element = this.elementpath;
-        element.style.position = "absolute";
-        element.style.width = this.width + "px";
-        element.style.height = this.height + "px";
-        element.innerHTML = "";
-        element.style.transform = "translate(" + this.positionX + "px," + this.positionY + "px)";
-    };
-    dino1.prototype.Update = function () {
-        var element = this.elementpath;
-        if (this.rightPress == 1) {
-            this.positionX += 5;
-        }
-        if (this.leftPress == 1) {
-            this.positionX -= 5;
-        }
-        if (this.spacePress == 1) {
-            this.positionY -= 5;
-            this.spacePress = 0;
-        }
-        element.style.transform = "translate(" + this.positionX + "px," + this.positionY + "px)";
-    };
-    return dino1;
-}());
 var kleding1 = (function () {
     function kleding1() {
         this.elementpath = document.createElement("dino1");
@@ -106,8 +28,8 @@ var kleding1 = (function () {
     };
     return kleding1;
 }());
-var dino1 = (function () {
-    function dino1() {
+var Dino = (function () {
+    function Dino(Xbegin) {
         var _this = this;
         this.dino = document.createElement("dino1");
         this.leftPress = 0;
@@ -118,7 +40,7 @@ var dino1 = (function () {
         this.width = 200;
         this.height = 200;
         this.velocity = 2;
-        this.positionX = 3000;
+        this.positionX = Xbegin;
         this.positionY = window.innerHeight - this.height - 56;
         this.leftkeycode = 65;
         this.rightkeycode = 68;
@@ -128,7 +50,7 @@ var dino1 = (function () {
         window.addEventListener("keyup", function (e) { return _this.onKeyUp(e); });
         window.addEventListener("keydown", function (e) { return _this.onKeyDown(e); });
     }
-    dino1.prototype.onKeyDown = function (e) {
+    Dino.prototype.onKeyDown = function (e) {
         console.log(e.keyCode);
         switch (e.keyCode) {
             case this.leftkeycode:
@@ -148,7 +70,7 @@ var dino1 = (function () {
                 break;
         }
     };
-    dino1.prototype.onKeyUp = function (e) {
+    Dino.prototype.onKeyUp = function (e) {
         console.log(e.keyCode);
         switch (e.keyCode) {
             case this.leftkeycode:
@@ -168,13 +90,13 @@ var dino1 = (function () {
                 break;
         }
     };
-    dino1.prototype.Create = function () {
+    Dino.prototype.Create = function () {
         var childElement = document.body;
         var element = this.dino;
         childElement.appendChild(element);
         element.innerHTML = " ";
     };
-    dino1.prototype.Opmaak = function () {
+    Dino.prototype.Opmaak = function () {
         var element = this.dino;
         element.style.position = "absolute";
         element.style.width = this.width + "px";
@@ -182,7 +104,7 @@ var dino1 = (function () {
         element.innerHTML = "";
         element.style.transform = "translate(" + this.positionX + "px," + this.positionY + "px)";
     };
-    dino1.prototype.Update = function (positionxbegin, positionxeinde) {
+    Dino.prototype.Update = function (positionxbegin, positionxeinde) {
         var element = this.dino;
         this.positionX += this.velocity;
         if (this.positionX <= positionxbegin) {
@@ -193,7 +115,7 @@ var dino1 = (function () {
         }
         element.style.transform = "translate(" + this.positionX + "px," + this.positionY + "px)";
     };
-    dino1.prototype.getvalues = function () {
+    Dino.prototype.getvalues = function () {
         var xbegin;
         var xeind;
         var ymax;
@@ -209,14 +131,13 @@ var dino1 = (function () {
             width: this.width
         };
     };
-    dino1.prototype.getRectangle = function () {
+    Dino.prototype.getRectangle = function () {
         return this.dino.getBoundingClientRect();
     };
-    return dino1;
+    return Dino;
 }());
 var Fire = (function () {
     function Fire(Xbegin, Xeind) {
-        var _this = this;
         this.spacePress = 0;
         this.elementpath = document.createElement("fireball");
         this.name = "Fire ball";
@@ -228,9 +149,6 @@ var Fire = (function () {
         this.positionXbegin = Xbegin;
         this.positionXeind = Xeind;
         this.positionY = window.innerHeight - this.height - 60;
-        this.spacekeycode = 32;
-        window.addEventListener("keyup", function (e) { return _this.onKeyUp(e); });
-        window.addEventListener("keydown", function (e) { return _this.onKeyDown(e); });
         this.create();
         this.Opmaak();
     }
@@ -247,22 +165,6 @@ var Fire = (function () {
         element.style.height = this.height + "px";
         element.innerHTML = "";
         element.style.transform = "translate(" + this.positionX + "px," + this.positionY + "px)";
-    };
-    Fire.prototype.onKeyDown = function (e) {
-        console.log(e.keyCode);
-        switch (e.keyCode) {
-            case this.spacekeycode:
-                this.spacePress = 0;
-                break;
-        }
-    };
-    Fire.prototype.onKeyUp = function (e) {
-        console.log(e.keyCode);
-        switch (e.keyCode) {
-            case this.spacekeycode:
-                this.spacePress = 1;
-                break;
-        }
     };
     Fire.prototype.update = function () {
         var element = this.elementpath;
@@ -327,7 +229,7 @@ var Game = (function () {
         this.Gap = [];
         this.Hoofdpersoon = new headCharacter();
         this.Fireball = new Fire(1380, 1700);
-        this.Dino = new dino1();
+        this.Dino = new Dino(3000);
         this.Dino.Create();
         this.Dino.Opmaak();
         this.Hoofdpersoon.Create();
@@ -335,7 +237,6 @@ var Game = (function () {
         console.log("aangemaakt");
         this.createbars();
         this.creategaps();
-        this.gameloop();
     }
     Game.prototype.checkCollision = function (a, b) {
         return (a.left <= b.right &&
@@ -421,18 +322,15 @@ var Game = (function () {
         }
     };
     Game.prototype.gameloop = function () {
-        var _this = this;
         this.Dino.Update(3000, 3700);
         this.Fireball.update();
         this.Hoofdpersoon.Update();
         this.checkCollisionBar();
         this.checkCollisionGap();
         this.checkColisionDino();
-        requestAnimationFrame(function () { return _this.gameloop(); });
     };
     return Game;
 }());
-window.addEventListener("load", function () { return new Game; });
 var Ground = (function () {
     function Ground(width, positiony, positionx) {
         this.elementpath = document.createElement("bar");
@@ -589,6 +487,61 @@ var headCharacter = (function () {
     };
     return headCharacter;
 }());
+var Startscherm = (function () {
+    function Startscherm() {
+        var _this = this;
+        this.elementpath = document.createElement("startscherm");
+        this.width = 100;
+        this.height = 100;
+        this.spacekey = 32;
+        this.spacepressed = 0;
+        window.addEventListener("keyup", function (e) { return _this.onKeyUp(e); });
+        window.addEventListener("keydown", function (e) { return _this.onKeyDown(e); });
+        this.create();
+        this.Opmaak();
+        this.Game = new Game();
+        this.gameloop();
+    }
+    Startscherm.prototype.create = function () {
+        var childElement = document.body;
+        var element = this.elementpath;
+        childElement.appendChild(element);
+        element.innerHTML = "Klik op de spatie toets om te beginnen";
+    };
+    Startscherm.prototype.Opmaak = function () {
+        var element = this.elementpath;
+        element.style.position = "absolute";
+        element.style.width = this.width + "%";
+        element.style.height = this.height + "%";
+        element.innerHTML = "";
+    };
+    Startscherm.prototype.onKeyDown = function (e) {
+        console.log(e.keyCode);
+        switch (e.keyCode) {
+            case this.spacekey:
+                this.spacepressed = 0;
+                break;
+        }
+    };
+    Startscherm.prototype.onKeyUp = function (e) {
+        console.log(e.keyCode);
+        switch (e.keyCode) {
+            case this.spacekey:
+                this.spacepressed = 1;
+                break;
+        }
+    };
+    Startscherm.prototype.gameloop = function () {
+        var _this = this;
+        if (this.spacepressed == 1) {
+            this.elementpath.style.display = "none";
+            this.Game.gameloop();
+        }
+        requestAnimationFrame(function () { return _this.gameloop(); });
+    };
+    return Startscherm;
+}());
+window.addEventListener("load", function () { return new Startscherm; });
 var Camera = (function () {
     function Camera(event) {
         var _this = this;

@@ -37,10 +37,12 @@ class headCharacter {
         this.upkeycode = 87
         this.spacekeycode = 32 
 
+        //event listeners voor toetsenbord
         window.addEventListener("keyup", (e: KeyboardEvent) => this.onKeyUp(e))
         window.addEventListener("keydown", (e: KeyboardEvent) => this.onKeyDown(e))
     }
 
+    //wanneer er een toets is ingedrukt
     private onKeyDown(e: KeyboardEvent): void {
         console.log(e.keyCode)
         switch (e.keyCode) {
@@ -59,6 +61,7 @@ class headCharacter {
         }
     }
 
+    //Wanneer een toets weer omhoog is gekomen
     private onKeyUp(e: KeyboardEvent): void {
         console.log(e.keyCode)
         switch (e.keyCode) {
@@ -76,7 +79,8 @@ class headCharacter {
                 break
         }
     }
-    
+
+    //De aanmaak functie
     public Create(){
         let childElement:HTMLElement = document.body
         //let element = document.createElement("headcharacter")
@@ -85,6 +89,7 @@ class headCharacter {
         element.innerHTML = " "
     }
 
+    //de opmaak functie    
     public Opmaak(){
         let element = this.elementpath
         element.style.position = "absolute"
@@ -94,6 +99,7 @@ class headCharacter {
         element.style.transform = "translate(" + this.positionX + "px," + this.positionY + "px)"
     }
 
+    //De loop functie
     public Update(){
         let element = this.elementpath
         let snelheid:number = 5;
@@ -114,10 +120,12 @@ class headCharacter {
         element.style.transform = "translate(" + this.positionX + "px," + this.positionY + "px)"
     }
 
+    //Geeft waardes terug voor de collision
     public getRectangle() {
         return this.elementpath.getBoundingClientRect()
     }
 
+    // geeft nog meer waardes terug voor de collision
     public getvalues(){
         let xbegin : number
         let xeind : number
@@ -135,6 +143,7 @@ class headCharacter {
         }
     }
 
+    // De zwaarte kracht
     public gravity (strengthx:number, strengthy:number){
         let element = this.elementpath
         this.positionY += strengthy

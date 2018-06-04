@@ -1,4 +1,4 @@
-class dino1 {
+class Dino {
     //Dino Afbeelding
     private width:number            //Breedte Dino afbeelding
     private height:number
@@ -20,11 +20,11 @@ class dino1 {
     private downPress: number = 0
     private spacePress:number = 0
     
-    constructor(){
+    constructor(Xbegin:number){
         this.width = 200                                        //Zichtbare breedte Dino afbeelding
         this.height = 200                                       //Hoogte positie Dino
         this.velocity = 2
-        this.positionX = 3000                                     //Begin positie X dino
+        this.positionX = Xbegin                                     //Begin positie X dino
         this.positionY = window.innerHeight - this.height - 56  //Veranderende Y positie Dino
 
         //toetsenbord besturing
@@ -105,7 +105,7 @@ class dino1 {
         element.style.transform = "translate(" + this.positionX + "px," + this.positionY + "px)"    //Dino's positie is aanpasbaar
     }
 
-    //Update gezette stappen doormiddel van key's klikken;
+    //Update gezette stappen doormiddel van xbegin en xeind
     public Update(positionxbegin:number, positionxeinde:number){
         let element = this.dino
         this.positionX += this.velocity
@@ -120,7 +120,7 @@ class dino1 {
         element.style.transform = "translate(" + this.positionX + "px," + this.positionY + "px)"
      }
 
-
+     //Algemene functie voor waardes (voor evt. collision)
      public getvalues(){
         let xbegin : number
         let xeind : number
@@ -138,6 +138,7 @@ class dino1 {
         }
     }
 
+    //Formule voor data voor collision
     public getRectangle() {
         return this.dino.getBoundingClientRect()
     }
