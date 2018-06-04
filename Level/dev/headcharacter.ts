@@ -114,11 +114,12 @@ class headCharacter {
             this.upPress = 0
         }
 
-        //Zorgt ervoor dat Character scherm niet verlaat.
+        //Zorgt ervoor dat Character scherm niet verlaat van links.
         if(this.leftPress == 1 && this.positionX==0){
             this.leftPress = 0
         }
 
+        //Zorgt ervoor dat Character scherm niet verlaat van rechts.
         if(this.rightPress == 1 && this.positionX == window.innerWidth){
              this.rightPress = 0
         }
