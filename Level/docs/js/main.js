@@ -91,7 +91,7 @@ var Dino = (function () {
         }
     };
     Dino.prototype.Create = function () {
-        var childElement = document.body;
+        var childElement = document.getElementById("game");
         var element = this.dino;
         childElement.appendChild(element);
         element.innerHTML = " ";
@@ -153,7 +153,7 @@ var Fire = (function () {
         this.Opmaak();
     }
     Fire.prototype.create = function () {
-        var childElement = document.body;
+        var childElement = document.getElementById("game");
         var element = this.elementpath;
         childElement.appendChild(element);
         element.innerHTML = " ";
@@ -189,7 +189,7 @@ var Gap = (function () {
         this.positiony = positiony - this.height;
     }
     Gap.prototype.Create = function () {
-        var childElement = document.getElementById("camera");
+        var childElement = document.getElementById("bars");
         var element = this.elementpath;
         childElement.appendChild(element);
         element.innerHTML = " ";
@@ -340,7 +340,7 @@ var Ground = (function () {
         this.positiony = positiony - this.height;
     }
     Ground.prototype.Create = function () {
-        var childElement = document.getElementById("camera");
+        var childElement = document.getElementById("bars");
         var element = this.elementpath;
         childElement.appendChild(element);
         element.innerHTML = " ";
@@ -431,7 +431,7 @@ var headCharacter = (function () {
         }
     };
     headCharacter.prototype.Create = function () {
-        var childElement = document.body;
+        var childElement = document.getElementById("game");
         var element = this.elementpath;
         childElement.appendChild(element);
         element.innerHTML = " ";

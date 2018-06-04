@@ -15,7 +15,7 @@ class Gap{
     
     //Create functie
     public Create(){
-        let childElement = document.getElementById("camera")
+        let childElement = document.getElementById("bars")
         //let childElement:HTMLElement = document.body
         let element = this.elementpath
         childElement.appendChild(element)

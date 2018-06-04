@@ -15,7 +15,7 @@ class Ground{
 
     //Aanmaak functie
     public Create(){
-        let childElement = document.getElementById("camera")
+        let childElement = document.getElementById("bars")
         //let childElement = document.body.camera
         let element = this.elementpath
         //childElement.appendChild(element)

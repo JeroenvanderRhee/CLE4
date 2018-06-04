@@ -29,7 +29,8 @@ class Fire{
 
     //Deze functie word gebruikt om het object aan te maken
     private create(){
-        let childElement:HTMLElement = document.body
+        let childElement:HTMLElement = document.getElementById("game")
+        //let childElement:HTMLElement = document.body
         let element = this.elementpath
         childElement.appendChild(element)
         element.innerHTML = " "

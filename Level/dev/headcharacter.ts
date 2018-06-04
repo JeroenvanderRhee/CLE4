@@ -82,7 +82,7 @@ class headCharacter {
 
     //De aanmaak functie
     public Create(){
-        let childElement:HTMLElement = document.body
+        let childElement:HTMLElement = document.getElementById("game")
         //let element = document.createElement("headcharacter")
         let element = this.elementpath
         childElement.appendChild(element)
