@@ -457,12 +457,14 @@ var headCharacter = (function () {
         }
         if (this.leftPress == 1 && this.positionX == 0) {
             this.leftPress = 0;
-            this.positionX = 0;
-            this.positionX = 0;
+        }
+        if (this.rightPress == 1 && this.positionX == window.innerWidth) {
+            this.rightPress = 0;
         }
         if (this.leftPress == 1) {
             this.positionX -= snelheid;
         }
+        console.log(this.positionX);
         element.style.transform = "translate(" + this.positionX + "px," + this.positionY + "px)";
     };
     headCharacter.prototype.getRectangle = function () {

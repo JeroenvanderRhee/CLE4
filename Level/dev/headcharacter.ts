@@ -108,29 +108,30 @@ class headCharacter {
             this.positionX += snelheid;
         }
 
-
-
         if(this.upPress == 1 && this.positionY == (window.innerHeight - this.height - 56)){
             this.positionY -= 210;
             this.positionX += snelheid + 5;
             this.upPress = 0
         }
 
-        if(this.leftPress == 1 &&  this.positionX==0){
+        //Zorgt ervoor dat Character scherm niet verlaat.
+        if(this.leftPress == 1 && this.positionX==0){
             this.leftPress = 0
-            this.positionX = 0 
-            this.positionX = 0
-        } 
+        }
+
+        if(this.rightPress == 1 && this.positionX == window.innerWidth){
+             this.rightPress = 0
+        }
 
         if(this.leftPress == 1){            
             this.positionX -= snelheid;
         }
+        console.log(this.positionX)
 
         element.style.transform = "translate(" + this.positionX + "px," + this.positionY + "px)"
     }
 
-
-
+   // console.log(this.positionX)
     //Geeft waardes terug voor de collision
     public getRectangle() {
         return this.elementpath.getBoundingClientRect()
