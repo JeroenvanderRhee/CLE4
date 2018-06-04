@@ -608,7 +608,7 @@ var StartScreen = (function () {
     };
     StartScreen.prototype.showPlayScreen = function () {
         document.body.innerHTML = "";
-        this.screen = new Game(this);
+        this.screen = this.Game.gameloop();
     };
     return StartScreen;
 }());

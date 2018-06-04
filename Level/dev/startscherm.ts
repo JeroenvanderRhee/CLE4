@@ -30,6 +30,6 @@ class StartScreen {
         document.body.innerHTML = ""
 
         //"This" is een instance. De variabele this.screen verwijst naar playscreen.ts
-        this.screen = new Game(this)
+        this.screen = this.Game.gameloop()
     }
 }
