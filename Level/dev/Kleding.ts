@@ -8,7 +8,7 @@ class kleding1 {
 
     
     constructor(){
-        this.elementpath = document.createElement("car")
+        this.elementpath = document.createElement("kleding1")
         document.body.appendChild(this.elementpath)
         this.name = "shirt"
         this.width = 200                                        //Zichtbare breedte kleding
