@@ -595,6 +595,23 @@ var headCharacter = (function () {
     };
     return headCharacter;
 }());
+var StartScreen = (function () {
+    function StartScreen(g) {
+        var _this = this;
+        this.game = g;
+        this.div = document.createElement("splash");
+        document.body.appendChild(this.div);
+        this.div.addEventListener("click", function () { return _this.showPlayScreen(); });
+        this.div.innerHTML = "START THE GAME";
+    }
+    StartScreen.prototype.update = function () {
+    };
+    StartScreen.prototype.showPlayScreen = function () {
+        document.body.innerHTML = "";
+        this.screen = new Game(this);
+    };
+    return StartScreen;
+}());
 var Camera = (function () {
     function Camera(event) {
         var _this = this;

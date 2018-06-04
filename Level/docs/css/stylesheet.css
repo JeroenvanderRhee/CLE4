@@ -33,3 +33,14 @@ fireball{
 kleding {
     background: url("../img/Prehistory_0002s_0001_Tshirt.png") no-repeat center top;
 }
+
+splash {
+    font-size:2em;
+    cursor: pointer;
+    width:500px;
+    height:100px;
+    margin-top:calc(50vh - 50px);
+    margin-left:calc(50vw - 250px);
+    text-align:center;
+   
+}
