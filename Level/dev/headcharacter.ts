@@ -31,11 +31,11 @@ class headCharacter {
         // this.upkeycode = 38
         // this.spacekeycode = 32  
         
-        //toetsenbord besturing WSAD
-        this.leftkeycode = 65
-        this.rightkeycode = 68
-        this.upkeycode = 87
-        this.spacekeycode = 32 
+        //toetsenbord besturing ADWS
+        this.leftkeycode = 65         //A
+        this.rightkeycode = 68        //D
+        this.upkeycode = 87           //W
+        //this.spacekeycode = 32      //S
 
         //event listeners voor toetsenbord
         window.addEventListener("keyup", (e: KeyboardEvent) => this.onKeyUp(e))
@@ -46,17 +46,18 @@ class headCharacter {
     private onKeyDown(e: KeyboardEvent): void {
         console.log(e.keyCode)
         switch (e.keyCode) {
-            case this.leftkeycode:
+            case this.leftkeycode:          //A
                 this.leftPress = 1
                 break
-            case this.rightkeycode:
+            case this.rightkeycode:         //D
                 this.rightPress = 1
                 break
-            case this.spacekeycode:
+            case this.spacekeycode:         //S
                 this.upPress = 0
-                break
-            case this.spacekeycode:
                 this.spacePress = 0
+                break
+            case this.upkeycode:            //W
+                this.upPress = 0
                 break
         }
     }
@@ -65,22 +66,22 @@ class headCharacter {
     private onKeyUp(e: KeyboardEvent): void {
         console.log(e.keyCode)
         switch (e.keyCode) {
-            case this.leftkeycode:
+            case this.leftkeycode:          //A
                 this.leftPress = 0
                 break
-            case this.rightkeycode:
+            case this.rightkeycode:         //D
                 this.rightPress = 0
                 break
-            case this.upkeycode:
+            case this.upkeycode:            //w
                 this.upPress = 1
                 break
-            case this.spacekeycode:
+            case this.spacekeycode:         //s
                 this.spacePress = 1
                 break
         }
     }
 
-    //De aanmaak functie
+    //Aanmaak functie
     public Create(){
         let childElement:HTMLElement = document.body
         //let element = document.createElement("headcharacter")
@@ -107,9 +108,7 @@ class headCharacter {
             this.positionX += snelheid;
         }
 
-        if(this.leftPress == 1){
-            this.positionX -= snelheid;
-        }
+
 
         if(this.upPress == 1 && this.positionY == (window.innerHeight - this.height - 56)){
             this.positionY -= 210;
@@ -117,8 +116,20 @@ class headCharacter {
             this.upPress = 0
         }
 
+        if(this.leftPress == 1 &&  this.positionX==0){
+            this.leftPress = 0
+            this.positionX = 0 
+            this.positionX = 0
+        } 
+
+        if(this.leftPress == 1){            
+            this.positionX -= snelheid;
+        }
+
         element.style.transform = "translate(" + this.positionX + "px," + this.positionY + "px)"
     }
+
+
 
     //Geeft waardes terug voor de collision
     public getRectangle() {

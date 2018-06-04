@@ -392,7 +392,6 @@ var headCharacter = (function () {
         this.leftkeycode = 65;
         this.rightkeycode = 68;
         this.upkeycode = 87;
-        this.spacekeycode = 32;
         window.addEventListener("keyup", function (e) { return _this.onKeyUp(e); });
         window.addEventListener("keydown", function (e) { return _this.onKeyDown(e); });
     }
@@ -407,9 +406,10 @@ var headCharacter = (function () {
                 break;
             case this.spacekeycode:
                 this.upPress = 0;
-                break;
-            case this.spacekeycode:
                 this.spacePress = 0;
+                break;
+            case this.upkeycode:
+                this.upPress = 0;
                 break;
         }
     };
@@ -450,13 +450,18 @@ var headCharacter = (function () {
         if (this.rightPress == 1) {
             this.positionX += snelheid;
         }
-        if (this.leftPress == 1) {
-            this.positionX -= snelheid;
-        }
         if (this.upPress == 1 && this.positionY == (window.innerHeight - this.height - 56)) {
             this.positionY -= 210;
             this.positionX += snelheid + 5;
             this.upPress = 0;
+        }
+        if (this.leftPress == 1 && this.positionX == 0) {
+            this.leftPress = 0;
+            this.positionX = 0;
+            this.positionX = 0;
+        }
+        if (this.leftPress == 1) {
+            this.positionX -= snelheid;
         }
         element.style.transform = "translate(" + this.positionX + "px," + this.positionY + "px)";
     };
