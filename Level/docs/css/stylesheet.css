@@ -11,8 +11,19 @@ body{
 
 headcharacter{
     background: url("../img/Poppetje.png") no-repeat center top;
+    margin-right: 100px;
+    margin-left: 100px;
 }
 
 dino1 {
     background: url("../img/Dino1.png") no-repeat center top;
+}
+.nativeCamera {
+    overflow: hidden;
+    position: relative;
+}
+canvas {
+    position: relative;
+    height: 1020px;
+    width: 1200px;
 }
