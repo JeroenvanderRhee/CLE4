@@ -598,8 +598,7 @@ var headCharacter = (function () {
 var StartScreen = (function () {
     function StartScreen(g) {
         var _this = this;
-        this.game = new Game();
-        this.gameloop();
+        this.Game = new Game();
         this.div = document.createElement("splash");
         document.body.appendChild(this.div);
         this.div.addEventListener("click", function () { return _this.showPlayScreen(); });
@@ -609,7 +608,7 @@ var StartScreen = (function () {
     };
     StartScreen.prototype.showPlayScreen = function () {
         document.body.innerHTML = "";
-        this.screen = this.Game.gameloop();
+        this.screen = this.game.gameloop();
     };
     return StartScreen;
 }());

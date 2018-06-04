@@ -2,13 +2,12 @@
 class StartScreen {
 
     private div: HTMLElement
-    private game : Game 
+    private Game : Game 
     screen: any
 
     constructor(g:Game) {
         //this.game = g
-        this.game = new Game()
-        this.gameloop()
+        this.Game = new Game()
         //Splash element is opgehaald van style.css & verwerkt in index.html
         this.div = document.createElement("splash")
         document.body.appendChild(this.div)
@@ -17,7 +16,6 @@ class StartScreen {
         this.div.addEventListener("click", ()=>this.showPlayScreen())
         this.div.innerHTML = "START THE GAME"
     }
-
     
 
     //Update functie
@@ -31,7 +29,7 @@ class StartScreen {
         document.body.innerHTML = ""
 
         //"This" is een instance. De variabele this.screen verwijst naar playscreen.ts
-        this.screen =this.Game.gameloop()
+        this.screen =this.game.gameloop()
 
     }
 }
