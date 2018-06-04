@@ -598,7 +598,8 @@ var headCharacter = (function () {
 var StartScreen = (function () {
     function StartScreen(g) {
         var _this = this;
-        this.game = g;
+        this.game = new Game();
+        this.gameloop();
         this.div = document.createElement("splash");
         document.body.appendChild(this.div);
         this.div.addEventListener("click", function () { return _this.showPlayScreen(); });
