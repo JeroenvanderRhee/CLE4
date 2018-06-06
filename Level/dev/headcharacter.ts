@@ -104,12 +104,14 @@ class headCharacter {
     public Update(){
         let element = this.elementpath
         let snelheid:number = 5;
+        
         if(this.rightPress == 1){
             this.positionX += snelheid;
         }
 
         if(this.leftPress == 1){
             this.positionX -= snelheid;
+            console.log(this.positionX)
         }
 
         if(this.upPress == 1){
@@ -117,6 +119,7 @@ class headCharacter {
             this.positionX += snelheid + 5;
             this.upPress = 0
         }
+
         // && this.positionY == (window.innerHeight - this.height - 56)
 
         element.style.transform = "translate(" + this.positionX + "px," + this.positionY + "px)"
