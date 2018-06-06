@@ -502,6 +502,8 @@ var Startscherm = (function () {
         this.height = 100;
         this.spacekey = 32;
         this.spacepressed = 0;
+        console.log("WIDTH " + window.innerWidth);
+        console.log("hEIGHT " + window.innerHeight);
         window.addEventListener("keyup", function (e) { return _this.onKeyUp(e); });
         window.addEventListener("keydown", function (e) { return _this.onKeyDown(e); });
         this.create();

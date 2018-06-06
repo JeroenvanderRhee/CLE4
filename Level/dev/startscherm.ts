@@ -11,7 +11,8 @@ class Startscherm {
         this.height = 100
         this.spacekey =32
         this.spacepressed = 0
-
+        console.log("WIDTH " + window.innerWidth)
+        console.log("hEIGHT " +window.innerHeight)
         //event listeners voor toetsenbord
         window.addEventListener("keyup", (e: KeyboardEvent) => this.onKeyUp(e))
         window.addEventListener("keydown", (e: KeyboardEvent) => this.onKeyDown(e))
