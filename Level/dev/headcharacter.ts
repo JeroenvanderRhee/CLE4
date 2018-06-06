@@ -130,6 +130,7 @@ class headCharacter {
         if(this.leftPress == 1){            
             this.positionX -= snelheid;
         }
+              
         console.log(this.positionX)
 
         element.style.transform = "translate(" + this.positionX + "px," + this.positionY + "px)"
