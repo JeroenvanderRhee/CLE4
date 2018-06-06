@@ -253,7 +253,6 @@ var Game = (function () {
         this.Dino.Opmaak();
         this.Hoofdpersoon.Create();
         this.Hoofdpersoon.Opmaak();
-        console.log("aangemaakt");
         this.createbars();
         this.creategaps();
         this.Kleding = new kleding(300, window.innerHeight);
@@ -278,7 +277,7 @@ var Game = (function () {
         this.Bar.push(new Ground(920, window.innerHeight, 1980));
         this.Bar.push(new Ground(700, window.innerHeight, 3000));
         this.Bar.push(new Ground(530, window.innerHeight, 3770));
-        this.Bar.push(new Ground(530, window.innerHeight - 400, 900));
+        this.Bar.push(new Ground(530, window.innerHeight - 400, 600));
         this.Bar.forEach(function (ReadOut) {
             ReadOut.Create();
             ReadOut.Opmaak();
@@ -298,6 +297,7 @@ var Game = (function () {
     };
     Game.prototype.checkCollisionBar = function () {
         var _this = this;
+        console.log("Bar");
         var barhit;
         var positionbar;
         var positioncharacter;

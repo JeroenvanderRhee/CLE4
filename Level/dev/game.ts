@@ -17,7 +17,7 @@ class Game{
         this.Dino.Opmaak()
         this.Hoofdpersoon.Create()
         this.Hoofdpersoon.Opmaak()
-        console.log("aangemaakt")
+        //console.log("aangemaakt")
         this.createbars()
         this.creategaps()
         this.Kleding = new kleding(300, window.innerHeight)
@@ -53,7 +53,7 @@ class Game{
         this.Bar.push(new Ground(530, window.innerHeight, 3770))
         
         //                       BREEDTE    Y                    X
-        this.Bar.push(new Ground(530, window.innerHeight - 400, 900))
+        this.Bar.push(new Ground(530, window.innerHeight - 400, 600))
 
 
         this.Bar.forEach(ReadOut => {
@@ -79,6 +79,7 @@ class Game{
 
     //Check de collision van een loopbalk
     private checkCollisionBar(){
+        console.log("Bar")
         let barhit
         let positionbar
         let positioncharacter
@@ -94,8 +95,7 @@ class Game{
                     this.Hoofdpersoon.gravity(0,5)
                 }
             }
-        })
-        
+        })   
     }
 
     //Check de collision van een Gat
@@ -122,7 +122,6 @@ class Game{
                 }
             }
         })
-        
     }
 
     //Check de collision van de Dino
@@ -135,7 +134,6 @@ class Game{
             if (barhit == true){
                 alert("Je bent dood door een Dino")
                 console.log("hit by the dino")
-                
             }
         }
     }
