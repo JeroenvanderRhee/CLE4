@@ -33,7 +33,7 @@ class headCharacter {
         
         //toetsenbord besturing WSAD
         this.leftkeycode = 65
-        this.rightkeycode = 68
+        this.rightkeycode = 68 //D
         this.upkeycode = 87
         this.spacekeycode = 32 
 
@@ -49,7 +49,7 @@ class headCharacter {
             case this.leftkeycode:
                 this.leftPress = 1
                 break
-            case this.rightkeycode:
+            case this.rightkeycode:     //D
                 this.rightPress = 1
                 break
             case this.spacekeycode:
@@ -104,9 +104,6 @@ class headCharacter {
     public Update(){
         let element = this.elementpath
         let snelheid:number = 5;
-        if(this.rightPress == 1){
-            this.positionX += snelheid;
-        }
 
         if(this.upPress == 1){
             this.positionY -= 210;
@@ -114,14 +111,22 @@ class headCharacter {
             this.upPress = 0
         }
 
+        console.log("Positie" + this.positionX)
         //Zorgt ervoor dat Character scherm niet verlaat van links.
-        if(this.leftPress == 1 && this.positionX==0){
+        if(this.leftPress == 1 && this.positionX == 0){
             this.leftPress = 0
         }
 
         //Zorgt ervoor dat Character scherm niet verlaat van rechts.
-        if(this.rightPress == 1 && this.positionX == window.innerWidth){
-                this.rightPress = 0
+        if(this.rightPress == 1 && this.positionX == 4000){
+            console.log("Muur Rechts")
+            this.rightPress = 0
+            
+                
+        }
+
+        if(this.rightPress == 1){
+            this.positionX += snelheid;
         }
 
         if(this.leftPress == 1){            

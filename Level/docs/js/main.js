@@ -488,19 +488,21 @@ var headCharacter = (function () {
     headCharacter.prototype.Update = function () {
         var element = this.elementpath;
         var snelheid = 5;
-        if (this.rightPress == 1) {
-            this.positionX += snelheid;
-        }
         if (this.upPress == 1) {
             this.positionY -= 210;
             this.positionX += snelheid + 5;
             this.upPress = 0;
         }
+        console.log("Positie" + this.positionX);
         if (this.leftPress == 1 && this.positionX == 0) {
             this.leftPress = 0;
         }
-        if (this.rightPress == 1 && this.positionX == window.innerWidth) {
+        if (this.rightPress == 1 && this.positionX == 4000) {
+            console.log("Muur Rechts");
             this.rightPress = 0;
+        }
+        if (this.rightPress == 1) {
+            this.positionX += snelheid;
         }
         if (this.leftPress == 1) {
             this.positionX -= snelheid;
