@@ -472,19 +472,12 @@ var headCharacter = (function () {
         }
     };
     headCharacter.prototype.Create = function () {
-<<<<<<< HEAD
         window.onload = function () {
             var canvas = document.getElementById('game');
             var ctx = canvas.getContext("2d");
             var img = document.getElementById("hoofdpersoon");
             ctx.drawImage(img, 10, 10);
         };
-=======
-        var childElement = document.body;
-        var element = this.elementpath;
-        childElement.appendChild(element);
-        element.innerHTML = " ";
->>>>>>> 013b52e19a2b372b590f0d5c776bfb95eb10f1d8
     };
     headCharacter.prototype.Opmaak = function () {
         var element = this.elementpath;
