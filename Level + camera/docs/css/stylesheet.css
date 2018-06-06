@@ -45,4 +45,5 @@ kleding {
 
 startscherm{
     background: url("../img/Startscherm.png") center center;
+    display: none;
 }
