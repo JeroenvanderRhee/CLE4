@@ -33,7 +33,7 @@ class Ground{
         element.style.transform = "translate(" + this.positionx + "px," + this.positiony + "px)"
     }
 
-    //Geef waardes terug voor Collision
+    //Geef waardes terug voor collision
     public getRectangle() {
         return this.elementpath.getBoundingClientRect()
     }

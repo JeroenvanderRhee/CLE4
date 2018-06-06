@@ -431,12 +431,10 @@ var headCharacter = (function () {
         }
     };
     headCharacter.prototype.Create = function () {
-        window.onload = function () {
-            var canvas = document.getElementById('game');
-            var ctx = canvas.getContext("2d");
-            var img = document.getElementById("hoofdpersoon");
-            ctx.drawImage(img, 10, 10);
-        };
+        var childElement = document.getElementById("game");
+        var element = this.elementpath;
+        childElement.appendChild(element);
+        element.innerHTML = " ";
     };
     headCharacter.prototype.Opmaak = function () {
         var element = this.elementpath;

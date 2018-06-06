@@ -10,9 +10,9 @@ dino1 {
 }
 
 #game{
-    position: absolute;
-    width: 280%;
-    height: 100%;
+    position: relative;
+    width: 1200px;
+    height: 1020px;
     background: url(../img/Achtergrond.jpg) no-repeat center top;
 }
 
@@ -37,3 +37,12 @@ kleding {
 startscherm{
     background-color:red;
 }
+.nativeCamera {
+    overflow: hidden;
+    position: absolute;
+}
+/* #canvas {
+    position: absolute;
+    height: 1020px;
+    width: 1200px;
+} */
