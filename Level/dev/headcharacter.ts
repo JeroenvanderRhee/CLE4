@@ -111,7 +111,7 @@ class headCharacter {
             this.upPress = 0
         }
 
-        console.log("Positie" + this.positionX)
+        // console.log("Positie" + this.positionX)
         //Zorgt ervoor dat Character scherm niet verlaat van links.
         if(this.leftPress == 1 && this.positionX == 0){
             this.leftPress = 0
@@ -121,8 +121,6 @@ class headCharacter {
         if(this.rightPress == 1 && this.positionX == 4000){
             console.log("Muur Rechts")
             this.rightPress = 0
-            
-                
         }
 
         if(this.rightPress == 1){

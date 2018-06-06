@@ -278,6 +278,7 @@ var Game = (function () {
         this.Bar.push(new Ground(920, window.innerHeight, 1980));
         this.Bar.push(new Ground(700, window.innerHeight, 3000));
         this.Bar.push(new Ground(530, window.innerHeight, 3770));
+        this.Bar.push(new Ground(530, window.innerHeight - 400, 900));
         this.Bar.forEach(function (ReadOut) {
             ReadOut.Create();
             ReadOut.Opmaak();
@@ -493,7 +494,6 @@ var headCharacter = (function () {
             this.positionX += snelheid + 5;
             this.upPress = 0;
         }
-        console.log("Positie" + this.positionX);
         if (this.leftPress == 1 && this.positionX == 0) {
             this.leftPress = 0;
         }

@@ -13,7 +13,7 @@ class Gap{
         this.positiony = positiony - this.height
     }
     
-    //Create functie
+    //Create loop-planken
     public Create(){
         let childElement = document.getElementById("bars")
         //let childElement:HTMLElement = document.body

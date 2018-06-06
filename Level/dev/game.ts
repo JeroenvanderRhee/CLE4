@@ -41,6 +41,7 @@ class Game{
 
      //Array waarin de nieuwe loopplanken worden gedeclareerd
     private createbars(){
+        //Window.Height is 734
         //Array waarin de nieuwe loopplanken worden gedeclareerd
         this.Bar.push(new Ground(800, window.innerHeight, 0))
         this.Bar.push(new Ground(400, window.innerHeight, 900))
@@ -50,6 +51,10 @@ class Game{
         this.Bar.push(new Ground(920, window.innerHeight, 1980))
         this.Bar.push(new Ground(700, window.innerHeight, 3000))
         this.Bar.push(new Ground(530, window.innerHeight, 3770))
+        
+        //                       BREEDTE    Y                    X
+        this.Bar.push(new Ground(530, window.innerHeight - 400, 900))
+
 
         this.Bar.forEach(ReadOut => {
             ReadOut.Create()
