@@ -491,14 +491,21 @@ var headCharacter = (function () {
         if (this.rightPress == 1) {
             this.positionX += snelheid;
         }
-        if (this.leftPress == 1) {
-            this.positionX -= snelheid;
-        }
         if (this.upPress == 1) {
             this.positionY -= 210;
             this.positionX += snelheid + 5;
             this.upPress = 0;
         }
+        if (this.leftPress == 1 && this.positionX == 0) {
+            this.leftPress = 0;
+        }
+        if (this.rightPress == 1 && this.positionX == window.innerWidth) {
+            this.rightPress = 0;
+        }
+        if (this.leftPress == 1) {
+            this.positionX -= snelheid;
+        }
+        console.log(this.positionX);
         element.style.transform = "translate(" + this.positionX + "px," + this.positionY + "px)";
     };
     headCharacter.prototype.getRectangle = function () {

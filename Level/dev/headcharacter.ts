@@ -104,14 +104,8 @@ class headCharacter {
     public Update(){
         let element = this.elementpath
         let snelheid:number = 5;
-        
         if(this.rightPress == 1){
             this.positionX += snelheid;
-        }
-
-        if(this.leftPress == 1){
-            this.positionX -= snelheid;
-            console.log(this.positionX)
         }
 
         if(this.upPress == 1){
@@ -120,7 +114,20 @@ class headCharacter {
             this.upPress = 0
         }
 
-        // && this.positionY == (window.innerHeight - this.height - 56)
+        //Zorgt ervoor dat Character scherm niet verlaat van links.
+        if(this.leftPress == 1 && this.positionX==0){
+            this.leftPress = 0
+        }
+
+        //Zorgt ervoor dat Character scherm niet verlaat van rechts.
+        if(this.rightPress == 1 && this.positionX == window.innerWidth){
+                this.rightPress = 0
+        }
+
+        if(this.leftPress == 1){            
+            this.positionX -= snelheid;
+        }
+        console.log(this.positionX)
 
         element.style.transform = "translate(" + this.positionX + "px," + this.positionY + "px)"
     }
