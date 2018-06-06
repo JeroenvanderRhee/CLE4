@@ -4,6 +4,9 @@ class Game{
     Gap:Gap[] = []
     Dino:Dino
     Fireball:Fire
+    Kleding :kleding
+    Check : State[] = []
+    private score = 0;
 
     //Hierworden de functies gedeclareerd.
     constructor(){
@@ -17,7 +20,8 @@ class Game{
         console.log("aangemaakt")
         this.createbars()
         this.creategaps()
-        //this.gameloop()
+        this.Kleding = new kleding(300, window.innerHeight)
+        this.createcheck(3)
     }
 
     //Algemene functie collision
@@ -27,6 +31,13 @@ class Game{
             a.top <= b.bottom &&
             b.top <= a.bottom)
      }
+
+    //Checks aanmaken
+    private createcheck(hoeveelheid:number){
+        for(let i = 1; i <= hoeveelheid; i++){
+            this.Check.push(new State(i))
+        }
+    }
 
      //Array waarin de nieuwe loopplanken worden gedeclareerd
     private createbars(){
@@ -45,7 +56,6 @@ class Game{
             ReadOut.Opmaak()
         });
     }
-
     //Array waarin de nieuwe gaten worden gedeclareerd
     private creategaps(){
         //volgorde : Lengte, Yas, Xas
@@ -124,6 +134,23 @@ class Game{
             }
         }
     }
+
+    //Collision met de kleding
+    private checkCollisionKleding(){
+        let barhit
+        let positionkleding = this.Kleding.getvalues()
+        let positioncharacter = this.Hoofdpersoon.getvalues()
+
+        if((positioncharacter.xeind >= positionkleding.xbegin) && (positioncharacter.xeind <= positionkleding.xeind)){
+            barhit = this.checkCollision(this.Kleding.getRectangle(), this.Hoofdpersoon.getRectangle())
+            if (barhit == true){
+                console.log("hit by de kleding")
+                this.Kleding.elementpath.style.display = "none"
+                this.Check[this.score].imagagepath.style.display = "block"
+                this.score ++
+            }
+        }
+    }
     
     //Dit is de gameloop. Hierin worden alle assets geupdate en word de collision bij gehouden. Deze gameloop word aangeroepen in de echte gameloop
     public gameloop(){
@@ -133,6 +160,7 @@ class Game{
         this.checkCollisionBar()
         this.checkCollisionGap()
         this.checkColisionDino()
+        this.checkCollisionKleding()
         //requestAnimationFrame(() =>this.gameloop())
     }
 }

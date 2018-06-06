@@ -1,27 +1,30 @@
-class kleding1 {
+class kleding {
     private name:string
     private width:number
     private height:number
-    private velocity:number
     private positionX:number
     private positionY:number
-    private elementpath:HTMLElement = document.createElement("dino1")
+    public elementpath:HTMLElement = document.createElement("kleding")
 
     
-    constructor(){
+    constructor(x:number, y:number){
+        //this.elementpath = document.createElement("kleding")
         this.name = "shirt"
-        this.width = 200                                        //Zichtbare breedte Dino
-        this.height = 200                                       //Hoogte positie Dino
-        this.velocity = 2
-        this.positionX = 20    
-        this.positionY = 20                                  //Begin positie X dino
+        this.width = 93                                        //Zichtbare breedte kleding
+        this.height = 167                                       //Hoogte positie kleding
+        this.positionX = x        
+        this.positionY = y - this.height - 56                       //Begin positie X kleding
 
+        this.Create()
+        this.Opmaak()
     }
-
-    //Acties wanneer keys DOWN
+    public getRectangle() {
+        return this.elementpath.getBoundingClientRect()
+    }
     
     
-    public Create(){
+    private Create(){
+        //document.body.appendChild(this.elementpath)
         let childElement:HTMLElement = document.body
         let element = this.elementpath
         childElement.appendChild(element)
@@ -29,21 +32,30 @@ class kleding1 {
     }
 
     //Opmaak scherm
-    public Opmaak(){
+    private Opmaak(){
         console.log("Opmaak werkt")
         let element = this.elementpath
         element.style.position = "absolute"
         element.style.width = this.width + "px"
         element.style.height = this.height + "px"
         element.innerHTML = ""
+        element.style.transform = "translate(" + this.positionX + "px," +this.positionY + "px)"
     }
 
-    //Update gezette stappen doormiddel van key's klikken;
-    public Update(){
-        let element = this.elementpath
-       
-}
-
-
-
+    public getvalues(){
+        let xbegin : number
+        let xeind : number
+        let y :number
+        let height:number
+        let width:number
+        let bar : HTMLElement
+        return {
+            //element : this.elementpath,
+            xbegin : this.positionX,
+            xeind : this.positionX + this.width,
+            y : this.positionY,
+            height : this.height,
+            width : this.width
+        }
+    }
 }

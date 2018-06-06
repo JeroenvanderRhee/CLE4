@@ -15,9 +15,9 @@ class Startscherm {
         //event listeners voor toetsenbord
         window.addEventListener("keyup", (e: KeyboardEvent) => this.onKeyUp(e))
         window.addEventListener("keydown", (e: KeyboardEvent) => this.onKeyDown(e))
+        this.Game = new Game()
         this.create()
         this.Opmaak()
-        this.Game = new Game()
         this.gameloop()
     }
 
@@ -64,8 +64,9 @@ class Startscherm {
         //Als er op de spatie toets word gedrukt gaat hij weg.
         if(this.spacepressed == 1){
             this.elementpath.style.display = "none"
-            this.Game.gameloop()
         }
+
+        this.Game.gameloop()
 
         requestAnimationFrame(() =>this.gameloop())
     }

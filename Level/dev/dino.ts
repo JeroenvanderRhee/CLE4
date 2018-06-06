@@ -87,7 +87,8 @@ class Dino {
     
     //Creatie Dino in HTML Body
     public Create(){
-        let childElement:HTMLElement = document.getElementById("game")
+        //let childElement:HTMLElement = document.getElementById("game")
+        let childElement:HTMLElement = document.body
         //let element = document.createElement("dino1")
         let element = this.dino
         childElement.appendChild(element)

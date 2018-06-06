@@ -82,7 +82,8 @@ class headCharacter {
 
     //De aanmaak functie
     public Create(){
-        let childElement:HTMLElement = document.getElementById("game")
+        //let childElement:HTMLElement = document.getElementById("game")
+        let childElement:HTMLElement = document.body
         //let element = document.createElement("headcharacter")
         let element = this.elementpath
         childElement.appendChild(element)
@@ -111,11 +112,12 @@ class headCharacter {
             this.positionX -= snelheid;
         }
 
-        if(this.upPress == 1 && this.positionY == (window.innerHeight - this.height - 56)){
+        if(this.upPress == 1){
             this.positionY -= 210;
             this.positionX += snelheid + 5;
             this.upPress = 0
         }
+        // && this.positionY == (window.innerHeight - this.height - 56)
 
         element.style.transform = "translate(" + this.positionX + "px," + this.positionY + "px)"
     }

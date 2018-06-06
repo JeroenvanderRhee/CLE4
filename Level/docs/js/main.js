@@ -1,32 +1,49 @@
 "use strict";
-var kleding1 = (function () {
-    function kleding1() {
-        this.elementpath = document.createElement("dino1");
+var kleding = (function () {
+    function kleding(x, y) {
+        this.elementpath = document.createElement("kleding");
         this.name = "shirt";
-        this.width = 200;
-        this.height = 200;
-        this.velocity = 2;
-        this.positionX = 20;
-        this.positionY = 20;
+        this.width = 93;
+        this.height = 167;
+        this.positionX = x;
+        this.positionY = y - this.height - 56;
+        this.Create();
+        this.Opmaak();
     }
-    kleding1.prototype.Create = function () {
+    kleding.prototype.getRectangle = function () {
+        return this.elementpath.getBoundingClientRect();
+    };
+    kleding.prototype.Create = function () {
         var childElement = document.body;
         var element = this.elementpath;
         childElement.appendChild(element);
         element.innerHTML = " ";
     };
-    kleding1.prototype.Opmaak = function () {
+    kleding.prototype.Opmaak = function () {
         console.log("Opmaak werkt");
         var element = this.elementpath;
         element.style.position = "absolute";
         element.style.width = this.width + "px";
         element.style.height = this.height + "px";
         element.innerHTML = "";
+        element.style.transform = "translate(" + this.positionX + "px," + this.positionY + "px)";
     };
-    kleding1.prototype.Update = function () {
-        var element = this.elementpath;
+    kleding.prototype.getvalues = function () {
+        var xbegin;
+        var xeind;
+        var y;
+        var height;
+        var width;
+        var bar;
+        return {
+            xbegin: this.positionX,
+            xeind: this.positionX + this.width,
+            y: this.positionY,
+            height: this.height,
+            width: this.width
+        };
     };
-    return kleding1;
+    return kleding;
 }());
 var Dino = (function () {
     function Dino(Xbegin) {
@@ -91,7 +108,7 @@ var Dino = (function () {
         }
     };
     Dino.prototype.Create = function () {
-        var childElement = document.getElementById("game");
+        var childElement = document.body;
         var element = this.dino;
         childElement.appendChild(element);
         element.innerHTML = " ";
@@ -153,7 +170,7 @@ var Fire = (function () {
         this.Opmaak();
     }
     Fire.prototype.create = function () {
-        var childElement = document.getElementById("game");
+        var childElement = document.body;
         var element = this.elementpath;
         childElement.appendChild(element);
         element.innerHTML = " ";
@@ -227,6 +244,8 @@ var Game = (function () {
     function Game() {
         this.Bar = [];
         this.Gap = [];
+        this.Check = [];
+        this.score = 0;
         this.Hoofdpersoon = new headCharacter();
         this.Fireball = new Fire(1380, 1700);
         this.Dino = new Dino(3000);
@@ -237,12 +256,19 @@ var Game = (function () {
         console.log("aangemaakt");
         this.createbars();
         this.creategaps();
+        this.Kleding = new kleding(300, window.innerHeight);
+        this.createcheck(3);
     }
     Game.prototype.checkCollision = function (a, b) {
         return (a.left <= b.right &&
             b.left <= a.right &&
             a.top <= b.bottom &&
             b.top <= a.bottom);
+    };
+    Game.prototype.createcheck = function (hoeveelheid) {
+        for (var i = 1; i <= hoeveelheid; i++) {
+            this.Check.push(new State(i));
+        }
     };
     Game.prototype.createbars = function () {
         this.Bar.push(new Ground(800, window.innerHeight, 0));
@@ -321,6 +347,20 @@ var Game = (function () {
             }
         }
     };
+    Game.prototype.checkCollisionKleding = function () {
+        var barhit;
+        var positionkleding = this.Kleding.getvalues();
+        var positioncharacter = this.Hoofdpersoon.getvalues();
+        if ((positioncharacter.xeind >= positionkleding.xbegin) && (positioncharacter.xeind <= positionkleding.xeind)) {
+            barhit = this.checkCollision(this.Kleding.getRectangle(), this.Hoofdpersoon.getRectangle());
+            if (barhit == true) {
+                console.log("hit by de kleding");
+                this.Kleding.elementpath.style.display = "none";
+                this.Check[this.score].imagagepath.style.display = "block";
+                this.score++;
+            }
+        }
+    };
     Game.prototype.gameloop = function () {
         this.Dino.Update(3000, 3700);
         this.Fireball.update();
@@ -328,6 +368,7 @@ var Game = (function () {
         this.checkCollisionBar();
         this.checkCollisionGap();
         this.checkColisionDino();
+        this.checkCollisionKleding();
     };
     return Game;
 }());
@@ -431,7 +472,7 @@ var headCharacter = (function () {
         }
     };
     headCharacter.prototype.Create = function () {
-        var childElement = document.getElementById("game");
+        var childElement = document.body;
         var element = this.elementpath;
         childElement.appendChild(element);
         element.innerHTML = " ";
@@ -453,7 +494,7 @@ var headCharacter = (function () {
         if (this.leftPress == 1) {
             this.positionX -= snelheid;
         }
-        if (this.upPress == 1 && this.positionY == (window.innerHeight - this.height - 56)) {
+        if (this.upPress == 1) {
             this.positionY -= 210;
             this.positionX += snelheid + 5;
             this.upPress = 0;
@@ -497,9 +538,9 @@ var Startscherm = (function () {
         this.spacepressed = 0;
         window.addEventListener("keyup", function (e) { return _this.onKeyUp(e); });
         window.addEventListener("keydown", function (e) { return _this.onKeyDown(e); });
+        this.Game = new Game();
         this.create();
         this.Opmaak();
-        this.Game = new Game();
         this.gameloop();
     }
     Startscherm.prototype.create = function () {
@@ -535,13 +576,46 @@ var Startscherm = (function () {
         var _this = this;
         if (this.spacepressed == 1) {
             this.elementpath.style.display = "none";
-            this.Game.gameloop();
         }
+        this.Game.gameloop();
         requestAnimationFrame(function () { return _this.gameloop(); });
     };
     return Startscherm;
 }());
 window.addEventListener("load", function () { return new Startscherm; });
+var State = (function () {
+    function State(hoeveelheid) {
+        this.elementpath = document.createElement("status");
+        this.imagagepath = document.createElement("img");
+        this.height_vakje = 50;
+        this.width_vakje = 50;
+        this.positionX = 20 + ((this.width_vakje + 2) * hoeveelheid);
+        this.positionY = 20;
+        this.hoeveelheid = hoeveelheid;
+        this.setup();
+    }
+    State.prototype.setup = function () {
+        var childElement = document.body;
+        var element = this.elementpath;
+        childElement.appendChild(element);
+        element.innerHTML = " ";
+        element.style.position = "absolute";
+        element.style.width = this.width_vakje + "px";
+        element.style.height = this.height_vakje + "px";
+        element.innerHTML = "";
+        element.style.transform = "translate(" + this.positionX + "px," + this.positionY + "px)";
+        element.style.border = "2px solid gray";
+        this.arrow();
+    };
+    State.prototype.arrow = function () {
+        var element = this.imagagepath;
+        var childElement = document.getElementsByTagName("status")[0 + this.hoeveelheid - 1];
+        childElement.appendChild(element);
+        element.setAttribute("src", "../docs/img/Check.png");
+        element.style.display = "none";
+    };
+    return State;
+}());
 var Camera = (function () {
     function Camera(event) {
         var _this = this;
