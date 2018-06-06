@@ -1,10 +1,9 @@
-
-class headCharacter {
+class headCharacter{
     private name:string
     private width:number
     private height:number
     private velocity:number
-    private positionX:number
+    public positionX:number
     private positionY:number
     private elementpath:HTMLElement = document.createElement("headcharacter")
     private leftkeycode:number
@@ -34,7 +33,7 @@ class headCharacter {
         //toetsenbord besturing WSAD
         this.leftkeycode = 65
         this.rightkeycode = 68
-        this.upkeycode = 87
+        this.upkeycode = 32
         this.spacekeycode = 32 
 
         //event listeners voor toetsenbord
@@ -81,25 +80,6 @@ class headCharacter {
     }
 
     //De aanmaak functie
-<<<<<<< HEAD
-    // public Create(){
-    //     let childElement:HTMLElement = document.getElementById("game")
-    //     //let element = document.createElement("headcharacter")
-    //     let element = this.elementpath
-    //     childElement.appendChild(element)
-    //     element.innerHTML = " "
-    // }
-
-public Create(){
-        // let childElement:HTMLCanvasElement = document.getElementById("game");
-        window.onload = () => {
-            let canvas = <HTMLCanvasElement>document.getElementById('game');
-            let ctx = <CanvasRenderingContext2D>canvas.getContext("2d");
-            let img = <HTMLCanvasElement>document.getElementById("hoofdpersoon");
-            ctx.drawImage(img, 10, 10);
-         }
-        }
-=======
     public Create(){
         //let childElement:HTMLElement = document.getElementById("game")
         let childElement:HTMLElement = document.body
@@ -108,7 +88,6 @@ public Create(){
         childElement.appendChild(element)
         element.innerHTML = " "
     }
->>>>>>> 013b52e19a2b372b590f0d5c776bfb95eb10f1d8
 
     //de opmaak functie    
     public Opmaak(){
@@ -122,19 +101,12 @@ public Create(){
 
     //De loop functie
     public Update(){
+        positiehoofdpersoon = this.positionX
+        console.log(positiehoofdpersoon)
         let element = this.elementpath
-        let snelheid:number = 5;
-        if(this.rightPress == 1){
-            this.positionX += snelheid;
-        }
-
-        if(this.leftPress == 1){
-            this.positionX -= snelheid;
-        }
 
         if(this.upPress == 1){
             this.positionY -= 210;
-            this.positionX += snelheid + 5;
             this.upPress = 0
         }
         // && this.positionY == (window.innerHeight - this.height - 56)

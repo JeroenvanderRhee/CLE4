@@ -1,3 +1,4 @@
+var positiehoofdpersoon:number = 0;
 class Game{
     Hoofdpersoon:headCharacter
     Bar:Ground[] = []
@@ -6,12 +7,14 @@ class Game{
     Fireball:Fire
     Kleding :kleding
     Check : State[] = []
+    Camera : Camera
     private score = 0;
 
     //Hier worden de functies gedeclareerd.
     constructor(){
         this.Hoofdpersoon = new headCharacter()
-        this.Fireball = new Fire(1380,1700)
+        this.Camera = new Camera()
+        this.Fireball = new Fire(1380 ,1700)
         this.Dino = new Dino(3000)
         this.Dino.Create()
         this.Dino.Opmaak()
@@ -82,7 +85,7 @@ class Game{
             positioncharacter = this.Hoofdpersoon.getvalues()
             positionbar = ReadOut.getvalues()
             
-            if((positioncharacter.xeind >= positionbar.xbegin) && (positioncharacter.xeind <= positionbar.xeind)){
+            if(((positioncharacter.xeind - translate) >= positionbar.xbegin) && ((positioncharacter.xeind - translate) <= positionbar.xeind)){
                 barhit = this.checkCollision(ReadOut.getRectangle(), this.Hoofdpersoon.getRectangle())
                 if (barhit != true){
                     console.log("hit")
@@ -103,7 +106,7 @@ class Game{
             positioncharacter = this.Hoofdpersoon.getvalues()
             positionbar = ReadOut.getvalues()
             
-            if((positioncharacter.xeind >= positionbar.xbegin) && (positioncharacter.xbegin <= positionbar.xeind)){
+            if(((positioncharacter.xeind - translate) >= positionbar.xbegin) && ((positioncharacter.xeind - translate) <= positionbar.xeind)) {
                 barhit = this.checkCollision(ReadOut.getRectangle(), this.Hoofdpersoon.getRectangle())
                 if (barhit != true){
                     console.log("hit")
@@ -125,7 +128,7 @@ class Game{
         let barhit
         let positiondino = this.Dino.getvalues()
         let positioncharacter = this.Hoofdpersoon.getvalues()
-        if((positioncharacter.xeind >= positiondino.xbegin) && (positioncharacter.xeind <= positiondino.xeind)){
+        if(((positioncharacter.xeind - translate) >= positiondino.xbegin) && ((positioncharacter.xeind - translate) <= positiondino.xeind)){
             barhit = this.checkCollision(this.Dino.getRectangle(), this.Hoofdpersoon.getRectangle())
             if (barhit == true){
                 alert("Je bent dood door een Dino")
@@ -141,7 +144,7 @@ class Game{
         let positionkleding = this.Kleding.getvalues()
         let positioncharacter = this.Hoofdpersoon.getvalues()
 
-        if((positioncharacter.xeind >= positionkleding.xbegin) && (positioncharacter.xeind <= positionkleding.xeind)){
+        if(((positioncharacter.xeind - translate) >= positionkleding.xbegin) && ((positioncharacter.xeind - translate) <= positionkleding.xeind)){
             barhit = this.checkCollision(this.Kleding.getRectangle(), this.Hoofdpersoon.getRectangle())
             if (barhit == true){
                 console.log("hit by de kleding")
@@ -154,6 +157,7 @@ class Game{
     
     //Dit is de gameloop. Hierin worden alle assets geupdate en word de collision bij gehouden. Deze gameloop word aangeroepen in de echte gameloop
     public gameloop(){
+        this.Camera.update()
         this.Dino.Update(3000,3700)
         this.Fireball.update()
         this.Hoofdpersoon.Update()

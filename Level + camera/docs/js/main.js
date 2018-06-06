@@ -1,4 +1,74 @@
 "use strict";
+var translate = 0;
+var Camera = (function () {
+    function Camera() {
+        var _this = this;
+        this.leftPress = 0;
+        this.rightPress = 0;
+        this.upPress = 0;
+        this.spacePress = 0;
+        this.positionXcam = 0;
+        this.positionYcam = 0;
+        this.positionXchar = positiehoofdpersoon;
+        this.elementpathcam = document.getElementById("assets");
+        this.translatecam = 0;
+        this.leftkeycode = 65;
+        this.rightkeycode = 68;
+        this.upkeycode = 99;
+        this.spacekeycode = 32;
+        window.addEventListener("keyup", function (e) { return _this.onKeyUp(e); });
+        window.addEventListener("keydown", function (e) { return _this.onKeyDown(e); });
+    }
+    Camera.prototype.onKeyDown = function (e) {
+        console.log(e.keyCode);
+        switch (e.keyCode) {
+            case this.leftkeycode:
+                this.leftPress = 1;
+                break;
+            case this.rightkeycode:
+                this.rightPress = 1;
+                break;
+            case this.spacekeycode:
+                this.upPress = 0;
+                break;
+            case this.spacekeycode:
+                this.spacePress = 0;
+                break;
+        }
+    };
+    Camera.prototype.onKeyUp = function (e) {
+        console.log(e.keyCode);
+        switch (e.keyCode) {
+            case this.leftkeycode:
+                this.leftPress = 0;
+                break;
+            case this.rightkeycode:
+                this.rightPress = 0;
+                break;
+            case this.upkeycode:
+                this.upPress = 1;
+                break;
+            case this.spacekeycode:
+                this.spacePress = 1;
+                break;
+        }
+    };
+    Camera.prototype.update = function () {
+        var element = this.elementpathcam;
+        var snelheid = 5;
+        if (this.rightPress == 1) {
+            translate -= snelheid;
+            this.positionXcam -= snelheid;
+        }
+        if (this.leftPress == 1) {
+            this.positionXcam += snelheid;
+            translate += snelheid;
+        }
+        element.style.transform = "translate(" + this.positionXcam + "px," + this.positionYcam + "px)";
+    };
+    return Camera;
+}());
+var element = new Camera();
 var kleding = (function () {
     function kleding(x, y) {
         this.elementpath = document.createElement("kleding");
@@ -14,7 +84,7 @@ var kleding = (function () {
         return this.elementpath.getBoundingClientRect();
     };
     kleding.prototype.Create = function () {
-        var childElement = document.body;
+        var childElement = document.getElementById("assets");
         var element = this.elementpath;
         childElement.appendChild(element);
         element.innerHTML = " ";
@@ -108,7 +178,7 @@ var Dino = (function () {
         }
     };
     Dino.prototype.Create = function () {
-        var childElement = document.body;
+        var childElement = document.getElementById("assets");
         var element = this.dino;
         childElement.appendChild(element);
         element.innerHTML = " ";
@@ -170,7 +240,7 @@ var Fire = (function () {
         this.Opmaak();
     }
     Fire.prototype.create = function () {
-        var childElement = document.body;
+        var childElement = document.getElementById("assets");
         var element = this.elementpath;
         childElement.appendChild(element);
         element.innerHTML = " ";
@@ -240,6 +310,7 @@ var Gap = (function () {
     };
     return Gap;
 }());
+var positiehoofdpersoon = 0;
 var Game = (function () {
     function Game() {
         this.Bar = [];
@@ -247,6 +318,7 @@ var Game = (function () {
         this.Check = [];
         this.score = 0;
         this.Hoofdpersoon = new headCharacter();
+        this.Camera = new Camera();
         this.Fireball = new Fire(1380, 1700);
         this.Dino = new Dino(3000);
         this.Dino.Create();
@@ -303,7 +375,7 @@ var Game = (function () {
         this.Bar.forEach(function (ReadOut) {
             positioncharacter = _this.Hoofdpersoon.getvalues();
             positionbar = ReadOut.getvalues();
-            if ((positioncharacter.xeind >= positionbar.xbegin) && (positioncharacter.xeind <= positionbar.xeind)) {
+            if (((positioncharacter.xeind - translate) >= positionbar.xbegin) && ((positioncharacter.xeind - translate) <= positionbar.xeind)) {
                 barhit = _this.checkCollision(ReadOut.getRectangle(), _this.Hoofdpersoon.getRectangle());
                 if (barhit != true) {
                     console.log("hit");
@@ -320,7 +392,7 @@ var Game = (function () {
         this.Gap.forEach(function (ReadOut) {
             positioncharacter = _this.Hoofdpersoon.getvalues();
             positionbar = ReadOut.getvalues();
-            if ((positioncharacter.xeind >= positionbar.xbegin) && (positioncharacter.xbegin <= positionbar.xeind)) {
+            if (((positioncharacter.xeind - translate) >= positionbar.xbegin) && ((positioncharacter.xeind - translate) <= positionbar.xeind)) {
                 barhit = _this.checkCollision(ReadOut.getRectangle(), _this.Hoofdpersoon.getRectangle());
                 if (barhit != true) {
                     console.log("hit");
@@ -339,7 +411,7 @@ var Game = (function () {
         var barhit;
         var positiondino = this.Dino.getvalues();
         var positioncharacter = this.Hoofdpersoon.getvalues();
-        if ((positioncharacter.xeind >= positiondino.xbegin) && (positioncharacter.xeind <= positiondino.xeind)) {
+        if (((positioncharacter.xeind - translate) >= positiondino.xbegin) && ((positioncharacter.xeind - translate) <= positiondino.xeind)) {
             barhit = this.checkCollision(this.Dino.getRectangle(), this.Hoofdpersoon.getRectangle());
             if (barhit == true) {
                 alert("Je bent dood door een Dino");
@@ -351,7 +423,7 @@ var Game = (function () {
         var barhit;
         var positionkleding = this.Kleding.getvalues();
         var positioncharacter = this.Hoofdpersoon.getvalues();
-        if ((positioncharacter.xeind >= positionkleding.xbegin) && (positioncharacter.xeind <= positionkleding.xeind)) {
+        if (((positioncharacter.xeind - translate) >= positionkleding.xbegin) && ((positioncharacter.xeind - translate) <= positionkleding.xeind)) {
             barhit = this.checkCollision(this.Kleding.getRectangle(), this.Hoofdpersoon.getRectangle());
             if (barhit == true) {
                 console.log("hit by de kleding");
@@ -362,6 +434,7 @@ var Game = (function () {
         }
     };
     Game.prototype.gameloop = function () {
+        this.Camera.update();
         this.Dino.Update(3000, 3700);
         this.Fireball.update();
         this.Hoofdpersoon.Update();
@@ -432,7 +505,7 @@ var headCharacter = (function () {
         console.log(this.positionY);
         this.leftkeycode = 65;
         this.rightkeycode = 68;
-        this.upkeycode = 87;
+        this.upkeycode = 32;
         this.spacekeycode = 32;
         window.addEventListener("keyup", function (e) { return _this.onKeyUp(e); });
         window.addEventListener("keydown", function (e) { return _this.onKeyDown(e); });
@@ -472,19 +545,10 @@ var headCharacter = (function () {
         }
     };
     headCharacter.prototype.Create = function () {
-<<<<<<< HEAD
-        window.onload = function () {
-            var canvas = document.getElementById('game');
-            var ctx = canvas.getContext("2d");
-            var img = document.getElementById("hoofdpersoon");
-            ctx.drawImage(img, 10, 10);
-        };
-=======
         var childElement = document.body;
         var element = this.elementpath;
         childElement.appendChild(element);
         element.innerHTML = " ";
->>>>>>> 013b52e19a2b372b590f0d5c776bfb95eb10f1d8
     };
     headCharacter.prototype.Opmaak = function () {
         var element = this.elementpath;
@@ -495,17 +559,11 @@ var headCharacter = (function () {
         element.style.transform = "translate(" + this.positionX + "px," + this.positionY + "px)";
     };
     headCharacter.prototype.Update = function () {
+        positiehoofdpersoon = this.positionX;
+        console.log(positiehoofdpersoon);
         var element = this.elementpath;
-        var snelheid = 5;
-        if (this.rightPress == 1) {
-            this.positionX += snelheid;
-        }
-        if (this.leftPress == 1) {
-            this.positionX -= snelheid;
-        }
         if (this.upPress == 1) {
             this.positionY -= 210;
-            this.positionX += snelheid + 5;
             this.upPress = 0;
         }
         element.style.transform = "translate(" + this.positionX + "px," + this.positionY + "px)";
@@ -624,54 +682,5 @@ var State = (function () {
         element.style.display = "none";
     };
     return State;
-}());
-var Camera = (function () {
-    function Camera(event) {
-        var _this = this;
-        this.translation = 0;
-        this.speed = event;
-        this.rightPress = 0;
-        this.leftPress = 0;
-        this.positionX = 0;
-        this.leftkeycode = 37;
-        this.rightkeycode = 39;
-        window.addEventListener("keyup", function (e) { return _this.onKeyUp(e); });
-        window.addEventListener("keydown", function (e) { return _this.onKeyDown(e); });
-    }
-    Camera.prototype.onKeyDown = function (e) {
-        console.log(e.keyCode);
-        switch (e.keyCode) {
-            case this.leftkeycode:
-                this.leftPress = 1;
-                break;
-            case this.rightkeycode:
-                this.rightPress = 1;
-                break;
-        }
-    };
-    Camera.prototype.onKeyUp = function (e) {
-        console.log(e.keyCode);
-        switch (e.keyCode) {
-            case this.leftkeycode:
-                this.leftPress = 0;
-                break;
-            case this.rightkeycode:
-                this.rightPress = 0;
-                break;
-        }
-    };
-    Camera.prototype.Update = function () {
-        var element = document.getElementById("camera");
-        if (this.rightPress == 1) {
-            this.positionX -= this.speed;
-            this.translation -= this.speed;
-        }
-        if (this.leftPress == 1) {
-            this.positionX += this.speed;
-            this.translation += this.speed;
-        }
-        element.style.transform = "translateX(" + this.positionX + "px)";
-    };
-    return Camera;
 }());
 //# sourceMappingURL=main.js.map

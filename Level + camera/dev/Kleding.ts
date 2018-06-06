@@ -25,7 +25,7 @@ class kleding {
     
     private Create(){
         //document.body.appendChild(this.elementpath)
-        let childElement:HTMLElement = document.body
+        let childElement = document.getElementById("assets")
         let element = this.elementpath
         childElement.appendChild(element)
         element.innerHTML = " "
