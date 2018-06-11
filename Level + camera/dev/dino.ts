@@ -6,19 +6,6 @@ class Dino {
     private positionX:number
     private positionY:number
     private dino:HTMLElement = document.createElement("dino1")
-
-    //KeyCodes
-    private leftkeycode:number      //A
-    private rightkeycode:number     //D
-    private spacekeycode:number     //I
-    private upkeycode: number       //W
-    private downkeycode: number     //S
-
-    private leftPress: number = 0
-    private rightPress: number = 0
-    private upPress: number = 0
-    private downPress: number = 0
-    private spacePress:number = 0
     
     constructor(Xbegin:number){
         this.width = 200                                        //Zichtbare breedte Dino afbeelding
@@ -26,65 +13,8 @@ class Dino {
         this.velocity = 2
         this.positionX = Xbegin                                     //Begin positie X dino
         this.positionY = window.innerHeight - this.height - 56  //Veranderende Y positie Dino
-
-        //toetsenbord besturing
-        this.leftkeycode = 65                                   //A = 65 = naar links
-        this.rightkeycode = 68                                  //D = 68 = naar rechts
-        this.upkeycode = 87                                     //W = 87 = naar boven
-        this.downkeycode = 83                                   //S = 83 = naar beneden 
-        this.spacekeycode = 73                                  //I = 73 = Schieten       
-
-        //Event Listener voor NIET ingedrukt
-        window.addEventListener("keyup", (e: KeyboardEvent) => this.onKeyUp(e))
-        
-        //Event Listener voor WEL ingedrukt
-        window.addEventListener("keydown", (e: KeyboardEvent) => this.onKeyDown(e))
     }
 
-    //Acties wanneer keys DOWN
-    private onKeyDown(e: KeyboardEvent): void {
-        console.log(e.keyCode)
-        switch (e.keyCode) {
-            case this.leftkeycode:
-                this.leftPress = 1
-                break
-            case this.rightkeycode:
-                this.rightPress = 1
-                break
-            case this.upkeycode:
-                this.upPress = 1
-                break
-            case this.downkeycode:
-                this.downPress = 1;
-                break
-            case this.spacekeycode:
-                this.spacePress = 1
-                break
-        }
-    }
-
-    //Acties wanneer key UP
-    private onKeyUp(e: KeyboardEvent): void {
-        console.log(e.keyCode)
-        switch (e.keyCode) {
-            case this.leftkeycode:
-                this.leftPress = 0
-                break
-            case this.rightkeycode:
-                this.rightPress = 0
-                break
-            case this.upkeycode:
-                this.upPress = 0
-                break
-            case this.downkeycode:
-                this.downPress = 0
-                break
-            case this.spacekeycode:
-                this.spacePress = 0
-                break
-        }
-    }
-    
     //Creatie Dino in HTML Body
     public Create(){
         let childElement = document.getElementById("assets")

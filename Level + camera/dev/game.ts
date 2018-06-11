@@ -5,7 +5,7 @@ class Game{
     Gap:Gap[] = []
     Dino:Dino
     Fireball:Fire
-    Kleding :kleding
+    Kleding :kleding[] = []
     Check : State[] = []
     Camera : Camera
     private score = 0;
@@ -13,7 +13,7 @@ class Game{
     //Hier worden de functies gedeclareerd.
     constructor(){
         this.Hoofdpersoon = new headCharacter()
-        this.Camera = new Camera()
+        this.Camera = new Camera(4200)
         this.Fireball = new Fire(1380 ,1700)
         this.Dino = new Dino(3000)
         this.Dino.Create()
@@ -23,7 +23,7 @@ class Game{
         console.log("aangemaakt")
         this.createbars()
         this.creategaps()
-        this.Kleding = new kleding(300, window.innerHeight)
+        this.createclothes()
         this.createcheck(3)
     }
 
@@ -42,7 +42,15 @@ class Game{
         }
     }
 
-     //Array waarin de nieuwe loopplanken worden gedeclareerd
+    //Array waarin we nieuwe kleding stukken pushen.
+    private createclothes(){
+        this.Kleding.push(new kleding(300, window.innerHeight))
+        this.Kleding.push(new kleding(1000, window.innerHeight))
+        this.Kleding.push(new kleding(3000, window.innerHeight))
+    }
+
+
+    //Array waarin de nieuwe loopplanken worden gedeclareerd
     private createbars(){
         //Array waarin de nieuwe loopplanken worden gedeclareerd
         this.Bar.push(new Ground(800, window.innerHeight, 0))
@@ -138,19 +146,39 @@ class Game{
         }
     }
 
-    //Collision met de kleding
+    //Check de collision van kledingstukken
     private checkCollisionKleding(){
         let barhit
-        let positionkleding = this.Kleding.getvalues()
+        let positionbar
+        let positioncharacter
+            
+        this.Kleding.forEach(ReadOut =>{
+            positioncharacter = this.Hoofdpersoon.getvalues()
+            positionbar = ReadOut.getvalues()
+                
+            if(((positioncharacter.xeind - translate) >= positionbar.xbegin) && ((positioncharacter.xeind - translate) <= positionbar.xeind)) {
+                barhit = this.checkCollision(ReadOut.getRectangle(), this.Hoofdpersoon.getRectangle())
+                if(barhit == true){
+                    console.log("hit by de kleding")
+                    ReadOut.elementpath.style.display = "none"
+                    this.Check[this.score].imagagepath.style.display = "block"
+                    this.score ++
+                }
+            }
+        })            
+    }
+
+    //Collision met de vuur
+    private checkCollisionFire(){
+        let barhit
+        let positionfire = this.Fireball.getvalues()
         let positioncharacter = this.Hoofdpersoon.getvalues()
 
-        if(((positioncharacter.xeind - translate) >= positionkleding.xbegin) && ((positioncharacter.xeind - translate) <= positionkleding.xeind)){
-            barhit = this.checkCollision(this.Kleding.getRectangle(), this.Hoofdpersoon.getRectangle())
+        if(((positioncharacter.xeind - translate) >= positionfire.xbegin) && ((positioncharacter.xeind - translate) <= positionfire.xeind)){
+            barhit = this.checkCollision(this.Fireball.getRectangle(), this.Hoofdpersoon.getRectangle())
             if (barhit == true){
-                console.log("hit by de kleding")
-                this.Kleding.elementpath.style.display = "none"
-                this.Check[this.score].imagagepath.style.display = "block"
-                this.score ++
+                alert("Je bent dood door een fireball")
+                console.log("hit by a fireball")    
             }
         }
     }
@@ -165,6 +193,7 @@ class Game{
         this.checkCollisionGap()
         this.checkColisionDino()
         this.checkCollisionKleding()
+        this.checkCollisionFire()
         //requestAnimationFrame(() =>this.gameloop())
     }
 }

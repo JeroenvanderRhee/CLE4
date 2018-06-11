@@ -3,6 +3,7 @@ class Camera{
     private positionXcam:number
     private positionYcam:number
     private positionXchar:number
+    private positionYend:number
     private elementpathcam:HTMLDivElement
     public translatecam:number
     private leftkeycode:number
@@ -14,12 +15,13 @@ class Camera{
     private upPress: number = 0
     private spacePress:number = 0
 
-    constructor(){
+    constructor(eindecanvas:number){
         this.positionXcam = 0
         this.positionYcam = 0
         this.positionXchar = positiehoofdpersoon
         this.elementpathcam = document.getElementById("assets")
         this.translatecam = 0
+        this.positionYend = eindecanvas
 
          //toetsenbord besturing WSAD
          this.leftkeycode = 65
@@ -73,6 +75,15 @@ class Camera{
     public update(){
         let element = this.elementpathcam
         let snelheid:number = 5;
+
+        if((this.leftPress == 1) && (this.positionXcam == (0 - translate))){
+            this.leftPress = 0
+        }
+
+        // if((this.leftPress == 1) && (this.positionXcam == ((this.positionYend + window.innerHeight) - translate))){
+        //     this.leftPress = 0
+        // }
+
         if(this.rightPress == 1){
             translate -= snelheid
             this.positionXcam -= snelheid;
@@ -89,7 +100,7 @@ class Camera{
     }
 }
 
-let element = new Camera()
+//let element = new Camera()
 // public update(){
 //     let widthscreen = window.innerWidth / 2
 //     this.positionXchar = positiehoofdpersoon

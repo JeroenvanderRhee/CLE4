@@ -20,7 +20,7 @@ class headCharacter{
         this.width = 40
         this.height = 200
         this.velocity = 2
-        this.positionX = 20
+        this.positionX = 60
         this.positionY = window.innerHeight - this.height - 56
         console.log(this.positionY)
 
@@ -105,11 +105,10 @@ class headCharacter{
         console.log(positiehoofdpersoon)
         let element = this.elementpath
 
-        if(this.upPress == 1){
+        if(this.upPress == 1 && this.positionY == (window.innerHeight - this.height - 56)) {
             this.positionY -= 210;
             this.upPress = 0
         }
-        // && this.positionY == (window.innerHeight - this.height - 56)
 
         element.style.transform = "translate(" + this.positionX + "px," + this.positionY + "px)"
     }

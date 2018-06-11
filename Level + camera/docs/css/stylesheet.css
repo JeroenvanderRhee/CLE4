@@ -1,7 +1,6 @@
 body{
     margin:0px;
-     overflow-y:hidden;
-     /* overflow-x:hidden; */
+    overflow:hidden;
      
 }
 
@@ -45,5 +44,4 @@ kleding {
 
 startscherm{
     background: url("../img/Startscherm.png") center center;
-    display: none;
 }

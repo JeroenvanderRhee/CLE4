@@ -60,10 +60,31 @@ class Fire{
 
         if (this.positionX >= this.positionXeind - this.width) {
             this.velocity *= -1;
-        }
-
-
-        
+        }      
         element.style.transform = "translate(" + (this.positionX) + "px," + this.positionY + "px)"
     }  
+
+    
+    //Formule voor data voor collision
+    public getRectangle() {
+        return this.elementpath.getBoundingClientRect()
+    }
+
+     //Algemene functie voor waardes (voor evt. collision)
+     public getvalues(){
+        let xbegin : number
+        let xeind : number
+        let ymax : number
+        let ymin :number
+        let height: number
+        let width: number
+        return {
+            xbegin : this.positionX,
+            xeind : this.positionX + this.width,
+            ymax : this.positionY + this.height,
+            ymin : this.positionY,
+            height : this.height,
+            width : this.width
+        }
+    }
 } 	

@@ -1,7 +1,7 @@
 "use strict";
 var translate = 0;
 var Camera = (function () {
-    function Camera() {
+    function Camera(eindecanvas) {
         var _this = this;
         this.leftPress = 0;
         this.rightPress = 0;
@@ -12,6 +12,7 @@ var Camera = (function () {
         this.positionXchar = positiehoofdpersoon;
         this.elementpathcam = document.getElementById("assets");
         this.translatecam = 0;
+        this.positionYend = eindecanvas;
         this.leftkeycode = 65;
         this.rightkeycode = 68;
         this.upkeycode = 99;
@@ -56,6 +57,9 @@ var Camera = (function () {
     Camera.prototype.update = function () {
         var element = this.elementpathcam;
         var snelheid = 5;
+        if ((this.leftPress == 1) && (this.positionXcam == (0 - translate))) {
+            this.leftPress = 0;
+        }
         if (this.rightPress == 1) {
             translate -= snelheid;
             this.positionXcam -= snelheid;
@@ -68,7 +72,6 @@ var Camera = (function () {
     };
     return Camera;
 }());
-var element = new Camera();
 var kleding = (function () {
     function kleding(x, y) {
         this.elementpath = document.createElement("kleding");
@@ -117,66 +120,13 @@ var kleding = (function () {
 }());
 var Dino = (function () {
     function Dino(Xbegin) {
-        var _this = this;
         this.dino = document.createElement("dino1");
-        this.leftPress = 0;
-        this.rightPress = 0;
-        this.upPress = 0;
-        this.downPress = 0;
-        this.spacePress = 0;
         this.width = 200;
         this.height = 200;
         this.velocity = 2;
         this.positionX = Xbegin;
         this.positionY = window.innerHeight - this.height - 56;
-        this.leftkeycode = 65;
-        this.rightkeycode = 68;
-        this.upkeycode = 87;
-        this.downkeycode = 83;
-        this.spacekeycode = 73;
-        window.addEventListener("keyup", function (e) { return _this.onKeyUp(e); });
-        window.addEventListener("keydown", function (e) { return _this.onKeyDown(e); });
     }
-    Dino.prototype.onKeyDown = function (e) {
-        console.log(e.keyCode);
-        switch (e.keyCode) {
-            case this.leftkeycode:
-                this.leftPress = 1;
-                break;
-            case this.rightkeycode:
-                this.rightPress = 1;
-                break;
-            case this.upkeycode:
-                this.upPress = 1;
-                break;
-            case this.downkeycode:
-                this.downPress = 1;
-                break;
-            case this.spacekeycode:
-                this.spacePress = 1;
-                break;
-        }
-    };
-    Dino.prototype.onKeyUp = function (e) {
-        console.log(e.keyCode);
-        switch (e.keyCode) {
-            case this.leftkeycode:
-                this.leftPress = 0;
-                break;
-            case this.rightkeycode:
-                this.rightPress = 0;
-                break;
-            case this.upkeycode:
-                this.upPress = 0;
-                break;
-            case this.downkeycode:
-                this.downPress = 0;
-                break;
-            case this.spacekeycode:
-                this.spacePress = 0;
-                break;
-        }
-    };
     Dino.prototype.Create = function () {
         var childElement = document.getElementById("assets");
         var element = this.dino;
@@ -265,6 +215,25 @@ var Fire = (function () {
         }
         element.style.transform = "translate(" + (this.positionX) + "px," + this.positionY + "px)";
     };
+    Fire.prototype.getRectangle = function () {
+        return this.elementpath.getBoundingClientRect();
+    };
+    Fire.prototype.getvalues = function () {
+        var xbegin;
+        var xeind;
+        var ymax;
+        var ymin;
+        var height;
+        var width;
+        return {
+            xbegin: this.positionX,
+            xeind: this.positionX + this.width,
+            ymax: this.positionY + this.height,
+            ymin: this.positionY,
+            height: this.height,
+            width: this.width
+        };
+    };
     return Fire;
 }());
 var Gap = (function () {
@@ -315,10 +284,11 @@ var Game = (function () {
     function Game() {
         this.Bar = [];
         this.Gap = [];
+        this.Kleding = [];
         this.Check = [];
         this.score = 0;
         this.Hoofdpersoon = new headCharacter();
-        this.Camera = new Camera();
+        this.Camera = new Camera(4200);
         this.Fireball = new Fire(1380, 1700);
         this.Dino = new Dino(3000);
         this.Dino.Create();
@@ -328,7 +298,7 @@ var Game = (function () {
         console.log("aangemaakt");
         this.createbars();
         this.creategaps();
-        this.Kleding = new kleding(300, window.innerHeight);
+        this.createclothes();
         this.createcheck(3);
     }
     Game.prototype.checkCollision = function (a, b) {
@@ -341,6 +311,11 @@ var Game = (function () {
         for (var i = 1; i <= hoeveelheid; i++) {
             this.Check.push(new State(i));
         }
+    };
+    Game.prototype.createclothes = function () {
+        this.Kleding.push(new kleding(300, window.innerHeight));
+        this.Kleding.push(new kleding(1000, window.innerHeight));
+        this.Kleding.push(new kleding(3000, window.innerHeight));
     };
     Game.prototype.createbars = function () {
         this.Bar.push(new Ground(800, window.innerHeight, 0));
@@ -420,16 +395,33 @@ var Game = (function () {
         }
     };
     Game.prototype.checkCollisionKleding = function () {
+        var _this = this;
         var barhit;
-        var positionkleding = this.Kleding.getvalues();
+        var positionbar;
+        var positioncharacter;
+        this.Kleding.forEach(function (ReadOut) {
+            positioncharacter = _this.Hoofdpersoon.getvalues();
+            positionbar = ReadOut.getvalues();
+            if (((positioncharacter.xeind - translate) >= positionbar.xbegin) && ((positioncharacter.xeind - translate) <= positionbar.xeind)) {
+                barhit = _this.checkCollision(ReadOut.getRectangle(), _this.Hoofdpersoon.getRectangle());
+                if (barhit == true) {
+                    console.log("hit by de kleding");
+                    ReadOut.elementpath.style.display = "none";
+                    _this.Check[_this.score].imagagepath.style.display = "block";
+                    _this.score++;
+                }
+            }
+        });
+    };
+    Game.prototype.checkCollisionFire = function () {
+        var barhit;
+        var positionfire = this.Fireball.getvalues();
         var positioncharacter = this.Hoofdpersoon.getvalues();
-        if (((positioncharacter.xeind - translate) >= positionkleding.xbegin) && ((positioncharacter.xeind - translate) <= positionkleding.xeind)) {
-            barhit = this.checkCollision(this.Kleding.getRectangle(), this.Hoofdpersoon.getRectangle());
+        if (((positioncharacter.xeind - translate) >= positionfire.xbegin) && ((positioncharacter.xeind - translate) <= positionfire.xeind)) {
+            barhit = this.checkCollision(this.Fireball.getRectangle(), this.Hoofdpersoon.getRectangle());
             if (barhit == true) {
-                console.log("hit by de kleding");
-                this.Kleding.elementpath.style.display = "none";
-                this.Check[this.score].imagagepath.style.display = "block";
-                this.score++;
+                alert("Je bent dood door een fireball");
+                console.log("hit by a fireball");
             }
         }
     };
@@ -442,6 +434,7 @@ var Game = (function () {
         this.checkCollisionGap();
         this.checkColisionDino();
         this.checkCollisionKleding();
+        this.checkCollisionFire();
     };
     return Game;
 }());
@@ -500,7 +493,7 @@ var headCharacter = (function () {
         this.width = 40;
         this.height = 200;
         this.velocity = 2;
-        this.positionX = 20;
+        this.positionX = 60;
         this.positionY = window.innerHeight - this.height - 56;
         console.log(this.positionY);
         this.leftkeycode = 65;
@@ -562,7 +555,7 @@ var headCharacter = (function () {
         positiehoofdpersoon = this.positionX;
         console.log(positiehoofdpersoon);
         var element = this.elementpath;
-        if (this.upPress == 1) {
+        if (this.upPress == 1 && this.positionY == (window.innerHeight - this.height - 56)) {
             this.positionY -= 210;
             this.upPress = 0;
         }
