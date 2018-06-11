@@ -4,16 +4,18 @@ class kleding {
     private height:number
     private positionX:number
     private positionY:number
+    private sourceImage:string
     public elementpath:HTMLElement = document.createElement("kleding")
 
     
-    constructor(x:number, y:number){
+    constructor(x:number, y:number, width:number, height:number, source:string){
         //this.elementpath = document.createElement("kleding")
         this.name = "shirt"
-        this.width = 93                                        //Zichtbare breedte kleding
-        this.height = 167                                       //Hoogte positie kleding
+        this.width = width                                       //Zichtbare breedte kleding
+        this.height = height                                      //Hoogte positie kleding
         this.positionX = x        
         this.positionY = y - this.height - 56                       //Begin positie X kleding
+        this.sourceImage = source
 
         this.Create()
         this.Opmaak()
@@ -40,6 +42,7 @@ class kleding {
         element.style.height = this.height + "px"
         element.innerHTML = ""
         element.style.transform = "translate(" + this.positionX + "px," +this.positionY + "px)"
+        element.style.background = "url("+this.sourceImage+")"// no-repeat center top"
     }
 
     public getvalues(){

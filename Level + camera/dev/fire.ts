@@ -15,8 +15,8 @@ class Fire{
     constructor(Xbegin:number, Xeind:number){
         this.name = "Fire ball"
         this.img = "../img/Fire.png"
-        this.width = 60
-        this.height = 80
+        this.width = 54
+        this.height = 76
         this.velocity = 1.8
         this.positionX = Xbegin
         this.positionXbegin = Xbegin

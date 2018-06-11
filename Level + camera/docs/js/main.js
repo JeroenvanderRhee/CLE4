@@ -73,13 +73,14 @@ var Camera = (function () {
     return Camera;
 }());
 var kleding = (function () {
-    function kleding(x, y) {
+    function kleding(x, y, width, height, source) {
         this.elementpath = document.createElement("kleding");
         this.name = "shirt";
-        this.width = 93;
-        this.height = 167;
+        this.width = width;
+        this.height = height;
         this.positionX = x;
         this.positionY = y - this.height - 56;
+        this.sourceImage = source;
         this.Create();
         this.Opmaak();
     }
@@ -100,6 +101,7 @@ var kleding = (function () {
         element.style.height = this.height + "px";
         element.innerHTML = "";
         element.style.transform = "translate(" + this.positionX + "px," + this.positionY + "px)";
+        element.style.background = "url(" + this.sourceImage + ")";
     };
     kleding.prototype.getvalues = function () {
         var xbegin;
@@ -121,8 +123,8 @@ var kleding = (function () {
 var Dino = (function () {
     function Dino(Xbegin) {
         this.dino = document.createElement("dino1");
-        this.width = 200;
-        this.height = 200;
+        this.width = 120;
+        this.height = 150;
         this.velocity = 2;
         this.positionX = Xbegin;
         this.positionY = window.innerHeight - this.height - 56;
@@ -179,8 +181,8 @@ var Fire = (function () {
         this.elementpath = document.createElement("fireball");
         this.name = "Fire ball";
         this.img = "../img/Fire.png";
-        this.width = 60;
-        this.height = 80;
+        this.width = 54;
+        this.height = 76;
         this.velocity = 1.8;
         this.positionX = Xbegin;
         this.positionXbegin = Xbegin;
@@ -313,9 +315,9 @@ var Game = (function () {
         }
     };
     Game.prototype.createclothes = function () {
-        this.Kleding.push(new kleding(300, window.innerHeight));
-        this.Kleding.push(new kleding(1000, window.innerHeight));
-        this.Kleding.push(new kleding(3000, window.innerHeight));
+        this.Kleding.push(new kleding(300, window.innerHeight, 56, 100, "img/Tshirt.png"));
+        this.Kleding.push(new kleding(1000, window.innerHeight, 76, 100, "img/Jurk.png"));
+        this.Kleding.push(new kleding(3000, window.innerHeight, 100, 89, "img/Knuppel.png"));
     };
     Game.prototype.createbars = function () {
         this.Bar.push(new Ground(800, window.innerHeight, 0));
@@ -429,7 +431,7 @@ var Game = (function () {
         this.Camera.update();
         this.Dino.Update(3000, 3700);
         this.Fireball.update();
-        this.Hoofdpersoon.Update();
+        this.Hoofdpersoon.Update(window.innerHeight);
         this.checkCollisionBar();
         this.checkCollisionGap();
         this.checkColisionDino();
@@ -490,8 +492,8 @@ var headCharacter = (function () {
         this.upPress = 0;
         this.spacePress = 0;
         this.name = "Skelet";
-        this.width = 40;
-        this.height = 200;
+        this.width = 30;
+        this.height = 150;
         this.velocity = 2;
         this.positionX = 60;
         this.positionY = window.innerHeight - this.height - 56;
@@ -551,11 +553,11 @@ var headCharacter = (function () {
         element.innerHTML = "";
         element.style.transform = "translate(" + this.positionX + "px," + this.positionY + "px)";
     };
-    headCharacter.prototype.Update = function () {
+    headCharacter.prototype.Update = function (positionY) {
         positiehoofdpersoon = this.positionX;
         console.log(positiehoofdpersoon);
         var element = this.elementpath;
-        if (this.upPress == 1 && this.positionY == (window.innerHeight - this.height - 56)) {
+        if (this.upPress == 1 && (this.positionY >= (positionY - this.height - 60)) && (this.positionY <= (positionY - 20))) {
             this.positionY -= 210;
             this.upPress = 0;
         }

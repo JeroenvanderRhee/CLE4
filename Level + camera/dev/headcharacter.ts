@@ -17,8 +17,8 @@ class headCharacter{
     
     constructor(){
         this.name = "Skelet"
-        this.width = 40
-        this.height = 200
+        this.width = 30
+        this.height = 150
         this.velocity = 2
         this.positionX = 60
         this.positionY = window.innerHeight - this.height - 56
@@ -100,12 +100,12 @@ class headCharacter{
     }
 
     //De loop functie
-    public Update(){
+    public Update(positionY:number){
         positiehoofdpersoon = this.positionX
         console.log(positiehoofdpersoon)
         let element = this.elementpath
 
-        if(this.upPress == 1 && this.positionY == (window.innerHeight - this.height - 56)) {
+        if(this.upPress == 1 && (this.positionY >= (positionY - this.height - 60)) && (this.positionY <= (positionY - 20))) {
             this.positionY -= 210;
             this.upPress = 0
         }

@@ -44,9 +44,10 @@ class Game{
 
     //Array waarin we nieuwe kleding stukken pushen.
     private createclothes(){
-        this.Kleding.push(new kleding(300, window.innerHeight))
-        this.Kleding.push(new kleding(1000, window.innerHeight))
-        this.Kleding.push(new kleding(3000, window.innerHeight))
+        //Kleding heeft 5 parameters(1 = x positie, 2 = y positie, 3 = breedte van de img, 4 = hoogte van de img, 5 is de bron van de img)
+        this.Kleding.push(new kleding(300, window.innerHeight, 56, 100, "img/Tshirt.png"))
+        this.Kleding.push(new kleding(1000, window.innerHeight, 76, 100, "img/Jurk.png"))
+        this.Kleding.push(new kleding(3000, window.innerHeight, 100, 89, "img/Knuppel.png"))
     }
 
 
@@ -188,7 +189,7 @@ class Game{
         this.Camera.update()
         this.Dino.Update(3000,3700)
         this.Fireball.update()
-        this.Hoofdpersoon.Update()
+        this.Hoofdpersoon.Update(window.innerHeight)
         this.checkCollisionBar()
         this.checkCollisionGap()
         this.checkColisionDino()

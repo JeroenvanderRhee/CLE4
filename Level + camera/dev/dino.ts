@@ -8,8 +8,8 @@ class Dino {
     private dino:HTMLElement = document.createElement("dino1")
     
     constructor(Xbegin:number){
-        this.width = 200                                        //Zichtbare breedte Dino afbeelding
-        this.height = 200                                       //Hoogte positie Dino
+        this.width = 120                                        //Zichtbare breedte Dino afbeelding
+        this.height = 150                                       //Hoogte positie Dino
         this.velocity = 2
         this.positionX = Xbegin                                     //Begin positie X dino
         this.positionY = window.innerHeight - this.height - 56  //Veranderende Y positie Dino
