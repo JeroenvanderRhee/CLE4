@@ -81,6 +81,25 @@ class headCharacter {
     }
 
     //De aanmaak functie
+<<<<<<< HEAD
+    // public Create(){
+    //     let childElement:HTMLElement = document.getElementById("game")
+    //     //let element = document.createElement("headcharacter")
+    //     let element = this.elementpath
+    //     childElement.appendChild(element)
+    //     element.innerHTML = " "
+    // }
+
+public Create(){
+        // let childElement:HTMLCanvasElement = document.getElementById("game");
+        window.onload = () => {
+            let canvas = <HTMLCanvasElement>document.getElementById('game');
+            let ctx = <CanvasRenderingContext2D>canvas.getContext("2d");
+            let img = <HTMLCanvasElement>document.getElementById("hoofdpersoon");
+            ctx.drawImage(img, 10, 10);
+         }
+        }
+=======
     public Create(){
         //let childElement:HTMLElement = document.getElementById("game")
         let childElement:HTMLElement = document.body
@@ -89,6 +108,7 @@ class headCharacter {
         childElement.appendChild(element)
         element.innerHTML = " "
     }
+>>>>>>> 013b52e19a2b372b590f0d5c776bfb95eb10f1d8
 
     //de opmaak functie    
     public Opmaak(){

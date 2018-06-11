@@ -15,12 +15,18 @@ dino1 {
 }
 
 #game{
+<<<<<<< HEAD
+    position: relative;
+    width: 1200px;
+    height: 1020px;
+=======
     width: 100%;
     height: 100%;
 }
 
 #content{
     position: absolute;
+>>>>>>> 013b52e19a2b372b590f0d5c776bfb95eb10f1d8
     background: url(../img/Achtergrond.jpg) no-repeat center top;
 }
 
@@ -44,5 +50,19 @@ kleding {
 }
 
 startscherm{
+<<<<<<< HEAD
+    background-color:red;
+}
+.nativeCamera {
+    overflow: hidden;
+    position: absolute;
+}
+/* #canvas {
+    position: absolute;
+    height: 1020px;
+    width: 1200px;
+} */
+=======
     background: url("../img/Startscherm.png") center center;
 }
+>>>>>>> 013b52e19a2b372b590f0d5c776bfb95eb10f1d8
