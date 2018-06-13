@@ -98,16 +98,11 @@ class Camera{
 
         element.style.transform = "translate(" + this.positionXcam + "px," + this.positionYcam + "px)"
     }
+    
+    //Maak de hoofdpersoon op met de juiste gif
+    private opmaakheadcharacter(){
+
+    }
+
 }
 
-//let element = new Camera()
-// public update(){
-//     let widthscreen = window.innerWidth / 2
-//     this.positionXchar = positiehoofdpersoon
-//     if (this.positionXchar > widthscreen){
-//         this.translatecam += 5
-//         let tijdelijkeuitkomst = this.positionXcam - this.translatecam
-//     this.elementpathcam.style.transform = "translate(" + tijdelijkeuitkomst + "px," +this.positionYcam+ "px)"
-//     console.log("over de helft heen")
-//     }
-// }

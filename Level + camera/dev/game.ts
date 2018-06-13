@@ -63,6 +63,8 @@ class Game{
         this.Bar.push(new Ground(700, window.innerHeight, 3000))
         this.Bar.push(new Ground(530, window.innerHeight, 3770))
 
+        this.Bar.push(new Ground(600, window.innerHeight - 230, 500))
+
         this.Bar.forEach(ReadOut => {
             ReadOut.Create()
             ReadOut.Opmaak()

@@ -8,7 +8,6 @@ class headCharacter{
     private elementpath:HTMLElement = document.createElement("headcharacter")
     private leftkeycode:number
     private rightkeycode:number
-    private upkeycode:number
     private spacekeycode:number
     private leftPress: number = 0
     private rightPress: number = 0
@@ -33,7 +32,6 @@ class headCharacter{
         //toetsenbord besturing WSAD
         this.leftkeycode = 65
         this.rightkeycode = 68
-        this.upkeycode = 32
         this.spacekeycode = 32 
 
         //event listeners voor toetsenbord
@@ -54,9 +52,6 @@ class headCharacter{
             case this.spacekeycode:
                 this.upPress = 0
                 break
-            case this.spacekeycode:
-                this.spacePress = 0
-                break
         }
     }
 
@@ -70,11 +65,8 @@ class headCharacter{
             case this.rightkeycode:
                 this.rightPress = 0
                 break
-            case this.upkeycode:
-                this.upPress = 1
-                break
             case this.spacekeycode:
-                this.spacePress = 1
+                this.upPress = 1
                 break
         }
     }
@@ -102,12 +94,33 @@ class headCharacter{
     //De loop functie
     public Update(positionY:number){
         positiehoofdpersoon = this.positionX
-        console.log(positiehoofdpersoon)
+        //console.log(positiehoofdpersoon)
         let element = this.elementpath
 
         if(this.upPress == 1 && (this.positionY >= (positionY - this.height - 60)) && (this.positionY <= (positionY - 20))) {
             this.positionY -= 210;
             this.upPress = 0
+        }
+
+        if (this.rightPress == 1){
+            let source = "img/Animatie_vooruit.gif"
+            this.elementpath.style.background = "url("+ source +") no-repeat center top"
+            this.width = 84
+            this.elementpath.style.width = this.width + "px"
+        }
+
+        if (this.leftPress == 1){
+            let source = "img/Animatie_achteruit.gif"
+            this.elementpath.style.background = "url("+ source +") no-repeat center top"
+            this.width = 84
+            this.elementpath.style.width = this.width + "px"
+        }
+
+        if ((this.rightPress == 0) && (this.leftPress == 0)){
+            let source = "img/Poppetje.png"
+            this.elementpath.style.background = "url("+ source +") no-repeat center top"
+            this.width = 30
+            this.elementpath.style.width = this.width + "px"
         }
 
         element.style.transform = "translate(" + this.positionX + "px," + this.positionY + "px)"

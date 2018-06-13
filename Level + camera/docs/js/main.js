@@ -70,6 +70,8 @@ var Camera = (function () {
         }
         element.style.transform = "translate(" + this.positionXcam + "px," + this.positionYcam + "px)";
     };
+    Camera.prototype.opmaakheadcharacter = function () {
+    };
     return Camera;
 }());
 var kleding = (function () {
@@ -327,6 +329,7 @@ var Game = (function () {
         this.Bar.push(new Ground(920, window.innerHeight, 1980));
         this.Bar.push(new Ground(700, window.innerHeight, 3000));
         this.Bar.push(new Ground(530, window.innerHeight, 3770));
+        this.Bar.push(new Ground(600, window.innerHeight - 230, 500));
         this.Bar.forEach(function (ReadOut) {
             ReadOut.Create();
             ReadOut.Opmaak();
@@ -500,7 +503,6 @@ var headCharacter = (function () {
         console.log(this.positionY);
         this.leftkeycode = 65;
         this.rightkeycode = 68;
-        this.upkeycode = 32;
         this.spacekeycode = 32;
         window.addEventListener("keyup", function (e) { return _this.onKeyUp(e); });
         window.addEventListener("keydown", function (e) { return _this.onKeyDown(e); });
@@ -517,9 +519,6 @@ var headCharacter = (function () {
             case this.spacekeycode:
                 this.upPress = 0;
                 break;
-            case this.spacekeycode:
-                this.spacePress = 0;
-                break;
         }
     };
     headCharacter.prototype.onKeyUp = function (e) {
@@ -531,11 +530,8 @@ var headCharacter = (function () {
             case this.rightkeycode:
                 this.rightPress = 0;
                 break;
-            case this.upkeycode:
-                this.upPress = 1;
-                break;
             case this.spacekeycode:
-                this.spacePress = 1;
+                this.upPress = 1;
                 break;
         }
     };
@@ -555,11 +551,28 @@ var headCharacter = (function () {
     };
     headCharacter.prototype.Update = function (positionY) {
         positiehoofdpersoon = this.positionX;
-        console.log(positiehoofdpersoon);
         var element = this.elementpath;
         if (this.upPress == 1 && (this.positionY >= (positionY - this.height - 60)) && (this.positionY <= (positionY - 20))) {
             this.positionY -= 210;
             this.upPress = 0;
+        }
+        if (this.rightPress == 1) {
+            var source = "img/Animatie_vooruit.gif";
+            this.elementpath.style.background = "url(" + source + ") no-repeat center top";
+            this.width = 84;
+            this.elementpath.style.width = this.width + "px";
+        }
+        if (this.leftPress == 1) {
+            var source = "img/Animatie_achteruit.gif";
+            this.elementpath.style.background = "url(" + source + ") no-repeat center top";
+            this.width = 84;
+            this.elementpath.style.width = this.width + "px";
+        }
+        if ((this.rightPress == 0) && (this.leftPress == 0)) {
+            var source = "img/Poppetje.png";
+            this.elementpath.style.background = "url(" + source + ") no-repeat center top";
+            this.width = 30;
+            this.elementpath.style.width = this.width + "px";
         }
         element.style.transform = "translate(" + this.positionX + "px," + this.positionY + "px)";
     };
