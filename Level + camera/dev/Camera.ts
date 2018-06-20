@@ -4,7 +4,7 @@ class Camera{
     private positionYcam:number
     private positionXchar:number
     private positionYend:number
-    private elementpathcam:HTMLDivElement
+    private elementpathcam:HTMLElement
     public translatecam:number
     private leftkeycode:number
     private rightkeycode:number
@@ -14,12 +14,16 @@ class Camera{
     private rightPress: number = 0
     private upPress: number = 0
     private spacePress:number = 0
+    private child:HTMLElement
+    public speed:number
 
-    constructor(eindecanvas:number){
+    constructor(eindecanvas:number, assets:HTMLElement, speed:number){
+        this.speed = speed
+        this.child = assets
         this.positionXcam = 0
         this.positionYcam = 0
         this.positionXchar = positiehoofdpersoon
-        this.elementpathcam = document.getElementById("assets")
+        this.elementpathcam = this.child
         this.translatecam = 0
         this.positionYend = eindecanvas
 
@@ -74,7 +78,7 @@ class Camera{
 
     public update(){
         let element = this.elementpathcam
-        let snelheid:number = 5;
+        let snelheid:number = this.speed
 
         if((this.leftPress == 1) && (this.positionXcam == (0 - translate))){
             this.leftPress = 0
@@ -97,11 +101,15 @@ class Camera{
         // && this.positionY == (window.innerHeight - this.height - 56)
 
         element.style.transform = "translate(" + this.positionXcam + "px," + this.positionYcam + "px)"
+        this.speed = 5
     }
     
     //Maak de hoofdpersoon op met de juiste gif
-    private opmaakheadcharacter(){
-
+    public terugTeleporteren(){
+        let element = this.elementpathcam
+        translate += 5
+        this.positionXcam +=5
+        element.style.transform = "translate(" + this.positionXcam + "px," + this.positionYcam + "px)"
     }
 
 }

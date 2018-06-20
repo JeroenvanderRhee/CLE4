@@ -6,10 +6,12 @@ class Dino {
     private positionX:number
     private positionY:number
     private dino:HTMLElement = document.createElement("dino1")
+    private child:HTMLElement 
     
-    constructor(Xbegin:number){
-        this.width = 120                                        //Zichtbare breedte Dino afbeelding
-        this.height = 150                                       //Hoogte positie Dino
+    constructor(Xbegin:number, assets:HTMLElement){
+        this.child = assets
+        this.width = 96                                        //Zichtbare breedte Dino afbeelding
+        this.height = 120                                       //Hoogte positie Dino
         this.velocity = 2
         this.positionX = Xbegin                                     //Begin positie X dino
         this.positionY = window.innerHeight - this.height - 56  //Veranderende Y positie Dino
@@ -17,9 +19,8 @@ class Dino {
 
     //Creatie Dino in HTML Body
     public Create(){
-        let childElement = document.getElementById("assets")
         let element = this.dino
-        childElement.appendChild(element)
+        this.child.appendChild(element)
         element.innerHTML = " "
     }
 

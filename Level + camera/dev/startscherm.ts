@@ -6,7 +6,7 @@ class Startscherm {
     private spacepressed :number
     private elementpath:HTMLElement = document.createElement("startscherm")
 
-    constructor(){
+    constructor(game:Game){
         this.width = 100
         this.height = 100
         this.spacekey =32
@@ -15,16 +15,14 @@ class Startscherm {
         //event listeners voor toetsenbord
         window.addEventListener("keyup", (e: KeyboardEvent) => this.onKeyUp(e))
         window.addEventListener("keydown", (e: KeyboardEvent) => this.onKeyDown(e))
-        this.Game = new Game()
+        this.Game = game
         this.create()
         this.Opmaak()
-        this.gameloop()
     }
 
     //Maak het scherm aan
     private create(){
         let childElement:HTMLElement = document.body
-        //let element = document.createElement("headcharacter")
         let element = this.elementpath
         childElement.appendChild(element)
         element.innerHTML = "Klik op de spatie toets om te beginnen"
@@ -60,16 +58,11 @@ class Startscherm {
     }
 
     //Dit is de gameloop. Hierin worden alle assets geupdate en word de collision bij gehouden
-    public gameloop(){
+    public loop(){
         //Als er op de spatie toets word gedrukt gaat hij weg.
         if(this.spacepressed == 1){
             this.elementpath.style.display = "none"
+            this.Game.startNewGame()
         }
-
-        this.Game.gameloop()
-
-        requestAnimationFrame(() =>this.gameloop())
     }
 }
-
-window.addEventListener("load", () => new Startscherm)

@@ -4,9 +4,11 @@ class Ground{
     private positionx:number
     private positiony:number
     private elementpath:HTMLElement = document.createElement("bar")
+    private child:HTMLElement
 
     //Geef bij het declareren het volgende mee Lengte, positie y en x
-    constructor(width:number, positiony:number, positionx:number){
+    constructor(width:number, positiony:number, positionx:number, asset:HTMLElement){
+        this.child = asset
         this.width = width
         this.height = 56
         this.positionx = positionx
@@ -15,11 +17,9 @@ class Ground{
 
     //Aanmaak functie
     public Create(){
-        let childElement = document.getElementById("bars")
-        //let childElement = document.body.camera
         let element = this.elementpath
         //childElement.appendChild(element)
-        childElement.appendChild(element)
+        this.child.appendChild(element)
         element.innerHTML = " "
     }
 

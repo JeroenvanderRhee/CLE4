@@ -6,10 +6,12 @@ class kleding {
     private positionY:number
     private sourceImage:string
     public elementpath:HTMLElement = document.createElement("kleding")
+    private assets:HTMLElement
 
     
-    constructor(x:number, y:number, width:number, height:number, source:string){
+    constructor(x:number, y:number, width:number, height:number, source:string, assets:HTMLElement){
         //this.elementpath = document.createElement("kleding")
+        this.assets = assets
         this.name = "shirt"
         this.width = width                                       //Zichtbare breedte kleding
         this.height = height                                      //Hoogte positie kleding
@@ -26,10 +28,8 @@ class kleding {
     
     
     private Create(){
-        //document.body.appendChild(this.elementpath)
-        let childElement = document.getElementById("assets")
         let element = this.elementpath
-        childElement.appendChild(element)
+        this.assets.appendChild(element)
         element.innerHTML = " "
     }
 

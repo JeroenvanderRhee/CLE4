@@ -1,0 +1,45 @@
+body{
+    margin:0px;
+    overflow:hidden;
+     
+}
+
+#content{
+    height:100%;
+    width:280%
+}
+
+heks {
+    background: url("../img/Middeleeuwen/Middeleeuwen_0002s_0002_Vliegende-Heks2.png") no-repeat center top;
+}
+
+#game{
+    width: 100%;
+    height: 100%;
+}
+
+#content{
+    position: absolute;
+    background: url(../img/Middeleeuwen/Middeleeuwen\ 2.jpg) no-repeat center top;
+}
+
+headcharacter{
+    background: url("../img/Poppetje.png") no-repeat center top;
+}
+
+bar{
+    background: url(../img/Middeleeuwen/Middeleeuwen_0001s_0004_Staan-2.png);
+}
+
+
+fireball{
+    background: url(../img/Middeleeuwen/Middeleeuwen_0002s_0000_Claude_Frollo2.png) no-repeat center top;
+}
+
+/* kleding {
+    background: url("../img/Tshirt.png") no-repeat center top;
+} */
+
+startscherm{
+    background: url("../img/Startscherm.png") center center;
+}

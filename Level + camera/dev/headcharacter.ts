@@ -97,7 +97,7 @@ class headCharacter{
         //console.log(positiehoofdpersoon)
         let element = this.elementpath
 
-        if(this.upPress == 1 && (this.positionY >= (positionY - this.height - 60)) && (this.positionY <= (positionY - 20))) {
+        if(this.upPress == 1 && (this.positionY >= (positionY - this.height - 56)) && (this.positionY <= (positionY - 80))) {
             this.positionY -= 210;
             this.upPress = 0
         }
@@ -142,10 +142,10 @@ class headCharacter{
         return {
             element : this.elementpath,
             xbegin : this.positionX,
-            xeind : this.positionX + this.width,
+            xeind : this.positionX + 30,
             y : this.positionY,
             height : this.height,
-            width : this.width
+            width : 30
         }
     }
 

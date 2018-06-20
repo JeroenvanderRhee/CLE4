@@ -4,9 +4,11 @@ class Gap{
     private positionx:number
     private positiony:number
     private elementpath:HTMLElement = document.createElement("gap")
+    private child:HTMLElement
 
     //Hiet worden alle variabelen ingevuld
-    constructor(width:number, positiony:number, positionx:number){
+    constructor(width:number, positiony:number, positionx:number, childAsset:HTMLElement){
+        this.child = childAsset
         this.width = width
         this.height = 56
         this.positionx = positionx
@@ -15,10 +17,8 @@ class Gap{
     
     //Create functie
     public Create(){
-        let childElement = document.getElementById("bars")
-        //let childElement:HTMLElement = document.body
         let element = this.elementpath
-        childElement.appendChild(element)
+        this.child.appendChild(element)
         element.innerHTML = " "
     }
 
@@ -56,9 +56,3 @@ class Gap{
     }
 }
 
-
-    // //Corrigeer de afwijking en de verplaatsing
-    // public correctie(){
-    //     this.positionx -= translate
-    //     this.elementpath.style.transform = "translate(" + this.positionx + "px," + this.positiony + "px)"
-    // }
