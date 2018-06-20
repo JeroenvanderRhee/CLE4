@@ -176,7 +176,7 @@ class Level1{
         let positionTijdmachine = this.Tijdmachine.getvalues()
         let positioncharacter = this.Hoofdpersoon.getvalues()
         if(((positioncharacter.xeind - translate) >= positionTijdmachine.xbegin) && (this.score == 3)){
-                this.Game.endGame()
+                this.Game.startLevel2()
         }
         if(((positioncharacter.xeind - translate) >= positionTijdmachine.xbegin) && (!(this.score == 3))){
            this.Camera.terugTeleporteren()

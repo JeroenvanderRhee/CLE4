@@ -474,7 +474,7 @@ var Level1 = (function () {
         var positionTijdmachine = this.Tijdmachine.getvalues();
         var positioncharacter = this.Hoofdpersoon.getvalues();
         if (((positioncharacter.xeind - translate) >= positionTijdmachine.xbegin) && (this.score == 3)) {
-            this.Game.endGame();
+            this.Game.startLevel2();
         }
         if (((positioncharacter.xeind - translate) >= positionTijdmachine.xbegin) && (!(this.score == 3))) {
             this.Camera.terugTeleporteren();
@@ -549,11 +549,12 @@ var Level2 = (function () {
         this.Hoofdpersoon.Opmaak();
         document.body.style.background = "url(img/Middeleeuwen.jpg)";
         this.Camera = new Camera(4200, this.assets, 5);
+        this.Tijdmachine = new Timemachine(3900, this.assets);
         this.Frollo = new Frollo(1100, 1500, this.assets);
         this.createbars();
         this.creategaps();
         this.createclothes();
-        this.createcheck(5);
+        this.createcheck(4);
         this.createWitches();
     }
     Level2.prototype.checkCollision = function (a, b) {
@@ -576,17 +577,15 @@ var Level2 = (function () {
         }
     };
     Level2.prototype.createclothes = function () {
-        this.Kleding.push(new kleding(100, 400, 150, 230, "img/dress.png", this.assets));
-        this.Kleding.push(new kleding(880, window.innerHeight, 16, 120, "img/zwaard.png", this.assets));
-        this.Kleding.push(new kleding(3000, window.innerHeight, 90, 120, "img/helm.png", this.assets));
-        this.Kleding.push(new kleding(2600, window.innerHeight, 100, 89, "img/schild.png", this.assets));
+        this.Kleding.push(new kleding(700, window.innerHeight, 114, 170, "img/dress.png", this.assets));
+        this.Kleding.push(new kleding(1880, window.innerHeight, 16, 120, "img/zwaard.png", this.assets));
+        this.Kleding.push(new kleding(3000, window.innerHeight, 96, 120, "img/helm.png", this.assets));
+        this.Kleding.push(new kleding(2600, window.innerHeight, 56, 120, "img/schild.png", this.assets));
     };
     Level2.prototype.createbars = function () {
         this.Bar.push(new Ground(1920, window.innerHeight, 0, this.barasset));
         this.Bar.push(new Ground(920, window.innerHeight, 1980, this.barasset));
         this.Bar.push(new Ground(100, window.innerHeight, 2800, this.barasset));
-        this.Bar.push(new Ground(920, 200, 1980, this.barasset));
-        this.Bar.push(new Ground(400, 350, 2800, this.barasset));
         this.Bar.push(new Ground(700, window.innerHeight, 3000, this.barasset));
         this.Bar.push(new Ground(530, window.innerHeight, 3770, this.barasset));
         this.Bar.forEach(function (ReadOut) {
@@ -608,12 +607,16 @@ var Level2 = (function () {
         var barhit;
         var positionbar;
         var positioncharacter;
+        var check = 0;
         this.Bar.forEach(function (ReadOut) {
             positioncharacter = _this.Hoofdpersoon.getvalues();
             positionbar = ReadOut.getvalues();
-            if (((positioncharacter.xeind - translate) >= positionbar.xbegin) && ((positioncharacter.xeind - translate) <= positionbar.xeind)) {
+            if ((((positioncharacter.xbegin - translate) >= positionbar.xbegin) && ((positioncharacter.xbegin - translate) <= positionbar.xeind))) {
                 barhit = _this.checkCollision(ReadOut.getRectangle(), _this.Hoofdpersoon.getRectangle());
-                if (barhit != true) {
+                if (barhit == true) {
+                    check = 1;
+                }
+                if ((barhit != true) && (check == 0)) {
                     console.log("hit");
                     _this.Hoofdpersoon.gravity(0, 5);
                 }
@@ -628,16 +631,16 @@ var Level2 = (function () {
         this.Gap.forEach(function (ReadOut) {
             positioncharacter = _this.Hoofdpersoon.getvalues();
             positionbar = ReadOut.getvalues();
-            if (((positioncharacter.xeind - translate) >= positionbar.xbegin) && ((positioncharacter.xeind - translate) <= positionbar.xeind)) {
+            if (((positioncharacter.xbegin - translate) >= positionbar.xbegin) && ((positioncharacter.xbegin - translate) <= positionbar.xeind)) {
                 barhit = _this.checkCollision(ReadOut.getRectangle(), _this.Hoofdpersoon.getRectangle());
                 if (barhit != true) {
                     console.log("hit");
-                    _this.Hoofdpersoon.gravity(2, 5);
+                    _this.Hoofdpersoon.gravity(0, 10);
                 }
                 if (barhit == true) {
                     _this.Hoofdpersoon.gravity(1, 10);
-                    if (positioncharacter.y >= window.innerHeight - 10) {
-                        alert("Je bent af");
+                    if (positioncharacter.y >= (window.innerHeight - 70)) {
+                        _this.Game.endGame();
                     }
                 }
             }
@@ -652,8 +655,7 @@ var Level2 = (function () {
             if (((positioncharacter.xeind - translate) >= positionheks.xbegin) && ((positioncharacter.xeind - translate) <= positionheks.xeind)) {
                 barhit = _this.checkCollision(ReadOut.getRectangle(), _this.Hoofdpersoon.getRectangle());
                 if (barhit == true) {
-                    alert("Je bent dood door een heks");
-                    console.log("hit by the heks");
+                    _this.Game.endGame();
                 }
             }
         });
@@ -684,9 +686,18 @@ var Level2 = (function () {
         if (((positioncharacter.xeind - translate) >= positionfire.xbegin) && ((positioncharacter.xeind - translate) <= positionfire.xeind)) {
             barhit = this.checkCollision(this.Frollo.getRectangle(), this.Hoofdpersoon.getRectangle());
             if (barhit == true) {
-                alert("Je bent dood door een nare man");
-                console.log("hit by a fireball");
+                this.Game.endGame();
             }
+        }
+    };
+    Level2.prototype.checkColisionTijdmachine = function () {
+        var positionTijdmachine = this.Tijdmachine.getvalues();
+        var positioncharacter = this.Hoofdpersoon.getvalues();
+        if (((positioncharacter.xeind - translate) >= positionTijdmachine.xbegin) && (this.score == 4)) {
+            this.Game.YouWon();
+        }
+        if (((positioncharacter.xeind - translate) >= positionTijdmachine.xbegin) && (!(this.score == 4))) {
+            this.Camera.terugTeleporteren();
         }
     };
     Level2.prototype.loop = function () {
@@ -700,6 +711,7 @@ var Level2 = (function () {
         this.checkColisionHeks();
         this.checkCollisionKleding();
         this.checkCollisionFire();
+        this.checkColisionTijdmachine();
     };
     return Level2;
 }());
@@ -745,6 +757,37 @@ var Timemachine = (function () {
         return this.element.getBoundingClientRect();
     };
     return Timemachine;
+}());
+var Winnaarsscherm = (function () {
+    function Winnaarsscherm(g) {
+        var _this = this;
+        var body = document.body;
+        body.innerHTML = "";
+        this.Game = g;
+        this.element = document.createElement("youwon");
+        this.click = false;
+        window.addEventListener("click", function () { return _this.checkClick(); });
+        this.create();
+    }
+    Winnaarsscherm.prototype.loop = function () {
+        if (this.click == true) {
+            window.location.reload();
+        }
+    };
+    Winnaarsscherm.prototype.create = function () {
+        var childelement = document.body;
+        childelement.appendChild(this.element);
+        var textElement = document.createElement("h1");
+        var buttonElement = document.createElement("button");
+        this.element.appendChild(textElement);
+        this.element.appendChild(buttonElement);
+        textElement.innerHTML = "Je hebt gewonnen!";
+        buttonElement.innerHTML = "Klik hier om naar het start scherm te gaan!";
+    };
+    Winnaarsscherm.prototype.checkClick = function () {
+        this.click = true;
+    };
+    return Winnaarsscherm;
 }());
 var Dino = (function () {
     function Dino(Xbegin, assets) {
@@ -860,7 +903,7 @@ var Game = (function () {
     Game.prototype.startNewGame = function () {
         var body = document.body;
         body.innerHTML = "";
-        this.Screen = new Level2(this);
+        this.Screen = new Level1(this);
     };
     Game.prototype.startLevel2 = function () {
         var body = document.body;
@@ -868,6 +911,11 @@ var Game = (function () {
         this.Screen = new Level2(this);
     };
     Game.prototype.endGame = function () {
+        var body = document.body;
+        body.innerHTML = "";
+        this.Screen = new Eindscherm(this);
+    };
+    Game.prototype.YouWon = function () {
         var body = document.body;
         body.innerHTML = "";
         this.Screen = new Eindscherm(this);

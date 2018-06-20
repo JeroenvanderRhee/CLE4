@@ -12,6 +12,7 @@ class Level2{
     Camera : Camera
     private score = 0;
     Game:Game
+    Tijdmachine:Timemachine
 
     //Hier worden de functies gedeclareerd.
     constructor(game:Game){
@@ -33,6 +34,7 @@ class Level2{
         document.body.style.background = "url(img/Middeleeuwen.jpg)"
 
         this.Camera = new Camera(4200, this.assets, 5)
+        this.Tijdmachine = new Timemachine(3900, this.assets)
 
         //Kerk-man
         this.Frollo = new Frollo(1100 ,1500, this.assets) //Begin,Eind
@@ -40,7 +42,7 @@ class Level2{
         this.createbars()
         this.creategaps()
         this.createclothes()
-        this.createcheck(5)
+        this.createcheck(4)
         this.createWitches()
     }
 
@@ -72,15 +74,14 @@ class Level2{
     //Kleding aanmaak
     private createclothes(){
         //Kleding heeft 5 parameters(1 = x positie, 2 = y positie, 3 = breedte van de img, 4 = hoogte van de img, 5 is de bron van de img)
-        this.Kleding.push(new kleding(100, 400, 150, 230, "img/dress.png", this.assets))
-
-        this.Kleding.push(new kleding(880, window.innerHeight, 16, 120, "img/zwaard.png", this.assets))
+        this.Kleding.push(new kleding(700, window.innerHeight, 114, 170, "img/dress.png", this.assets))
+        this.Kleding.push(new kleding(1880, window.innerHeight, 16, 120, "img/zwaard.png", this.assets))
         //this.Kleding.push(new kleding(800, window.innerHeight, 240, 150, "img/Middeleeuwen/stone.png", this.assets))
 
 
         //this.Kleding.push(new kleding(1000, window.innerHeight, 90, 120, "img/Middeleeuwen/harnas.png"))
-        this.Kleding.push(new kleding(3000, window.innerHeight, 90, 120, "img/helm.png", this.assets))
-        this.Kleding.push(new kleding(2600, window.innerHeight, 100, 89, "img/schild.png", this.assets))
+        this.Kleding.push(new kleding(3000, window.innerHeight, 96, 120, "img/helm.png", this.assets))
+        this.Kleding.push(new kleding(2600, window.innerHeight, 56, 120, "img/schild.png", this.assets))
     }
 
 
@@ -95,9 +96,9 @@ class Level2{
         //Omhoog-paal
         this.Bar.push(new Ground(100, window.innerHeight, 2800, this.barasset))
         //Lucht-Plank
-        this.Bar.push(new Ground(920, 200, 1980, this.barasset))
-        //Staan-plank
-        this.Bar.push(new Ground(400, 350, 2800, this.barasset))
+        // this.Bar.push(new Ground(920, 200, 1980, this.barasset))
+        // //Staan-plank
+        // this.Bar.push(new Ground(400, 350, 2800, this.barasset))
 
         this.Bar.push(new Ground(700, window.innerHeight, 3000, this.barasset))
         this.Bar.push(new Ground(530, window.innerHeight, 3770, this.barasset))
@@ -129,14 +130,18 @@ class Level2{
         let barhit
         let positionbar
         let positioncharacter
-        
+        let check = 0
         this.Bar.forEach(ReadOut =>{
             positioncharacter = this.Hoofdpersoon.getvalues()
             positionbar = ReadOut.getvalues()
             
-            if(((positioncharacter.xeind - translate) >= positionbar.xbegin) && ((positioncharacter.xeind - translate) <= positionbar.xeind)){
+            if((((positioncharacter.xbegin - translate) >= positionbar.xbegin) && ((positioncharacter.xbegin - translate) <= positionbar.xeind))){
                 barhit = this.checkCollision(ReadOut.getRectangle(), this.Hoofdpersoon.getRectangle())
-                if (barhit != true){
+                if(barhit == true){
+                    check = 1
+                }
+                
+                if ((barhit != true) && (check == 0)){
                     console.log("hit")
                     this.Hoofdpersoon.gravity(0,5)
                 }
@@ -155,16 +160,16 @@ class Level2{
             positioncharacter = this.Hoofdpersoon.getvalues()
             positionbar = ReadOut.getvalues()
             
-            if(((positioncharacter.xeind - translate) >= positionbar.xbegin) && ((positioncharacter.xeind - translate) <= positionbar.xeind)) {
+            if(((positioncharacter.xbegin - translate) >= positionbar.xbegin) && ((positioncharacter.xbegin - translate) <= positionbar.xeind)) {
                 barhit = this.checkCollision(ReadOut.getRectangle(), this.Hoofdpersoon.getRectangle())
                 if (barhit != true){
                     console.log("hit")
-                    this.Hoofdpersoon.gravity(2,5)
+                    this.Hoofdpersoon.gravity(0,10)
                 }
                 if(barhit == true){
                   this.Hoofdpersoon.gravity(1,10)
-                  if (positioncharacter.y >= window.innerHeight - 10){
-                      alert("Je bent af")
+                  if (positioncharacter.y >= (window.innerHeight - 70)){
+                      this.Game.endGame()
                   }
                 }
             }
@@ -181,8 +186,7 @@ class Level2{
         if(((positioncharacter.xeind - translate) >= positionheks.xbegin) && ((positioncharacter.xeind - translate) <= positionheks.xeind)){
             barhit = this.checkCollision(ReadOut.getRectangle(), this.Hoofdpersoon.getRectangle())
             if (barhit == true){
-                alert("Je bent dood door een heks")
-                console.log("hit by the heks")
+                this.Game.endGame()
                 
             }
         }
@@ -220,9 +224,24 @@ class Level2{
         if(((positioncharacter.xeind - translate) >= positionfire.xbegin) && ((positioncharacter.xeind - translate) <= positionfire.xeind)){
             barhit = this.checkCollision(this.Frollo.getRectangle(), this.Hoofdpersoon.getRectangle())
             if (barhit == true){
-                alert("Je bent dood door een nare man")
-                console.log("hit by a fireball")    
+                this.Game.endGame()
             }
+        }
+    }
+
+    
+    //Check de collision van de Tijdmachine
+    private checkColisionTijdmachine(){
+        //let barhit
+        let positionTijdmachine = this.Tijdmachine.getvalues()
+        let positioncharacter = this.Hoofdpersoon.getvalues()
+        if(((positioncharacter.xeind - translate) >= positionTijdmachine.xbegin) && (this.score == 4)){
+                this.Game.YouWon()
+        }
+        if(((positioncharacter.xeind - translate) >= positionTijdmachine.xbegin) && (!(this.score == 4))){
+           this.Camera.terugTeleporteren()
+
+
         }
     }
     
@@ -238,6 +257,7 @@ class Level2{
         this.checkColisionHeks()
         this.checkCollisionKleding()
         this.checkCollisionFire()
+        this.checkColisionTijdmachine()
         //requestAnimationFrame(() =>this.gameloop())
     }
 }
