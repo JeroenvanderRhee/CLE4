@@ -32,7 +32,6 @@ class Level1{
         this.Hoofdpersoon = new headCharacter()
         this.Camera = new Camera(4200, this.assets, 5)
         this.Fireball = new Fire(1380 ,1700, this.assets)
-        console.log("aangemaakt")
         this.createbars()
         this.creategaps()
         this.createclothes()
@@ -42,6 +41,7 @@ class Level1{
         this.Hoofdpersoon.Create()
         this.Hoofdpersoon.Opmaak()
         this.Tijdmachine = new Timemachine(3950, this.assets)
+        // this.Tijdmachine = new Timemachine(200, this.assets)
         this.createcheck(3)
     }
 
@@ -138,18 +138,29 @@ class Level1{
         this.Gap.forEach(ReadOut =>{
             positioncharacter = this.Hoofdpersoon.getvalues()
             positionbar = ReadOut.getvalues()
+            let check = 0
             
-            if(((positioncharacter.xbegin - translate) >= positionbar.xbegin) && ((positioncharacter.xbegin - translate) <= positionbar.xeind)) {
+            if(((positioncharacter.xeind - translate) >= positionbar.xbegin) && ((positioncharacter.xbegin - translate) <= positionbar.xeind)) {
                 barhit = this.checkCollision(ReadOut.getRectangle(), this.Hoofdpersoon.getRectangle())
-                if (barhit != true){
-                    console.log("hit")
-                    this.Hoofdpersoon.gravity(0,10)
-                }
+                //positionbar.element.style.backgroundColor = "yellow"
+                // if (barhit != true){
+                //     console.log("hit")
+                //     this.Hoofdpersoon.gravity(0,10)
+                // }
+                // if(barhit == true){
+                //   this.Hoofdpersoon.gravity(1,10)
+                //   if (positioncharacter.y >= (window.innerHeight - 70)){
+                //       this.Game.endGame()
+                //   }
+                // }
                 if(barhit == true){
-                  this.Hoofdpersoon.gravity(1,10)
-                  if (positioncharacter.y >= (window.innerHeight - 70)){
-                      this.Game.endGame()
-                  }
+                    check = 1
+                    this.Game.endGame()
+                }
+                
+                if ((barhit != true) && (check == 0)){
+                    console.log("hit")
+                    this.Hoofdpersoon.gravity(0,5)
                 }
             }
         })

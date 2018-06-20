@@ -133,6 +133,7 @@ class headCharacter{
 
     // geeft nog meer waardes terug voor de collision
     public getvalues(){
+        this.width = 30
         let xbegin : number
         let xeind : number
         let y :number

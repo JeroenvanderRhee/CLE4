@@ -3,7 +3,7 @@ class Game{
 
     constructor(){
         this.Screen = new Startscherm(this)
-        // this.Screen = new Winnaarsscherm(this)
+        //this.Screen = new Winnaarsscherm(this)
         this.gameloop()
     }
 
@@ -38,7 +38,7 @@ class Game{
     public YouWon(){
         let body:HTMLElement = document.body
         body.innerHTML = ""
-       this.Screen = new Eindscherm(this)
+       this.Screen = new Winnaarsscherm(this)
     }
 }
 window.addEventListener("load", () => new Game)

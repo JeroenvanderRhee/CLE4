@@ -362,7 +362,6 @@ var Level1 = (function () {
         this.Hoofdpersoon = new headCharacter();
         this.Camera = new Camera(4200, this.assets, 5);
         this.Fireball = new Fire(1380, 1700, this.assets);
-        console.log("aangemaakt");
         this.createbars();
         this.creategaps();
         this.createclothes();
@@ -444,17 +443,16 @@ var Level1 = (function () {
         this.Gap.forEach(function (ReadOut) {
             positioncharacter = _this.Hoofdpersoon.getvalues();
             positionbar = ReadOut.getvalues();
-            if (((positioncharacter.xbegin - translate) >= positionbar.xbegin) && ((positioncharacter.xbegin - translate) <= positionbar.xeind)) {
+            var check = 0;
+            if (((positioncharacter.xeind - translate) >= positionbar.xbegin) && ((positioncharacter.xbegin - translate) <= positionbar.xeind)) {
                 barhit = _this.checkCollision(ReadOut.getRectangle(), _this.Hoofdpersoon.getRectangle());
-                if (barhit != true) {
-                    console.log("hit");
-                    _this.Hoofdpersoon.gravity(0, 10);
-                }
                 if (barhit == true) {
-                    _this.Hoofdpersoon.gravity(1, 10);
-                    if (positioncharacter.y >= (window.innerHeight - 70)) {
-                        _this.Game.endGame();
-                    }
+                    check = 1;
+                    _this.Game.endGame();
+                }
+                if ((barhit != true) && (check == 0)) {
+                    console.log("hit");
+                    _this.Hoofdpersoon.gravity(0, 5);
                 }
             }
         });
@@ -918,7 +916,7 @@ var Game = (function () {
     Game.prototype.YouWon = function () {
         var body = document.body;
         body.innerHTML = "";
-        this.Screen = new Eindscherm(this);
+        this.Screen = new Winnaarsscherm(this);
     };
     return Game;
 }());
@@ -1060,6 +1058,7 @@ var headCharacter = (function () {
         return this.elementpath.getBoundingClientRect();
     };
     headCharacter.prototype.getvalues = function () {
+        this.width = 30;
         var xbegin;
         var xeind;
         var y;
